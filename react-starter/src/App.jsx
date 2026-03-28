@@ -1,38 +1,24 @@
-import { useState } from 'react'
-import { Routes, Route, NavLink } from "react-router-dom"
-import './App.css'
-import Editor from "./Pages/Editor.jsx";
+import {Routes, Route } from "react-router-dom";
+import SideBar from "./components/SideBar";
+import HomeE from "./Pages/EditorPages/HomeE";
+import ProjectsE from "./Pages/EditorPages/ProjectsE";
+import NotificationE from "./Pages/EditorPages/NotificationE";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1>Welcome to Sard</h1>
-      <nav>
-        <NavLink to="/">Editor</NavLink>
-      </nav>
-      <section id="center">
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+      <div style={{ display: "flex" }}>
+        <SideBar />
+
+        <div style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/HomeE" element={<HomeE />} />
+            <Route path="/ProjectsE" element={<ProjectsE />} />
+            <Route path="/NotificationE" element={<NotificationE />} />
+          </Routes>
         </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-
-        {<Routes>
-          <Route path="/" element={<Editor />} /> 
-        </Routes>}
-
-      </section>
-    </>
-  )
+      </div>
+  );
 }
 
-export default App
+export default App;
