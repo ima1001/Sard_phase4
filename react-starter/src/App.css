@@ -22,9 +22,12 @@
   align-items: center;
   padding: 10px;
   border-radius: 5px;
+  transition: all 0.3s ease;
 }
 .sidebar a:hover {
   background: var(--hover-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateX(5px);
 }
 
 

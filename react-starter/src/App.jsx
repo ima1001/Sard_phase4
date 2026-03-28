@@ -9,8 +9,7 @@ function App() {
   return (
       <div style={{ display: "flex" }}>
         <SideBar />
-
-        <div style={{ flex: 1 }}>
+        <div >
           <Routes>
             <Route path="/HomeE" element={<HomeE />} />
             <Route path="/ProjectsE" element={<ProjectsE />} />
