@@ -1,17 +1,26 @@
+import CommunitytCard from "../../components/Card.jsx";
+import communities from "../../../communityData.json";
+
 function HomeP() {
-  return (
-    <div className="text-center mt-5">
-      <h1>Welcome to SARD Platform</h1>
-
-      <h3 className="mt-4">Communities</h3>
-
-      <div className="d-flex justify-content-center gap-4 mt-4">
-        <button className="btn btn-secondary">Fantasy</button>
-        <button className="btn btn-secondary">Mystery</button>
-        <button className="btn btn-secondary">Literature</button>
-      </div>
-    </div>
-  );
+    return (
+        <div className="home">
+            <h1>Welcome to SARD Platform</h1>
+        <div className="communities">
+            <h2>Communities</h2>
+            <div>
+                {communities.map((community) => (
+                    <CommunitytCard
+                    key={community.id}
+                    title={community.title}
+                    text={community.text}
+                    imageSrc={community.imageSrc}
+                    onClick={() => alert(community.title)}
+                    />
+                ))}
+            </div>
+        </div>
+        </div>
+    );
 }
 
 export default HomeP;
