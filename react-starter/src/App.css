@@ -84,7 +84,7 @@
   transform: translateY(-3px);
 }
 
-.communities {
+.communities, .projects {
   padding: 40px 20px; 
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@
   width: 100%;
 }
 
-.communities h2 {
+.communities h2, .projects h2 {
   margin-bottom: 30px;
   color: var(--text-color);
   font-size: 32px; 
@@ -100,7 +100,7 @@
   text-align: center;
 }
 
-.communities > div {
+.communities > div, .projects > div {
   display: flex;
   flex-direction: row;
   gap: 40px; 
@@ -110,12 +110,13 @@
 
 /* Page spacing */
 .home {
-  padding: 40px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
+  padding: 0; 
 }
 
 .home h1 {
@@ -124,12 +125,5 @@
   margin-bottom: 40px;
   text-align: center;
   font-weight: bold;
-}
-
-.home h1 {
-  font-size: 36px;
-  color: var(--text-color);
-  margin-bottom: 40px;
-  text-align: center;
-  font-weight: bold;
+  padding: 0 20px; 
 }
