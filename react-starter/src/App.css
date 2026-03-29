@@ -108,7 +108,7 @@
   flex-wrap: wrap;
 }
 
-/* Page spacing */
+/* Page spacing 
 .home {
   width: 100%;
   display: flex;
@@ -126,4 +126,46 @@
   text-align: center;
   font-weight: bold;
   padding: 0 20px; 
+}
+*/
+.home {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP (Welcome section) */
+.home-top {
+  background: #F0F0DB;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.home-top h1 {
+  font-size: 64px;
+  color: #30364F;
+  font-weight: bold;
+}
+
+/* BOTTOM (Communities section) */
+.home-bottom {
+  background: #E1D9BC;
+  padding: 60px 20px;
+  text-align: center;
+  flex: 1;
+}
+
+.home-bottom h2 {
+  font-size: 40px;
+  color: #30364F;
+  margin-bottom: 40px;
+}
+
+/* cards container */
+.communities-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
 }
