@@ -1,9 +1,14 @@
 import { NavLink } from "react-router-dom";
+import logo from "../assets/logoD.png";
 
 function SideBar() {
     return (
         <div className="sidebar">
-        <img src="/assets/logoD.png" alt="Sard Logo" className="logo" />   
+
+        <div className="logo-container" >   
+        <img src={logo} alt="Sard Logo" className="logo" />
+         </div> 
+          
         <nav>
             <NavLink to="/HomeE">Home</NavLink>
             <NavLink to="/ProjectsE">Projects</NavLink>
