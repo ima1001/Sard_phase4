@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "Fantasy Community",
+        "text": "description of the community",
+        "imageSrc": "/assets/logoB.png"
+    },
+    {
+        "id": 2,
+        "title": "Mystery Community",
+        "text": "description of the community",
+        "imageSrc": "/assets/logoB.png"
+    }
+]
