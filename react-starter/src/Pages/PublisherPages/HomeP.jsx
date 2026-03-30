@@ -1,4 +1,4 @@
-import CommunitytCard from "../../components/Card.jsx";
+import DataCard from "../../components/Card.jsx";
 import communities from "../../../communityData.json";
 
 function HomeP() {
@@ -12,7 +12,7 @@ function HomeP() {
         <h2>Communities</h2>
         <div className="communities-container">
           {communities.map((community) => (
-            <CommunitytCard
+            <DataCard
               key={community.id}
               title={community.title}
               text={community.text}
