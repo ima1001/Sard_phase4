@@ -1,4 +1,4 @@
-import ProjectCard from "../../components/Card.jsx";
+import ProjectCard from "../../components/dataCard.jsx";
 import projects from "../../../projectsData.json";
 
 function ProjectsE() {
