@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function dataCard({ title = "Card Title", text = "description", imageSrc = "/assets/logoB.png", buttonText = "Join", onClick }) {
+function DataCard({ title = "Card Title", text = "description", imageSrc = "/assets/logoB.png", buttonText = "Join", onClick }) {
     return (
         <Card className="card">
         <Card.Img variant="top" src={imageSrc} />
@@ -16,4 +16,4 @@ function dataCard({ title = "Card Title", text = "description", imageSrc = "/ass
     );
 }
 
-export default dataCard;
+export default DataCard;
