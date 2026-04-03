@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/logoD.png";
 import {
@@ -23,6 +23,7 @@ function SideBar({
   onActionClick,
 }) {
   const [openProjects, setOpenProjects] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="sidebar">
@@ -96,7 +97,7 @@ function SideBar({
         </div>
       )}
 
-      <div className="logout-icon">
+      <div className="logout-icon" onClick={() => navigate("/login")}>
         <BoxArrowLeft />
       </div>
     </div>

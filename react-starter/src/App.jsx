@@ -6,6 +6,7 @@ import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
 import NotificationsPage from "./Pages/NotificationsPage";
 import Community from "./Pages/Community";
 import RoleSelect from "./Pages/RoleSelect";
+import Login from "./Pages/login";
 
 import "./App.css";
 
@@ -50,6 +51,7 @@ function AppLayout({ role }) {
                     <Route path="/ProjectEditor" element={<ProjectEditor />} />
                     <Route path="/Notifications" element={<NotificationsPage />} />
                     <Route path="/Community" element={<Community />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
             </div>
         </div>
