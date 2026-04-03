@@ -1,25 +1,3 @@
-/*import { NavLink } from "react-router-dom";
-import logo from "../assets/logoD.png";
-
-function SideBar() {
-    return (
-        <div className="sidebar">
-
-        <div className="logo-container" >   
-        <img src={logo} alt="Sard Logo" className="logo" />
-         </div> 
-          
-        <nav>
-            <NavLink to="/HomeE">Home</NavLink>
-            <NavLink to="/ProjectsE">Projects</NavLink>
-            <NavLink to="/NotificationE">Notification</NavLink>
-        </nav>
-        </div>
-    );
-}
-
-export default SideBar;*/
-
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/logoD.png";
@@ -29,11 +7,22 @@ import {
   Bell,
   ChevronDown,
   ChevronUp,
-  PersonCircle
+  PersonCircle,
+  BoxArrowLeft,
 } from "react-bootstrap-icons";
 
-function SideBar({ role, name, homeLink, notificationLink, projectLinks = [] }) {
-  const [showProjects, setShowProjects] = useState(false);
+function SideBar({
+  role,
+  name,
+  homeLink,
+  notificationLink,
+  projectLinks = [],
+  showProjects = false,
+  showActionCard = false,
+  actionText = "",
+  onActionClick,
+}) {
+  const [openProjects, setOpenProjects] = useState(false);
 
   return (
     <div className="sidebar">
@@ -43,45 +32,73 @@ function SideBar({ role, name, homeLink, notificationLink, projectLinks = [] }) 
 
       <div className="profile-box">
         <PersonCircle className="profile-icon" />
-        <div>
+        <div className="profile-text">
           <p className="role-text">{role}</p>
           <p className="name-text">{name}</p>
         </div>
       </div>
 
-      <nav>
+      <nav className="sidebar-nav">
         <NavLink to={homeLink} className="nav-item">
           <div className="nav-left">
             <House className="nav-icon" />
-            Home
+            <span>Home</span>
           </div>
         </NavLink>
 
-        <div className="nav-item project-toggle" onClick={() => setShowProjects(!showProjects)}>
-          <div className="nav-left">
-            <Pencil className="nav-icon" />
-            Projects
-          </div>
-          {showProjects ? <ChevronUp /> : <ChevronDown />}
-        </div>
-
         {showProjects && (
-          <div className="dropdown-menu-projects">
-            {projectLinks.map((project, index) => (
-              <NavLink key={index} to={project.link} className="project-link">
-                {project.name}
-              </NavLink>
-            ))}
-          </div>
+          <>
+            <div
+              className="nav-item project-toggle"
+              onClick={() => setOpenProjects(!openProjects)}
+            >
+              <div className="nav-left">
+                <Pencil className="nav-icon" />
+                <span>Projects</span>
+              </div>
+
+              {openProjects ? (
+                <ChevronUp className="arrow-icon" />
+              ) : (
+                <ChevronDown className="arrow-icon" />
+              )}
+            </div>
+
+            {openProjects && (
+              <div className="dropdown-menu-projects">
+                {projectLinks.map((project, index) => (
+                  <NavLink key={index} to={project.link} className="project-link">
+                    {project.name}
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </>
         )}
 
         <NavLink to={notificationLink} className="nav-item">
           <div className="nav-left">
             <Bell className="nav-icon" />
-            Notification
+            <span>Notification</span>
           </div>
         </NavLink>
       </nav>
+
+      {showActionCard && (
+        <div className="action-card">
+          <p className="action-title">Let's start!</p>
+          <p className="action-subtitle">
+            Creating or adding new content couldn't be easier
+          </p>
+          <button className="action-btn" onClick={onActionClick}>
+            + {actionText}
+          </button>
+        </div>
+      )}
+
+      <div className="logout-icon">
+        <BoxArrowLeft />
+      </div>
     </div>
   );
 }

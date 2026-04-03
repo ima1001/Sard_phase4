@@ -227,3 +227,155 @@
   font-size: 14px;
   color: #EAE6D4;
 }
+
+/* Side Bar */
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background: #30364F;
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.logo {
+  width: 78px;
+  height: auto;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.profile-icon {
+  font-size: 42px;
+  color: #F0F0DB;
+  flex-shrink: 0;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.role-text {
+  margin: 0;
+  font-size: 12px;
+  color: #bdb59d;
+  font-weight: 500;
+}
+
+.name-text {
+  margin: 2px 0 0 0;
+  font-size: 13px;
+  color: #F0F0DB;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #F0F0DB;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(172, 186, 196, 0.14);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-icon,
+.arrow-icon {
+  font-size: 18px;
+  color: #F0F0DB;
+}
+
+.dropdown-menu-projects {
+  margin-left: 22px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-link {
+  color: #cfc8af;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.project-link:hover,
+.project-link.active {
+  background: rgba(172, 186, 196, 0.18);
+  color: #F0F0DB;
+}
+
+.action-card {
+  margin-top: auto;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 18px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.action-title {
+  color: #F0F0DB;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.action-subtitle {
+  color: #cfc8af;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+
+.action-btn {
+  background: #ACBAC4;
+  color: #30364F;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-icon {
+  font-size: 28px;
+  color: black;
+  cursor: pointer;
+}
