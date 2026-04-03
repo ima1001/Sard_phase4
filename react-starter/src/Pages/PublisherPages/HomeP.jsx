@@ -16,7 +16,7 @@ function HomeP() {
               key={community.id}
               title={community.title}
               text={community.text}
-              imageSrc={community.imageSrc}
+              // imageSrc={community.imageSrc}
               onClick={() => alert(community.title)}
             />
           ))}
