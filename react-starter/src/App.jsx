@@ -18,7 +18,7 @@ function App() {
         role={isPublisher ? "PUBLISHER" : "EDITOR"}
         name={isPublisher ? "Alex (Penguin House)" : "Andrew Smith"}
         homeLink={isPublisher ? "/HomeP" : "/HomeE"}
-        notificationLink={isPublisher ? "/NotificationsP" : "/NotificationsE"}
+        notificationLink="/Notifications"
         projectLinks={
           isPublisher
             ? [
@@ -39,8 +39,7 @@ function App() {
 
           <Route path="/ProjectEditor" element={<ProjectEditor />} />
 
-          <Route path="/NotificationsE" element={<NotificationsPage />} />
-          <Route path="/NotificationsP" element={<NotificationsPage />} />
+          <Route path="/Notifications" element={<NotificationsPage />} />
 
           <Route path="/Community" element={<Community />} />
         </Routes>
