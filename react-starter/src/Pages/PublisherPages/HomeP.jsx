@@ -1,4 +1,4 @@
-import DataCard from "../../components/Card.jsx";
+import DataCard from "../../components/dataCard.jsx";
 import communities from "../../../communityData.json";
 
 function HomeP() {
