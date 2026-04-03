@@ -1,4 +1,4 @@
-import CommunitytCard from "../../components/Card.jsx";
+import CommunitytCard from "../../components/dataCard.jsx";
 import communities from "../../../communityData.json";
 
 function HomeE() {
