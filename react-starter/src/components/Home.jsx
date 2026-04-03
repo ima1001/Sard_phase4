@@ -1,4 +1,4 @@
-import DataCard from "./dataCard.jsx";
+import CommunityCard from "./CommunityCard.jsx";
 import communities from "../../communityData.json";
 
 function Home({ role }) {
@@ -11,11 +11,10 @@ function Home({ role }) {
                 <h2>Communities</h2>
                 <div className="communities-container">
                     {communities.map((community) => (
-                        <DataCard
+                        <CommunityCard
                             key={community.id}
                             title={community.title}
                             text={community.text}
-                            imageSrc={community.imageSrc}
                             onClick={() => console.log(`Community ${community.title} entered`)}
                         />
                     ))}

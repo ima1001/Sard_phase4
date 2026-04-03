@@ -2,11 +2,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import SideBar from "./components/SideBar";
 
 import Home from "./components/Home";
-import ProjectsE from "./Pages/EditorPages/ProjectsE";
-import NotificationE from "./Pages/EditorPages/NotificationE";
-
-import CommunityP from "./Pages/PublisherPages/CommunityP";
-import NotificationP from "./Pages/PublisherPages/NotificationP";
+import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
+import NotificationsPage from "./Pages/NotificationsPage";
+import Community from "./Pages/Community";
 
 import "./App.css";
 
@@ -20,16 +18,16 @@ function App() {
         role={isPublisher ? "PUBLISHER" : "EDITOR"}
         name={isPublisher ? "Alex (Penguin House)" : "Andrew Smith"}
         homeLink={isPublisher ? "/HomeP" : "/HomeE"}
-        notificationLink={isPublisher ? "/NotificationP" : "/NotificationE"}
+        notificationLink={isPublisher ? "/NotificationsP" : "/NotificationsE"}
         projectLinks={
           isPublisher
             ? [
-                { name: "Book1", link: "/CommunityP" },
-                { name: "Book2", link: "/CommunityP" },
+                { name: "Book1", link: "/Community" },
+                { name: "Book2", link: "/Community" },
               ]
             : [
-                { name: "Book1", link: "/ProjectsE" },
-                { name: "Book2", link: "/ProjectsE" },
+                { name: "Book1", link: "/ProjectEditor" },
+                { name: "Book2", link: "/ProjectEditor" },
               ]
         }
       />
@@ -37,12 +35,14 @@ function App() {
       <div style={{ flex: 1 }}>
         <Routes>
           <Route path="/HomeE" element={<Home role="editor" />} />
-          <Route path="/ProjectsE" element={<ProjectsE />} />
-          <Route path="/NotificationE" element={<NotificationE />} />
-
           <Route path="/HomeP" element={<Home role="publisher" />} />
-          <Route path="/CommunityP" element={<CommunityP />} />
-          <Route path="/NotificationP" element={<NotificationP />} />
+
+          <Route path="/ProjectEditor" element={<ProjectEditor />} />
+
+          <Route path="/NotificationsE" element={<NotificationsPage />} />
+          <Route path="/NotificationsP" element={<NotificationsPage />} />
+
+          <Route path="/Community" element={<Community />} />
         </Routes>
       </div>
     </div>
