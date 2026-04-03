@@ -246,7 +246,7 @@
 }
 
 .logo {
-  width: 78px;
+  width: 130px;
   height: auto;
 }
 
@@ -340,6 +340,12 @@
   color: #F0F0DB;
 }
 
+.no-projects-text {
+  color: #cfc8af;
+  font-size: 13px;
+  margin: 6px 0 0 12px;
+}
+
 .action-card {
   margin-top: auto;
   background: rgba(255, 255, 255, 0.08);
@@ -375,7 +381,10 @@
 }
 
 .logout-icon {
+  margin-top: auto;
   font-size: 28px;
   color: black;
   cursor: pointer;
+  padding-left: 6px;
+  padding-bottom: 10px;
 }

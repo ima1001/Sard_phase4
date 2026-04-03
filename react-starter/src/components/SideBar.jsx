@@ -17,7 +17,7 @@ function SideBar({
   homeLink,
   notificationLink,
   projectLinks = [],
-  showProjects = false,
+  showProjects = true,
   showActionCard = false,
   actionText = "",
   onActionClick,
@@ -48,34 +48,37 @@ function SideBar({
         </NavLink>
 
         {showProjects && (
-          <>
-            <div
-              className="nav-item project-toggle"
-              onClick={() => setOpenProjects(!openProjects)}
-            >
-              <div className="nav-left">
-                <Pencil className="nav-icon" />
-                <span>Projects</span>
-              </div>
+  <>
+    <div
+      className="nav-item project-toggle"
+      onClick={() => setOpenProjects(!openProjects)}
+    >
+      <div className="nav-left">
+        <Pencil className="nav-icon" />
+        <span>Projects</span>
+      </div>
+      {openProjects ? (
+        <ChevronUp className="arrow-icon" />
+      ) : (
+        <ChevronDown className="arrow-icon" />
+      )}
+    </div>
 
-              {openProjects ? (
-                <ChevronUp className="arrow-icon" />
-              ) : (
-                <ChevronDown className="arrow-icon" />
-              )}
-            </div>
-
-            {openProjects && (
-              <div className="dropdown-menu-projects">
-                {projectLinks.map((project, index) => (
-                  <NavLink key={index} to={project.link} className="project-link">
-                    {project.name}
-                  </NavLink>
-                ))}
-              </div>
-            )}
-          </>
+    {openProjects && (
+      <div className="dropdown-menu-projects">
+        {projectLinks.length > 0 ? (
+          projectLinks.map((project, index) => (
+            <NavLink key={index} to={project.link} className="project-link">
+              {project.name}
+            </NavLink>
+          ))
+        ) : (
+          <div className="project-link">No projects yet</div>
         )}
+      </div>
+    )}
+  </>
+)}
 
         <NavLink to={notificationLink} className="nav-item">
           <div className="nav-left">
