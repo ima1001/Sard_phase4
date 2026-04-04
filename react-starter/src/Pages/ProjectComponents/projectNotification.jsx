@@ -6,13 +6,13 @@ function ProjectNotification() {
     ];
 
     return (
-        <div className="notifications">
+        <div className="project-notifications">
             <div>
                 <h1>Project Notifications</h1> 
             </div>
-            <div className="notification-content">
+            <div className="project-notification-content">
                 {notifications.map((notification) => (
-                    <div key={notification.id} className="notification-card">
+                    <div key={notification.id} className="notification-project_card">
                         <p>{notification.message}</p>
                         <div className="buttons">
                             <button>Accept</button>

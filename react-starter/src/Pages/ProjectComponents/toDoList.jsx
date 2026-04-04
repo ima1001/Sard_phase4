@@ -41,7 +41,7 @@ function ToDoList() {
 
     return (
         <div className="container">
-        <div className="card">
+        <div className="list-card">
             <div className="header">
                 <h3>Todo List</h3>
                 <div className="add-task">
@@ -77,7 +77,7 @@ function ToDoList() {
                 </table>
             </div>
 
-            <div className="card progress-card">
+            <div className="progress-card">
                 <h3>Project Progress</h3>
 
                 <div className="progress-bar">
