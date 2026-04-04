@@ -19,8 +19,7 @@ const ROLES = {
         notificationLink: "/Notifications",
         projectLinks: [
             { name: "Book1", link: "/ProjectEditor" },
-            { name: "Book2", link: "/ProjectEditor" },
-            { name: "Todo List", link: "/ToDoList" }
+            { name: "Book2", link: "/ProjectEditor" }
         ],
     },
     publisher: {
@@ -31,6 +30,7 @@ const ROLES = {
         projectLinks: [
             { name: "Book1", link: "/Community" },
             { name: "Book2", link: "/Community" },
+            { name: "Todo List", link: "/ToDoList" },
         ],
     },
 };
@@ -54,6 +54,7 @@ function AppLayout({ role }) {
                     <Route path="/Notifications" element={<NotificationsPage />} />
                     <Route path="/Community" element={<Community />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/ToDoList" element={<ToDoList />} />
                 </Routes>
             </div>
         </div>
@@ -62,7 +63,8 @@ function AppLayout({ role }) {
 
 function App() {
     const location = useLocation();
-    const isPublisher = location.pathname.startsWith("/HomePublisher") || location.pathname.startsWith("/Community");
+    const isPublisher = location.pathname.startsWith("/HomePublisher") || location.pathname.startsWith("/Community") || location.pathname.startsWith("/ToDoList");
+;
     const isEditor = location.pathname.startsWith("/HomeEditor") || location.pathname.startsWith("/ProjectEditor");
 
     if (!isPublisher && !isEditor && location.pathname !== "/Notifications") {

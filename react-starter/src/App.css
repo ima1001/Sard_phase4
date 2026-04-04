@@ -30,7 +30,7 @@
   transform: translateX(5px);
 }
 
-/* card styling */
+/* card styling 
 .card {
   background: var(--secondary-color);
   border: none;
@@ -39,8 +39,8 @@
   transition: all 0.3s ease;
   margin: 0;
   flex: 0 0 auto;
-  width: 24rem; /* Increased from 18rem for larger cards */
-  max-width: 90vw; /* Responsive max width */
+  width: 24rem; 
+  max-width: 90vw; 
 }
 .card:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
@@ -107,7 +107,7 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-
+*/
 /* Page spacing 
 .home {
   width: 100%;

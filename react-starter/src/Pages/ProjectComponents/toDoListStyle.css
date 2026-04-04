@@ -1,18 +1,18 @@
 .container {
-    max-width: 900px;
+    padding: 30px;
     margin: 40px auto;
 }
 
-/* CARD */
+/* Card */
 .card {
-    background: #fff;
+    background: #F6F6F6;
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 25px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* HEADER */
+/* Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -39,7 +39,7 @@
     cursor: pointer;
 }
 
-/* TABLE */
+/* Table */
 table {
     width: 100%;
     margin-top: 15px;
@@ -75,7 +75,7 @@ th, td {
     background: #d4edda;
 }
 
-/* PROGRESS BAR */
+/* Progress bar */
 .progress-card {
     text-align: center;
 }
@@ -94,7 +94,7 @@ th, td {
     width: 40%;
 }
 
-/* BUTTONS */
+/* Buttons */
 .buttons {
     display: flex;
     justify-content: space-between;

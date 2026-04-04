@@ -1,4 +1,4 @@
-import toDoListStyles from "./toDoList.css";
+import "./toDoListStyle.css";
 
 function ToDoList() {
     const tasks =[
@@ -64,7 +64,7 @@ function ToDoList() {
                     <tr key={task.id}>
                         <td>{task.title}</td>
                         <td>
-                        <span className={getStatusClass(task.status)}>
+                        <span className={task.status}>
                             {task.status}
                         </span>
                         </td>
