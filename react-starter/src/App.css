@@ -389,28 +389,34 @@ card styling
   padding-bottom: 10px;
 }
 
-<<<<<<< HEAD
 /* Project Notification */
-.project-notification{
+.project-notifications{
   min-height: 100vh;
   padding: 60px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  align-items: center; 
+  justify-content: flex-start; 
+  gap: 28px;
 }
-.notification-project_card{
-  max-width: 900px;
+
+.project-notification-content {
+  width: 100%;
+  max-width: 900px;  
+}
+
+.notification-project_card {
+  width: 100%;     
   background: #8f8a77;
   border-radius: 14px;
   padding: 18px 22px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center; 
   color: white;
-  flex-direction: row;
   margin-bottom: 20px;
-=======
+}
+
 /*Login/Signup Pages*/
 .login-container {
   background: #E1D9BC;
@@ -447,5 +453,4 @@ card styling
     color: #30364F;
     border-color: #30364F;
     background: #ffffff;
->>>>>>> a34a287ac688173f947faefb0fe4231c8cda8ee2
 }
