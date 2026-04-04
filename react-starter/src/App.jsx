@@ -8,6 +8,7 @@ import Community from "./Pages/Community";
 import RoleSelect from "./Pages/RoleSelect";
 import Login from "./Pages/login";
 import ToDoList from "./Pages/ProjectComponents/toDoList";
+import ProjectNotification from "./Pages/ProjectComponents/projectNotification";
 
 import "./App.css";
 
@@ -31,6 +32,7 @@ const ROLES = {
             { name: "Book1", link: "/Community" },
             { name: "Book2", link: "/Community" },
             { name: "Todo List", link: "/ToDoList" },
+            { name: "Project Notifications", link: "/ProjectNotification" }
         ],
     },
 };
@@ -55,6 +57,7 @@ function AppLayout({ role }) {
                     <Route path="/Community" element={<Community />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/ToDoList" element={<ToDoList />} />
+                    <Route path="/ProjectNotification" element={<ProjectNotification />} />
                 </Routes>
             </div>
         </div>
@@ -63,7 +66,7 @@ function AppLayout({ role }) {
 
 function App() {
     const location = useLocation();
-    const isPublisher = location.pathname.startsWith("/HomePublisher") || location.pathname.startsWith("/Community") || location.pathname.startsWith("/ToDoList");
+    const isPublisher = location.pathname.startsWith("/HomePublisher") || location.pathname.startsWith("/Community") || location.pathname.startsWith("/ToDoList")|| location.pathname.startsWith("/ProjectNotification");
 ;
     const isEditor = location.pathname.startsWith("/HomeEditor") || location.pathname.startsWith("/ProjectEditor");
 
