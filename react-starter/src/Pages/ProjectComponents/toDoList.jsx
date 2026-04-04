@@ -1,4 +1,6 @@
+import React, { useState } from "react";
 import "./toDoListStyle.css";
+import MessageCard from "../../components/MessageCard";
 
 function ToDoList() {
     const tasks =[
@@ -39,13 +41,30 @@ function ToDoList() {
     const progress =
         (tasks.filter((t) => t.status === "Completed").length / tasks.length) * 100;
 
+    const [message, setMessage] = useState(null);
+    
+    function handleAddTask() {
+        
+    }
+    function handlePublishEditors() {
+        setMessage(<MessageCard type="success" text="Published for Editors successfully" />);
+    }
+    function handlePublishReviewers() {
+        setMessage(<MessageCard type="success" text="Published for Reviewers successfully" />);
+    }
+    function handlePublishPublishingHouses() {
+        setMessage(<MessageCard type="success" text="Published for Publishing Houses successfully" />);
+    }
+
+
+
     return (
         <div className="container">
         <div className="list-card">
             <div className="header">
                 <h3>Todo List</h3>
                 <div className="add-task">
-                    <button>+ Add</button>
+                    <button onClick={handleAddTask}>+ Add</button>
                 </div>
             </div>
             <table>
@@ -88,11 +107,12 @@ function ToDoList() {
                 </div>
 
                 <div className="buttons">
-                    <button>Publish for Editors</button>
-                    <button>Publish for Reviewers</button>
-                    <button>Publish for Publishing Houses</button>
+                    <button onClick={handlePublishEditors}>Publish for Editors</button>
+                    <button onClick={handlePublishReviewers}>Publish for Reviewers</button>
+                    <button onClick={handlePublishPublishingHouses}>Publish for Publishing Houses</button>
                 </div>
             </div>
+            {message && <div className="message-container">{message}</div>}
             </div>
         );
     }

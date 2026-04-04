@@ -417,6 +417,14 @@ card styling
   margin-bottom: 20px;
 }
 
+.message-container{
+  margin-top: 20px;
+  margin-top: 20px;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+}
+
 /*Login/Signup Pages*/
 .login-container {
   background: #E1D9BC;
