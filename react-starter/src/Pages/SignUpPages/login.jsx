@@ -1,12 +1,12 @@
 function Login() {
   return (
-    <div style={{ padding: "50px" }}>
-      <div class="logo-container">
+    <div class="login-container" style={{ padding: "50px" }}>
+      <div class="logo-card">
         <img src="src/assets/logoDT.png" class="logo" alt="Sard logo"/>
       </div>
 
       <div class="card">
-          <div class="card-content">              
+          <div class="login-content">              
             <h3 class="card-title">Login</h3>
             <div>
               <text class="input-label">Username</text>
@@ -17,9 +17,12 @@ function Login() {
               <textarea placeholder="Password" class="input-field"></textarea>
             </div>
             <div class="button-container">
-              <button class="btn btn-primary">Login</button>
+              <button class="btn login-btn">Login</button>
             </div>
-            <a href="/signup" class="signup-link">Don't have an account? Sign up</a>
+            <p>
+              Don't have an account? 
+              <a href="/signup" class="signup-link">Sign up</a>
+            </p>
           </div>
         </div>
     </div>

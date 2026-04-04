@@ -1,7 +1,7 @@
 function Signup() {
   return (
-    <div style={{ padding: "50px" }}>
-      <div class="logo-container">
+    <div class="login-container" style={{ padding: "50px" }}>
+      <div class="login-card">
         <img src="src/assets/logoDT.png" class="logo" alt="Sard logo"/>
       </div>
 
@@ -34,7 +34,7 @@ function Signup() {
                 </div>
             </div>
             <div class="button-container">
-              <button class="btn btn-primary">Sign Up</button>
+              <button class="btn login-btn">Sign Up</button>
             </div>
             <a href="/login" class="signup-link">Already have an account? Login</a>
           </div>

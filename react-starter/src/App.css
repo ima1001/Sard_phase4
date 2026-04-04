@@ -389,6 +389,7 @@ card styling
   padding-bottom: 10px;
 }
 
+<<<<<<< HEAD
 /* Project Notification */
 .project-notification{
   min-height: 100vh;
@@ -409,4 +410,42 @@ card styling
   color: white;
   flex-direction: row;
   margin-bottom: 20px;
+=======
+/*Login/Signup Pages*/
+.login-container {
+  background: #E1D9BC;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background: #E1D9BC;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 16px;
+  border: 0.5px solid #30364F;
+  border-radius: 10px;
+  background: #161b27;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+    color: #30364F;
+    border-color: #30364F;
+    background: #ffffff;
+>>>>>>> a34a287ac688173f947faefb0fe4231c8cda8ee2
 }
