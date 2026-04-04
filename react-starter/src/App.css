@@ -427,16 +427,19 @@ card styling
 }
 
 .login-card {
-  background: #E1D9BC;
-  min-height: 100vh;
+  background: #F0F0DB;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50px;
+  padding: 40px;
 }
 
 .login-btn {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   font-size: 13px;
   font-weight: 500;
@@ -444,7 +447,7 @@ card styling
   text-decoration: none;
   padding: 10px 16px;
   border: 0.5px solid #30364F;
-  border-radius: 10px;
+  border-radius: 999px;
   background: #161b27;
   transition: all 0.2s ease;
 }
@@ -453,4 +456,34 @@ card styling
     color: #30364F;
     border-color: #30364F;
     background: #ffffff;
+}
+
+.input-field {
+  width: 100%;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  border-radius: 15px;
+  color: #30364F;
+  padding: 5px 14px;
+  border-width: 1px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: block;
+}
+
+.form-select {
+  width: 100%;
+  padding: 5px 14px;
+  font-size: 14px;
+  border-radius: 15px;
+  border-width: 1px;
+  border-color: #30364F;
+}
+
+.form-select>option::selection{
+  background: #30364F;
+  color: #F0F0DB;
 }
