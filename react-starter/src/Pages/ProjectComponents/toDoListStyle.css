@@ -1,12 +1,14 @@
+
 .container {
     padding: 30px;
     margin: 40px auto;
+    background: #ffffff;
 }
 
 /* Card */
 .card {
     background: #F6F6F6;
-    padding: 20px;
+    padding: 25px;
     border-radius: 15px;
     margin-bottom: 25px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -37,6 +39,10 @@
     padding: 6px 12px;
     border-radius: 8px;
     cursor: pointer;
+    transition: 0.2s ease;
+}
+.add-task button:hover {
+    background: #ACBAC4;
 }
 
 /* Table */
@@ -44,35 +50,43 @@ table {
     width: 100%;
     margin-top: 15px;
     border-collapse: collapse;
+    font-size: 18px;
 }
 
 th, td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #c5c3c3;
 }
 
-/* STATUS BADGES */
-.status {
+/* Status colors */
+
+.in_review {
+    background: #f8d7da;
     padding: 4px 10px;
     border-radius: 10px;
-    font-size: 12px;
+    font-size: 16px;
 }
 
-.review {
-    background: #f8d7da;
-}
-
-.progress {
+.in_progress {
     background: #fff3cd;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 16px;
 }
 
 .proposed {
     background: #d1ecf1;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 16px;
 }
 
 .completed {
     background: #d4edda;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 16px;
 }
 
 /* Progress bar */
@@ -101,7 +115,6 @@ th, td {
     gap: 10px;
     flex-wrap: wrap;
 }
-
 .buttons button {
     flex: 1;
     padding: 10px;
@@ -109,4 +122,10 @@ th, td {
     border: none;
     background: #e0e4ec;
     cursor: pointer;
+    transition: 0.2s ease;
+    font-size: 16px;
+    font-weight: bold;
+}
+.buttons button:hover {
+    background: #ACBAC4;
 }

@@ -5,7 +5,7 @@ function ToDoList() {
         {
         id: 1,
         title: "Plotline",
-        status: "In Review",
+        status: "In review",
         lastUpdate: "Feb 13th",
         deadline: "Apr 13th",
         author: "-"
@@ -13,7 +13,7 @@ function ToDoList() {
         {
         id: 2,
         title: "Chapter 1",
-        status: "In Progress",
+        status: "In progress",
         lastUpdate: "Feb 13th",
         deadline: "Mar 15th",
         author: "-"
@@ -64,7 +64,7 @@ function ToDoList() {
                     <tr key={task.id}>
                         <td>{task.title}</td>
                         <td>
-                        <span className={task.status}>
+                        <span className={task.status.toLowerCase().replace(" ", "_")}>
                             {task.status}
                         </span>
                         </td>
