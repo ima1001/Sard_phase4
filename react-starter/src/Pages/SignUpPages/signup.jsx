@@ -1,46 +1,53 @@
-function Signup() {
-  return (
-    <div class="login-container" style={{ padding: "50px" }}>
-      <div class="login-card">
-        <img src="src/assets/logoDT.png" class="logo" alt="Sard logo"/>
-      </div>
+import { useState } from "react";
 
-      <div class="card">
-          <div class="card-content">              
-            <h3 class="card-title">Sign Up</h3>
-            <div>
-              <text class="input-label">Email</text>
-              <textarea placeholder="Email" class="input-field"></textarea>
-            </div>
-            <div>
-              <text class="input-label">Username</text>
-              <textarea placeholder="Username" class="input-field"></textarea>
-            </div>
-            <div>
-              <text class="input-label">Password</text>
-              <textarea placeholder="Password" class="input-field"></textarea>
-            </div>
-            <div>
-              <text class="input-label">Confirm Password</text>
-              <textarea placeholder="Confirm Password" class="input-field"></textarea>
-            </div>
-            <div>
-                <text class="input-label">Role</text>
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action">Author</button>
-                    <button type="button" class="list-group-item list-group-item-action">Editor</button>
-                    <button type="button" class="list-group-item list-group-item-action">Reviewer</button>
-                    <button type="button" class="list-group-item list-group-item-action">Publisher</button>
-                </div>
-            </div>
-            <div class="button-container">
-              <button class="btn login-btn">Sign Up</button>
-            </div>
-            <a href="/login" class="signup-link">Already have an account? Login</a>
-          </div>
+function Signup() {
+    const [role, setRole] = useState("");
+
+
+    return (
+        <div class="login-container" style={{ padding: "50px" }}>
+        <div class="logo-card">
+            <img src="src/assets/logoDT.png" class="logo" alt="Sard logo"/>
         </div>
-    </div>
-  );
-}
+
+        <div class="login-card">
+            <div class="card-content">              
+                <h3 class="card-title">Sign Up</h3>
+                <div class="input-group">
+                <text class="input-label">Email</text>
+                <input type="email" placeholder="Email" class="input-field"></input>
+                </div>
+                <div class="input-group">
+                <text class="input-label">Username</text>
+                <input type="text" placeholder="Username" class="input-field"></input>
+                </div>
+                <div class="input-group">
+                <text class="input-label">Password</text>
+                <input type="password" placeholder="Password" class="input-field"></input>
+                </div>
+                <div class="input-group">
+                <text class="input-label">Confirm Password</text>
+                <input type="password" placeholder="Confirm Password" class="input-field"></input>
+                </div>
+                <div class="input-group">
+                    <text class="input-label">Role</text>
+                    <select className="form-select" value={role} onChange={(e) => setRole(e.target.value)}>
+                        <option value="" disabled>Select a role</option>
+                        <option value="author">Author</option>
+                        <option value="editor">Editor</option>
+                        <option value="reviewer">Reviewer</option>
+                        <option value="publisher">Publisher</option>
+                    </select>
+                </div>
+                
+                <div class="button-container">
+                <button class="btn login-btn">Sign Up</button>
+                </div>
+                <a href="/login" class="signup-link">Already have an account? Login</a>
+            </div>
+            </div>
+        </div>
+    );
+    }
 
 export default Signup;

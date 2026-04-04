@@ -5,16 +5,16 @@ function Login() {
         <img src="src/assets/logoDT.png" class="logo" alt="Sard logo"/>
       </div>
 
-      <div class="card">
+      <div class="login-card">
           <div class="login-content">              
-            <h3 class="card-title">Login</h3>
-            <div>
+            <h3 class="card-title">Log In</h3>
+            <div class="input-group">
               <text class="input-label">Username</text>
-              <textarea placeholder="Username" class="input-field"></textarea>
+              <input type="text" placeholder="Username" class="input-field"></input>
             </div>
-            <div>
+            <div class="input-group">
               <text class="input-label">Password</text>
-              <textarea placeholder="Password" class="input-field"></textarea>
+              <input type="password" placeholder="Password" class="input-field"></input>
             </div>
             <div class="button-container">
               <button class="btn login-btn">Login</button>
