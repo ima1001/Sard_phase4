@@ -7,6 +7,7 @@ import NotificationsPage from "./Pages/NotificationsPage";
 import Community from "./Pages/Community";
 import RoleSelect from "./Pages/RoleSelect";
 import Login from "./Pages/login";
+import ToDoList from "./Pages/ProjectComponents/toDoList";
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ const ROLES = {
         projectLinks: [
             { name: "Book1", link: "/ProjectEditor" },
             { name: "Book2", link: "/ProjectEditor" },
+            { name: "Todo List", link: "/ToDoList" }
         ],
     },
     publisher: {
