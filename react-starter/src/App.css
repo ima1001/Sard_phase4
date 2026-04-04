@@ -182,22 +182,6 @@
   width: 140px;
 }
 
-.login-container {
-  background: #E1D9BC;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-card {
-  background: #E1D9BC;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 /* Notification page */
 .notification-page {
   background: #E1D9BC;
@@ -403,6 +387,23 @@
   cursor: pointer;
   padding-left: 6px;
   padding-bottom: 10px;
+}
+
+/*Login/Signup Pages*/
+.login-container {
+  background: #E1D9BC;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background: #E1D9BC;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-btn {
