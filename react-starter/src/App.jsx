@@ -5,7 +5,6 @@ import Home from "./components/Home";
 import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
 import NotificationsPage from "./Pages/NotificationsPage";
 import Community from "./Pages/Community";
-import RoleSelect from "./Pages/RoleSelect";
 import Login from "./Pages/SignUpPages/login";
 import Signup from "./Pages/SignUpPages/signup";
 import ToDoList from "./Pages/ProjectComponents/toDoList";
