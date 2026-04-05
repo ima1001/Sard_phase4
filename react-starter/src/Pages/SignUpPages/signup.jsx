@@ -8,18 +8,36 @@ function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, samePassword] = useState("");
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
-    const handlesignup = () => {
-        if (password !== cpassword) {
-            alert("Passwords do not match");
-            return;
-        }
-        if (!role || !email || !username || !password) {
-            alert("Please fill in all fields");
-            return;
-        }
+    const validate = () => {
+    const newErrors = {};
+    if (!email) {
+      newErrors.email = "Email is required";
+    }
+    if (!username) {
+      newErrors.username = "Username is required";
+    }
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
+    if (!cpassword) {
+      newErrors.cpassword = "Confirm password is required";
+    }
+    if (password && cpassword && password !== cpassword) {
+      newErrors.password = "Passwords do not match";
+    }
+    return newErrors;
+  }
 
+    const handlesignup = () => {
+        const newErrors = validate();
+        if (Object.keys(newErrors).length > 0) {
+          setErrors(newErrors);
+          return;
+        }
+        
         switch (role) {
         case "author":
             navigate("/HomeAuthor");
@@ -52,12 +70,14 @@ function Signup() {
                 <div class="input-group">
 
                 <text class="input-label">Email</text>
-                <input 
+                <input
                 type="email"
                 placeholder="Email"
                 class="input-field"
                  value={email}
-                 onChange={(e) => setEmail(e.target.value)}></input>
+                 onChange={(e) => setEmail(e.target.value)}/>
+                {errors.email && <p className="error-text">{errors.email}</p>}
+
                 </div>
 
                 <div class="input-group">
@@ -68,6 +88,8 @@ function Signup() {
                 class="input-field"
                  value={username}
                  onChange={(e) => setUsername(e.target.value)}/>
+                {errors.username && <p className="error-text">{errors.username}</p>}
+
                 </div>
 
                 <div class="input-group">
@@ -78,6 +100,7 @@ function Signup() {
                 class="input-field"
                  value={password}
                  onChange={(e) => setPassword(e.target.value)}/>
+                {errors.password && <p className="error-text">{errors.password}</p>}
                 </div>
 
                 <div class="input-group">
