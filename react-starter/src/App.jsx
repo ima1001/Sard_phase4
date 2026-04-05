@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import SideBar from "./components/SideBar";
+
 import Home from "./components/Home";
 import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
 import NotificationsPage from "./Pages/NotificationsPage";
@@ -11,7 +12,33 @@ import ProjectNotification from "./Pages/ProjectComponents/projectNotification";
 
 import "./App.css";
 
-function App() {
+const ROLES = {
+    editor: {
+        label: "EDITOR",
+        name: "Andrew Smith",
+        homeLink: "/HomeEditor",
+        notificationLink: "/Notifications",
+        projectLinks: [
+            { name: "Book1", link: "/ProjectEditor" },
+            { name: "Book2", link: "/ProjectEditor" }
+        ],
+    },
+    publisher: {
+        label: "PUBLISHER",
+        name: "Alex (Penguin House)",
+        homeLink: "/HomePublisher",
+        notificationLink: "/Notifications",
+        projectLinks: [
+            { name: "Book1", link: "/Community" },
+            { name: "Book2", link: "/Community" },
+            { name: "Todo List", link: "/ToDoList" },
+            { name: "Project Notifications", link: "/ProjectNotification" }
+        ],
+    },
+};
+
+function AppLayout({ role }) {
+    const config = ROLES[role];
     return (
         <div style={{ display: "flex" }}>
             <SideBar
@@ -23,17 +50,11 @@ function App() {
             />
             <div style={{ flex: 1 }}>
                 <Routes>
-                    <Route path="/" element={<Login />} />
-                    <Route path="/*" element={<Login />} />
-                    <Route path="/HomeAdmin" element={<Home role="admin" />} />
-                    <Route path="/HomeAuthor" element={<Home role="author" />} />
                     <Route path="/HomeEditor" element={<Home role="editor" />} />
                     <Route path="/HomePublisher" element={<Home role="publisher" />} />
                     <Route path="/ProjectEditor" element={<ProjectEditor />} />
                     <Route path="/Notifications" element={<NotificationsPage />} />
                     <Route path="/Community" element={<Community />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<Signup />} />
                     <Route path="/ToDoList" element={<ToDoList />} />
                     <Route path="/ProjectNotification" element={<ProjectNotification />} />
                 </Routes>
@@ -41,27 +62,20 @@ function App() {
         </div>
     );
 }
-/*
+
 function App() {
-    return (
-            <div>
-<Routes>
-                    <Route path="/" element={<Login />} />
-                    <Route path="*" element={<Login />} />
-                    <Route path="/HomeEditor" element={<Home role="editor" />} />
-                    <Route path="/HomePublisher" element={<Home role="publisher" />} />
-                    <Route path="/ProjectEditor" element={<ProjectEditor />} />
-                    <Route path="/Notifications" element={<NotificationsPage />} />
-                    <Route path="/Community" element={<Community />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<Signup />} />
-                    <Route path="/ToDoList" element={<ToDoList />} />
-                    <Route path="/ProjectNotification" element={<ProjectNotification />}/>
-                </Routes>
-            </div>
-                
-            );
-    }
-*/
+    const location = useLocation();
+        return (
+            <Routes>
+                <Route path="/" element={<RoleSelect />} />
+                <Route path="*" element={<RoleSelect />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+            </Routes>
+        );
+    
+
+    return <AppLayout role={role} />;
+}
 
 export default App;
