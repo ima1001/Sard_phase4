@@ -23,6 +23,10 @@ function App() {
             />
             <div style={{ flex: 1 }}>
                 <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/*" element={<Login />} />
+                    <Route path="/HomeAdmin" element={<Home role="admin" />} />
+                    <Route path="/HomeAuthor" element={<Home role="author" />} />
                     <Route path="/HomeEditor" element={<Home role="editor" />} />
                     <Route path="/HomePublisher" element={<Home role="publisher" />} />
                     <Route path="/ProjectEditor" element={<ProjectEditor />} />
