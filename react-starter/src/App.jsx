@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
 import NotificationsPage from "./Pages/NotificationsPage";
 import Community from "./Pages/Community";
+import RoleSelect from "./Pages/RoleSelect";
 import Login from "./Pages/SignUpPages/login";
 import Signup from "./Pages/SignUpPages/signup";
 import ToDoList from "./Pages/ProjectComponents/toDoList";
@@ -55,6 +56,8 @@ function AppLayout({ role }) {
                     <Route path="/ProjectEditor" element={<ProjectEditor />} />
                     <Route path="/Notifications" element={<NotificationsPage />} />
                     <Route path="/Community" element={<Community />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="/ToDoList" element={<ToDoList />} />
                     <Route path="/ProjectNotification" element={<ProjectNotification />} />
                 </Routes>
@@ -65,16 +68,22 @@ function AppLayout({ role }) {
 
 function App() {
     const location = useLocation();
+    const isPublisher = location.pathname.startsWith("/HomePublisher") || location.pathname.startsWith("/Community") || location.pathname.startsWith("/ToDoList")|| location.pathname.startsWith("/ProjectNotification");
+;
+    const isEditor = location.pathname.startsWith("/HomeEditor") || location.pathname.startsWith("/ProjectEditor");
+
+    if (!isPublisher && !isEditor && location.pathname !== "/Notifications") {
         return (
             <Routes>
-                <Route path="/" element={<RoleSelect />} />
-                <Route path="*" element={<RoleSelect />} />
+                <Route path="/" element={<Login />} />
+                <Route path="*" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
             </Routes>
         );
-    
+    }
 
+    const role = isPublisher ? "publisher" : "editor";
     return <AppLayout role={role} />;
 }
 
