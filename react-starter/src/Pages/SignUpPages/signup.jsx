@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
     const [role, setRole] = useState("");
@@ -6,7 +7,36 @@ function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, samePassword] = useState("");
+    const navigate = useNavigate();
 
+    const handlesignup = () => {
+        if (password !== cpassword) {
+            alert("Passwords do not match");
+            return;
+        }
+        if (!role || !email || !username || !password) {
+            alert("Please fill in all fields");
+            return;
+        }
+
+        switch (role) {
+        case "author":
+            navigate("/HomeAuthor");
+            break;
+        case "editor":
+            navigate("/HomeEditor");
+            break; 
+        case "reviewer":
+            navigate("/HomeReviewer");
+            break;
+        case "publisher":
+            navigate("/HomePublisher");
+            break;
+        default:
+            alert("Choose a role.");
+        };
+
+    }
 
 
     return (
@@ -19,6 +49,7 @@ function Signup() {
             <div class="card-content">              
                 <h3 class="card-title">Sign Up</h3>
                 <div class="input-group">
+
                 <text class="input-label">Email</text>
                 <input 
                 type="email"
@@ -27,6 +58,7 @@ function Signup() {
                  value={email}
                  onChange={(e) => setEmail(e.target.value)}></input>
                 </div>
+
                 <div class="input-group">
                 <text class="input-label">Username</text>
                 <input 
@@ -36,6 +68,7 @@ function Signup() {
                  value={username}
                  onChange={(e) => setUsername(e.target.value)}></input>
                 </div>
+
                 <div class="input-group">
                 <text class="input-label">Password</text>
                 <input 
@@ -45,6 +78,7 @@ function Signup() {
                  value={password}
                  onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
+
                 <div class="input-group">
                 <text class="input-label">Confirm Password</text>
                 <input 
@@ -54,21 +88,22 @@ function Signup() {
                  value={cpassword}
                  onChange={(e) => samePassword(e.target.value)}></input>
                 </div>
+
                 <div class="input-group">
                     <text class="input-label">Role</text>
                     <select className="form-select" value={role} onChange={(e) => setRole(e.target.value)}>
                         <div class="dropdown-content">
-                        <option value="" disabled>Select a role</option>
-                        <option value="author">Author</option>
-                        <option value="editor">Editor</option>
-                        <option value="reviewer">Reviewer</option>
-                        <option value="publisher">Publisher</option>
+                            <option value="" disabled>Select a role</option>
+                            <option value="author">Author</option>
+                            <option value="editor">Editor</option>
+                            <option value="reviewer">Reviewer</option>
+                            <option value="publisher">Publisher</option>
                         </div>
                     </select>
                 </div>
                 
                 <div class="button-container">
-                <button class="btn login-btn">Sign Up</button>
+                <button class="btn login-btn" onClick={handlesignup}>Sign Up</button>
                 </div>
                 <p>
                     Already have an account? 

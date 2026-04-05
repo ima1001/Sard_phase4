@@ -7,6 +7,11 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
+    if (!username || !password) {
+      alert("Please enter both username and password");
+      return;
+    }
+
     switch (username.toLowerCase()) {
       case "admin":
         navigate("/HomeAdmin");
@@ -25,7 +30,7 @@ function Login() {
         break;
       default:
         alert("Invalid username or password");
-    }
+    };
 
   }
 
@@ -38,6 +43,7 @@ function Login() {
       <div class="login-card">
           <div class="login-content">              
             <h3 class="card-title">Log In</h3>
+
             <div class="input-group">
               <text class="input-label">Username</text>
               <input type="text" 
@@ -46,6 +52,7 @@ function Login() {
               value={username} 
               onChange={(e) => setUsername(e.target.value)}></input>
             </div>
+
             <div class="input-group">
               <text class="input-label">Password</text>
               <input type="password"
@@ -54,11 +61,13 @@ function Login() {
                value={password}
                onChange={(e) => setPassword(e.target.value)}></input>
             </div>
+
             <div class="button-container">
               <button 
               class="btn login-btn"
               onClick={handleLogin}>Login</button>
             </div>
+
             <p>
               Don't have an account? 
               <a href="/signup" class="signup-link">Sign up</a>
