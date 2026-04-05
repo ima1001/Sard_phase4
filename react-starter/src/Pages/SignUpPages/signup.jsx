@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AlignCenter } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -47,7 +48,7 @@ function Signup() {
 
         <div class="login-card">
             <div class="card-content">              
-                <h3 class="card-title">Sign Up</h3>
+                <h3 class="card-title" style={{textAlign: "center"}}>Sign Up</h3>
                 <div class="input-group">
 
                 <text class="input-label">Email</text>
@@ -61,22 +62,22 @@ function Signup() {
 
                 <div class="input-group">
                 <text class="input-label">Username</text>
-                <input 
+                <input
                 type="text"
                 placeholder="Username"
                 class="input-field"
                  value={username}
-                 onChange={(e) => setUsername(e.target.value)}></input>
+                 onChange={(e) => setUsername(e.target.value)}/>
                 </div>
 
                 <div class="input-group">
                 <text class="input-label">Password</text>
-                <input 
+                <input
                 type="password"
                 placeholder="Password"
                 class="input-field"
                  value={password}
-                 onChange={(e) => setPassword(e.target.value)}></input>
+                 onChange={(e) => setPassword(e.target.value)}/>
                 </div>
 
                 <div class="input-group">
@@ -86,7 +87,7 @@ function Signup() {
                 placeholder="Confirm Password"
                 class="input-field"
                  value={cpassword}
-                 onChange={(e) => samePassword(e.target.value)}></input>
+                 onChange={(e) => samePassword(e.target.value)}/>
                 </div>
 
                 <div class="input-group">

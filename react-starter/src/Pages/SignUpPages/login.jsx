@@ -5,10 +5,24 @@ function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  
+  const validate = () => {
+    const newErrors = {};
+
+    if (!username) {
+      newErrors.username = "Username is required";
+    }
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
+    return newErrors;
+  }
 
   const handleLogin = () => {
-    if (!username || !password) {
-      alert("Please enter both username and password");
+    const newErrors = validate();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
@@ -29,7 +43,7 @@ function Login() {
         navigate("/HomePublisher");
         break;
       default:
-        alert("Invalid username or password");
+        setErrors(newErrors => ({ ...newErrors, username: "Invalid username" }));
     };
 
   }
@@ -42,7 +56,7 @@ function Login() {
 
       <div class="login-card">
           <div class="login-content">              
-            <h3 class="card-title">Log In</h3>
+            <h3 class="card-title" style={{textAlign: "center"}}>Log In</h3>
 
             <div class="input-group">
               <text class="input-label">Username</text>
@@ -50,7 +64,8 @@ function Login() {
               placeholder="Username" 
               class="input-field" 
               value={username} 
-              onChange={(e) => setUsername(e.target.value)}></input>
+              onChange={(e) => setUsername(e.target.value)}/>
+              {errors.username && <p className="error-text">{errors.username}</p>}
             </div>
 
             <div class="input-group">
@@ -59,7 +74,8 @@ function Login() {
                placeholder="Password" 
                class="input-field"
                value={password}
-               onChange={(e) => setPassword(e.target.value)}></input>
+               onChange={(e) => setPassword(e.target.value)}/>
+              {errors.password && <p className="error-text">{errors.password}</p>}
             </div>
 
             <div class="button-container">

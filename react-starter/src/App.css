@@ -504,3 +504,10 @@ card styling
   border-radius: 999px;
 }
 
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  padding-left: 15px;
+}
+
