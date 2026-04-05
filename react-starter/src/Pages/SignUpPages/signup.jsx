@@ -2,10 +2,11 @@ import { useState } from "react";
 
 function Signup() {
     const [role, setRole] = useState("");
+    const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, samePassword] = useState("");
-    
+
 
 
     return (
@@ -19,19 +20,39 @@ function Signup() {
                 <h3 class="card-title">Sign Up</h3>
                 <div class="input-group">
                 <text class="input-label">Email</text>
-                <input type="email" placeholder="Email" class="input-field"></input>
+                <input 
+                type="email"
+                placeholder="Email"
+                class="input-field"
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}></input>
                 </div>
                 <div class="input-group">
                 <text class="input-label">Username</text>
-                <input type="text" placeholder="Username" class="input-field"></input>
+                <input 
+                type="text"
+                placeholder="Username"
+                class="input-field"
+                 value={username}
+                 onChange={(e) => setUsername(e.target.value)}></input>
                 </div>
                 <div class="input-group">
                 <text class="input-label">Password</text>
-                <input type="password" placeholder="Password" class="input-field"></input>
+                <input 
+                type="password"
+                placeholder="Password"
+                class="input-field"
+                 value={password}
+                 onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <div class="input-group">
                 <text class="input-label">Confirm Password</text>
-                <input type="password" placeholder="Confirm Password" class="input-field"></input>
+                <input 
+                type="password"
+                placeholder="Confirm Password"
+                class="input-field"
+                 value={cpassword}
+                 onChange={(e) => samePassword(e.target.value)}></input>
                 </div>
                 <div class="input-group">
                     <text class="input-label">Role</text>

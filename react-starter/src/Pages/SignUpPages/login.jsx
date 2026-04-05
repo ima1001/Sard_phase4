@@ -1,8 +1,33 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 function Login() {
-    
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleLogin = () => {
+    switch (username.toLowerCase()) {
+      case "admin":
+        navigate("/HomeAdmin");
+        break;
+      case "author":
+        navigate("/HomeAuthor");
+        break;
+      case "editor":
+        navigate("/HomeEditor");
+        break; 
+      case "reviewer":
+        navigate("/HomeReviewer");
+        break;
+      case "publisher":
+        navigate("/HomePublisher");
+        break;
+      default:
+        alert("Invalid username or password");
+    }
+
+  }
 
   return (
     <div class="login-container" style={{ padding: "50px" }}>
@@ -30,7 +55,9 @@ function Login() {
                onChange={(e) => setPassword(e.target.value)}></input>
             </div>
             <div class="button-container">
-              <button class="btn login-btn">Login</button>
+              <button 
+              class="btn login-btn"
+              onClick={handleLogin}>Login</button>
             </div>
             <p>
               Don't have an account? 
