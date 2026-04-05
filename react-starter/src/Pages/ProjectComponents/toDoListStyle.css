@@ -129,3 +129,21 @@ th, td {
 .buttons button:hover {
     background: #ACBAC4;
 }
+
+/*dropdown*/
+select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+option{
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #6c7ae0;
+}
+option:hover {
+    background-color: white;
+}

@@ -15,7 +15,7 @@ function ToDoList() {
         {
         id: 2,
         title: "Chapter 1",
-        status: "In progress",
+        status: "Completed",
         lastUpdate: "Feb 13th",
         deadline: "Mar 15th",
         author: "-"
@@ -63,9 +63,9 @@ function ToDoList() {
                     <input type="date" id="deadline" placeholder="Enter deadline date: "/>
                     <label for="Author">Author:</label>
                     <select id="Author">
-                        <option value="Author (yoy)">Proposed</option>
-                        <option value="Editor">In progress</option>
-                        <option value="Reviewer">In review</option>
+                        <option value="Author">Author</option>
+                        <option value="Editor">Editor</option>
+                        <option value="Reviewer">Reviewer</option>
                     </select>
                     <button type="submit">Add</button>
                 </form>
