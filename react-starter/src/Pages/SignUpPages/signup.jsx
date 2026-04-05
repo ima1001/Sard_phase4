@@ -2,11 +2,15 @@ import { useState } from "react";
 
 function Signup() {
     const [role, setRole] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [cpassword, samePassword] = useState("");
+    
 
 
     return (
         <div class="login-container" style={{ padding: "50px" }}>
-        <div class="logo-card">
+        <div class="logo-container">
             <img src="src/assets/logoDT.png" class="logo" alt="Sard logo"/>
         </div>
 
@@ -32,18 +36,23 @@ function Signup() {
                 <div class="input-group">
                     <text class="input-label">Role</text>
                     <select className="form-select" value={role} onChange={(e) => setRole(e.target.value)}>
+                        <div class="dropdown-content">
                         <option value="" disabled>Select a role</option>
                         <option value="author">Author</option>
                         <option value="editor">Editor</option>
                         <option value="reviewer">Reviewer</option>
                         <option value="publisher">Publisher</option>
+                        </div>
                     </select>
                 </div>
                 
                 <div class="button-container">
                 <button class="btn login-btn">Sign Up</button>
                 </div>
-                <a href="/login" class="signup-link">Already have an account? Login</a>
+                <p>
+                    Already have an account? 
+                    <a href="/login" class="signup-link">Login</a>
+                </p>            
             </div>
             </div>
         </div>

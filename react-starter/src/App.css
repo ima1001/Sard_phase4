@@ -424,7 +424,14 @@ card styling
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
+
+.login-container .logo {
+  width: 30%;
+  margin-bottom: 40px;
+}
+
 
 .login-card {
   background: #F0F0DB;
@@ -483,7 +490,9 @@ card styling
   border-color: #30364F;
 }
 
-.form-select>option::selection{
-  background: #30364F;
-  color: #F0F0DB;
+.form-select .dropdown-content {
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 999px;
 }
+
