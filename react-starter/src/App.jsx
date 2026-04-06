@@ -4,7 +4,7 @@ import SideBar from "./components/SideBar";
 import Home from "./components/Home";
 import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
 import NotificationsPage from "./Pages/NotificationsPage";
-import Community from "./Pages/Community";
+import CommunityInterface from "./Pages/CommunityInterface";
 import Login from "./Pages/SignUpPages/login";
 import Signup from "./Pages/SignUpPages/signup";
 import ToDoList from "./Pages/ProjectComponents/toDoList";
@@ -29,8 +29,8 @@ const ROLES = {
         homeLink: "/HomePublisher",
         notificationLink: "/Notifications",
         projectLinks: [
-            { name: "Book1", link: "/Community" },
-            { name: "Book2", link: "/Community" },
+            { name: "Book1", link: "/CommunityInterface" },
+            { name: "Book2", link: "/CommunityInterface" },
             { name: "Todo List", link: "/ToDoList" },
             { name: "Project Notifications", link: "/ProjectNotification" }
         ],
@@ -54,7 +54,7 @@ function AppLayout({ role }) {
                     <Route path="/HomePublisher" element={<Home role="publisher" />} />
                     <Route path="/ProjectEditor" element={<ProjectEditor />} />
                     <Route path="/Notifications" element={<NotificationsPage />} />
-                    <Route path="/Community" element={<Community />} />
+                    <Route path="/CommunityInterface" element={<CommunityInterface />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/ToDoList" element={<ToDoList />} />

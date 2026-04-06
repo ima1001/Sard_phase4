@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./toDoListStyle.css";
 import MessageCard from "../../components/MessageCard";
+import ProjectNavBar from "./ProjectNavBar";
 
 function ToDoList() {
     const tasks =[
@@ -48,25 +49,31 @@ function ToDoList() {
         return(
             <div className="add-task-form">
                 <form action="#" method="post">
-                    <label for="taskName">Task:</label>
-                    <input type="text" id="taskName" placeholder="Enter task name: " />
+                    <div className="field">
+                        <label for="taskName">Task:</label>
+                        <input type="text" id="taskName" placeholder="Enter task name: " />
+                    </div>
+                    <div className="field">
                     <label for="status">Status:</label>
-                    <select id="status">
-                        <option value="Proposed">Proposed</option>
-                        <option value="In progress">In progress</option>
-                        <option value="In review">In review</option>
-                        <option value="Completed">Completed</option>
-                    </select>
-                    <label for="lastUpdate">Last Update:</label>
-                    <input type="date" id="lastUpdate" placeholder="Enter date of last update: "/>
-                    <label for="deadline">Deadline:</label>
-                    <input type="date" id="deadline" placeholder="Enter deadline date: "/>
-                    <label for="Author">Author:</label>
-                    <select id="Author">
-                        <option value="Author">Author</option>
-                        <option value="Editor">Editor</option>
-                        <option value="Reviewer">Reviewer</option>
-                    </select>
+                        <select id="status">
+                            <option value="Proposed">Proposed</option>
+                            <option value="In progress">In progress</option>
+                            <option value="In review">In review</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+                    <div className="field">
+                        <label for="deadline">Deadline:</label>
+                        <input type="date" id="deadline" placeholder="Enter deadline date: "/>
+                    </div>
+                    <div className="field">
+                        <label for="Author">Author:</label>
+                        <select id="Author">
+                            <option value="Author">Author</option>
+                            <option value="Editor">Editor</option>
+                            <option value="Reviewer">Reviewer</option>
+                        </select>
+                    </div>
                     <button type="submit">Add</button>
                 </form>
             </div>
@@ -85,6 +92,8 @@ function ToDoList() {
 
 
     return (
+        <>
+        {< ProjectNavBar />}
         <div className="container">
         <div className="list-card">
             <div className="header">
@@ -141,6 +150,7 @@ function ToDoList() {
             </div>
             {message && <div className="message-container">{message}</div>}
             </div>
+            </>
         );
     }
 export default ToDoList;

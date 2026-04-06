@@ -147,3 +147,71 @@ option{
 option:hover {
     background-color: white;
 }
+
+/* add task form style */
+.add-task-form {
+    position: fixed;          /* to makes it float above everything in the list page */
+    top: 30%;                 
+    right: 20px;               
+    transform: translateY(-50%); 
+    width: 350px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    z-index: 9999;            /* to ensures it stays above all content */
+    animation: fadeIn 0.25s ease-out;
+}
+
+.add-task-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.add-task-form .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.add-task-form label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+}
+
+.add-task-form input,
+.add-task-form select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.add-task-form input:focus,
+.add-task-form select:focus {
+    border-color: #6c63ff;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+.add-task-form button {
+    margin-top: 10px;
+    padding: 12px;
+    background: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.add-task-form button:hover {
+    background: #584df2;
+}
+
