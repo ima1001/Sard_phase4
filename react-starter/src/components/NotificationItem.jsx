@@ -1,12 +1,15 @@
 import { useState } from "react";
 
 function NotificationItem({ notification, onRemove }) {
+    // This state controls if checkbox is checked or not 
   const [checked, setChecked] = useState(false);
 
   const handleCheck = () => {
+    // Show the tick immediately
     setChecked(true);
 
     // wait 500ms so user sees the tick
+    // then remove the notification from the list
     setTimeout(() => {
       onRemove(notification.id);
     }, 500);
@@ -18,8 +21,8 @@ function NotificationItem({ notification, onRemove }) {
         <input
           type="checkbox"
           className="notification-checkbox"
-          checked={checked}
-          onChange={handleCheck}
+          checked={checked} // controlled by state
+          onChange={handleCheck} // when clicked → run function
         />
         <span className="notification-title">{notification.title}</span>
       </div>

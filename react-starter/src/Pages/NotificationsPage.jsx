@@ -3,12 +3,13 @@ import NotificationItem from "../components/NotificationItem";
 
 function NotificationsPage() {
   const [notifications, setNotifications] = useState([
+    // Store notifications (each has creation time instead of fixed text)
     { id: 1, title: "Your project was updated", createdAt: Date.now() },
     { id: 2, title: "New review added", createdAt: Date.now() - 60000 },
     { id: 3, title: "Editor accepted request", createdAt: Date.now() - 3600000 },
     { id: 4, title: "New community created", createdAt: Date.now() - 86400000 },
   ]);
-
+  // Store notifications (each has creation time instead of fixed text)
   const [timeNow, setTimeNow] = useState(Date.now());
 
   //  update time every 30 sec
@@ -17,9 +18,11 @@ function NotificationsPage() {
       setTimeNow(Date.now());
     }, 30000);
 
+    // cleanup when component unmounts
     return () => clearInterval(interval);
   }, []);
 
+  // Function to convert timestamp → "time ago"
   const getTimeAgo = (createdAt) => {
     const diff = Math.floor((timeNow - createdAt) / 1000);
 
@@ -30,7 +33,7 @@ function NotificationsPage() {
 
     return `${Math.floor(diff / 604800)} weeks ago`;
   };
-
+  // Remove notification when checkbox is clicked
   const removeNotification = (id) => {
     setNotifications(notifications.filter((item) => item.id !== id));
   };
@@ -42,6 +45,13 @@ function NotificationsPage() {
       </div>
 
       <div className="notification-page">
+
+        {/* If no notifications left */}
+        {notifications.length === 0 && (
+          <p>No notifications</p>
+        )}
+
+        {/* Render each notification */}
         {notifications.map((item) => (
           <NotificationItem
             key={item.id}
@@ -52,8 +62,6 @@ function NotificationsPage() {
             onRemove={removeNotification}
           />
         ))}
-
-        {notifications.length === 0 && <p>No notifications</p>}
       </div>
     </div>
   );
