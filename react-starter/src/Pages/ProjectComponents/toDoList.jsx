@@ -2,48 +2,20 @@ import React, { useState } from "react";
 import "./toDoListStyle.css";
 import MessageCard from "../../components/MessageCard";
 import ProjectNavBar from "./ProjectNavBar";
+import tasks from "../../../toDoListTasks"; // Importing tasks from json file
 
 function ToDoList() {
-    const tasks =[
-        {
-        id: 1,
-        title: "Plotline",
-        status: "In review",
-        lastUpdate: "Feb 13th",
-        deadline: "Apr 13th",
-        author: "-"
-        },
-        {
-        id: 2,
-        title: "Chapter 1",
-        status: "Completed",
-        lastUpdate: "Feb 13th",
-        deadline: "Mar 15th",
-        author: "-"
-        },
-        {
-        id: 3,
-        title: "Index",
-        status: "Proposed",
-        lastUpdate: "Feb 13th",
-        deadline: "Apr 29th",
-        author: "-"
-        },
-        {
-        id: 4,
-        title: "Characters map",
-        status: "Completed",
-        lastUpdate: "Feb 13th",
-        deadline: "Mar 1st",
-        author: "-"
-        }];
-
     // Calculate progress (Completed tasks %)
     const progress =
         (tasks.filter((t) => t.status === "Completed").length / tasks.length) * 100;
 
     const [message, setMessage] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
+
+    function handleAddTask() {
+        setMessage(<MessageCard type="success" text="Task added successfully" />);
+        setShowAddForm(false);
+    }
     
     function AddTaskForm() {
         return(
@@ -74,7 +46,7 @@ function ToDoList() {
                             <option value="Reviewer">Reviewer</option>
                         </select>
                     </div>
-                    <button type="submit">Add</button>
+                    <button type="submit" onClick={handleAddTask}>Add</button>
                 </form>
             </div>
         );
@@ -88,7 +60,6 @@ function ToDoList() {
     function handlePublishPublishingHouses() {
         setMessage(<MessageCard type="success" text="Published for Publishing Houses successfully" />);
     }
-
 
 
     return (

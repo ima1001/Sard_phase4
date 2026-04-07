@@ -1,0 +1,34 @@
+    [
+        {
+        "id": 1,
+        "title": "Plotline",
+        "status": "In review",
+        "lastUpdate": "Feb 13th",
+        "deadline": "Apr 13th",
+        "author": "-"
+        },
+        {
+        "id": 2,
+        "title": "Chapter 1",
+        "status": "Completed",
+        "lastUpdate": "Feb 13th",
+        "deadline": "Mar 15th",
+        "author": "-"
+        },
+        {
+        "id": 3,
+        "title": "Index",
+        "status": "Proposed",
+        "lastUpdate": "Feb 13th",
+        "deadline": "Apr 29th",
+        "author": "-"
+        },
+        {
+        "id": 4,
+        "title": "Characters map",
+        "status": "Completed",
+        "lastUpdate": "Feb 13th",
+        "deadline": "Mar 1st",
+        "author": "-"
+        }
+    ]
