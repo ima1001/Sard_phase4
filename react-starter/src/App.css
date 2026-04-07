@@ -492,9 +492,8 @@ card styling
   padding: 20px;
   background: var(--secondary-color);
   border-radius: 20px;
-  width: 70%;
-  top: 50%;
-  right: 50%;
+  width: 80%;
+  margin: 50px auto;
 }
 
 .project-nav-bar p{
