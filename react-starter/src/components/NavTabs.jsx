@@ -4,6 +4,8 @@ import ToDoList from "../Pages/ProjectComponents/toDoList";
 //import Chats from "../Pages/ProjectComponents/chats";
 import Notifications from "../Pages/ProjectComponents/projectNotification";
 //import Settings from "../Pages/ProjectComponents/settings";
+import DraftsSection from "../Pages/ProjectComponents/draftsSection";       
+
 
 function NavTabs() {
 const [activeTab, setActiveTab] = useState("todo");
@@ -15,7 +17,7 @@ return (
             <button onClick={() => setActiveTab("todo")}>todo list</button>
             {/* <button onClick={() => setActiveTab("chats")}>chats</button> */}
             <button onClick={() => setActiveTab("notifications")}>notification</button>
-            {/* <button onClick={() => setActiveTab("drafts")}>drafts</button> */}
+            <button onClick={() => setActiveTab("drafts")}>drafts</button>
             {/* <button onClick={() => setActiveTab("settings")}>settings</button> */}
         </nav>
 
@@ -23,6 +25,7 @@ return (
         <div className="project-content-box">
             {activeTab === "todo" && <ToDoList />}
             {activeTab === "notifications" && <Notifications />}
+            {activeTab === "drafts" && <DraftsSection />}
         </div>
     </>
     );
