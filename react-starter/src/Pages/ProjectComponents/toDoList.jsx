@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./toDoListStyle.css";
 import MessageCard from "../../components/MessageCard";
-import ProjectNavBar from "./ProjectNavBar";
 import tasks from "../../../toDoListTasks"; // Importing tasks from json file
 
 function ToDoList() {
@@ -61,10 +60,8 @@ function ToDoList() {
         setMessage(<MessageCard type="success" text="Published for Publishing Houses successfully" />);
     }
 
-
     return (
         <>
-        {< ProjectNavBar />}
         <div className="container">
         <div className="list-card">
             <div className="header">

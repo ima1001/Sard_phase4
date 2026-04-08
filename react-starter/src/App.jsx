@@ -9,6 +9,7 @@ import Login from "./Pages/SignUpPages/login";
 import Signup from "./Pages/SignUpPages/signup";
 import ToDoList from "./Pages/ProjectComponents/toDoList";
 import ProjectNotification from "./Pages/ProjectComponents/projectNotification";
+import NavTabs from "./components/NavTabs";
 
 import "./App.css";
 
@@ -31,8 +32,7 @@ const ROLES = {
         projectLinks: [
             { name: "Book1", link: "/CommunityInterface" },
             { name: "Book2", link: "/CommunityInterface" },
-            { name: "Todo List", link: "/ToDoList" },
-            { name: "Project Notifications", link: "/ProjectNotification" }
+            { name: "nav tabs", link: "/NavTabs"}
         ],
     },
 };
@@ -57,8 +57,7 @@ function AppLayout({ role }) {
                     <Route path="/CommunityInterface" element={<CommunityInterface />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/ToDoList" element={<ToDoList />} />
-                    <Route path="/ProjectNotification" element={<ProjectNotification />} />
+                    <Route path="/NavTabs" element={<NavTabs />} />
                 </Routes>
             </div>
         </div>
@@ -67,7 +66,7 @@ function AppLayout({ role }) {
 
 function App() {
     const location = useLocation();
-    const isPublisher = location.pathname.startsWith("/HomePublisher") || location.pathname.startsWith("/Community") || location.pathname.startsWith("/ToDoList")|| location.pathname.startsWith("/ProjectNotification");
+    const isPublisher = location.pathname.startsWith("/HomePublisher") || location.pathname.startsWith("/Community") || location.pathname.startsWith("/NavTabs");
 ;
     const isEditor = location.pathname.startsWith("/HomeEditor") || location.pathname.startsWith("/ProjectEditor");
 
