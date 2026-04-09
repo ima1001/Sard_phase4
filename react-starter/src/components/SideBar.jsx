@@ -26,7 +26,7 @@ function SideBar({
   const navigate = useNavigate();
 
   return (
-    <div className={`sidebar ${role?.toLowerCase() === "admin" ? "admin-sidebar" : ""}`}>
+    <div className={`sidebar ${showActionCard ? "sidebar-with-action" : ""}`}>
       <div className="logo-container">
         <img src={logo} alt="Sard Logo" className="logo" />
       </div>
@@ -51,6 +51,7 @@ function SideBar({
   <>
     <div
       className="nav-item project-toggle"
+      role="button"
       onClick={() => setOpenProjects(!openProjects)}
     >
       <div className="nav-left">

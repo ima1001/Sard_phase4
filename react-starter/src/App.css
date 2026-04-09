@@ -404,11 +404,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .logo {
-  width: 78px;
+  width: 74px;
   height: auto;
 }
 
@@ -416,11 +416,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 26px;
+  margin-bottom: 22px;
 }
 
 .profile-icon {
-  font-size: 32px;
+  font-size: 30px;
   color: #F0F0DB;
   flex-shrink: 0;
 }
@@ -428,12 +428,12 @@
 .profile-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  line-height: 1.05;
 }
 
 .role-text {
   margin: 0;
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   color: #c8bea5;
   font-weight: 400;
   text-transform: uppercase;
@@ -441,7 +441,7 @@
 
 .name-text {
   margin: 2px 0 0;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   color: #F0F0DB;
   font-weight: 400;
 }
@@ -449,7 +449,7 @@
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .nav-item {
@@ -458,10 +458,9 @@
   justify-content: space-between;
   color: #F0F0DB;
   text-decoration: none;
-  font-size: 0.95rem;
-  padding: 9px 10px;
+  font-size: 0.82rem;
+  padding: 8px 9px;
   border-radius: 10px;
-  margin-bottom: 0;
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -473,29 +472,31 @@
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
 }
 
 .nav-icon,
 .arrow-icon {
-  font-size: 0.95rem;
+  font-size: 0.82rem;
   color: #F0F0DB;
 }
 
 .dropdown-menu-projects {
-  margin-left: 16px;
-  margin-bottom: 8px;
+  margin-left: 2px;
+  margin-bottom: 6px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
+  padding-left: 18px;
 }
 
 .project-link {
   color: #d8cfb5;
   text-decoration: none;
-  font-size: 0.82rem;
-  padding: 7px 10px;
-  border-radius: 9px;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  padding: 5px 8px;
+  border-radius: 8px;
   transition: background 0.2s ease;
 }
 
@@ -542,7 +543,7 @@
 
 .logout-icon {
   margin-top: auto;
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   color: #111;
   cursor: pointer;
   padding-left: 4px;
