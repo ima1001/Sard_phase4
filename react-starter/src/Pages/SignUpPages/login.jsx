@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   
   const validate = () => {
     const newErrors = {};
 
-    if (!username) {
-      newErrors.username = "Username is required";
+    if (!email) {
+      newErrors.email = "Email is required";
     }
     if (!password) {
       newErrors.password = "Password is required";
@@ -26,7 +26,7 @@ function Login() {
       return;
     }
 
-    switch (username.toLowerCase()) {
+    switch (email.toLowerCase()) {
       case "admin":
         navigate("/HomeAdmin");
         break;
@@ -43,7 +43,7 @@ function Login() {
         navigate("/HomePublisher");
         break;
       default:
-        setErrors(newErrors => ({ ...newErrors, username: "Invalid username" }));
+        setErrors(newErrors => ({ ...newErrors, email: "Invalid email" }));
     };
 
   }
@@ -59,13 +59,13 @@ function Login() {
             <h3 class="card-title" style={{textAlign: "center"}}>Log In</h3>
 
             <div class="input-group">
-              <text class="input-label">Username</text>
-              <input type="text" 
-              placeholder="Username" 
+              <text class="input-label">Email</text>
+              <input type="email" 
+              placeholder="Email" 
               class="input-field" 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)}/>
-              {errors.username && <p className="error-text">{errors.username}</p>}
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)}/>
+              {errors.email && <p className="error-text">{errors.email}</p>}
             </div>
 
             <div class="input-group">

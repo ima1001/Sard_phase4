@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Signup() {
     const [role, setRole] = useState("");
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [cpassword, samePassword] = useState("");
     const [errors, setErrors] = useState({});
@@ -16,8 +16,8 @@ function Signup() {
     if (!email) {
       newErrors.email = "Email is required";
     }
-    if (!username) {
-      newErrors.username = "Username is required";
+    if (!name) {
+      newErrors.name = "Name is required";
     }
     if (!password) {
       newErrors.password = "Password is required";
@@ -81,14 +81,14 @@ function Signup() {
                 </div>
 
                 <div class="input-group">
-                <text class="input-label">Username</text>
+                <text class="input-label">Name</text>
                 <input
                 type="text"
-                placeholder="Username"
+                placeholder="Name"
                 class="input-field"
-                 value={username}
-                 onChange={(e) => setUsername(e.target.value)}/>
-                {errors.username && <p className="error-text">{errors.username}</p>}
+                 value={name}
+                 onChange={(e) => setFname(e.target.value)}/>
+                {errors.fname && <p className="error-text">{errors.name}</p>}
 
                 </div>
 
@@ -125,7 +125,17 @@ function Signup() {
                         </div>
                     </select>
                 </div>
-                
+
+                <div class="input-group">
+                <text class="input-label">I agree to the Terms and Conditions</text>
+                <input 
+                type="checkbox"
+                class="input-field"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                />
+                </div>
+
                 <div class="button-container">
                 <button class="btn login-btn" onClick={handlesignup}>Sign Up</button>
                 </div>
