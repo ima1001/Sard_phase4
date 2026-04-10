@@ -9,6 +9,8 @@ import Login from "./Pages/SignUpPages/Login";
 import Signup from "./Pages/SignUpPages/Signup";
 import NavTabs from "./components/NavTabs";
 import BookInterface from "./Pages/BookInterface";
+import AddNew from "./Pages/AddNew";
+
 
 import "./App.css";
 
@@ -74,6 +76,7 @@ function AppLayout() {
     const role = localStorage.getItem("role") || "editor";
     const name = localStorage.getItem("name") || "";
     const config = ROLES[role] || ROLES.editor;
+    
 
     return (
         <div style={{ display: "flex" }}>
@@ -97,6 +100,8 @@ function AppLayout() {
                     <Route path="/BookInterface"       element={<BookInterface />} />
                     <Route path="/NavTabs"             element={<NavTabs />} />
                     <Route path="/Settings"            element={<div>Settings Page</div>} />
+                    <Route path="/CreateProject"   element={<AddNew action="project" />} />
+                    <Route path="/CreateCommunity" element={<AddNew action="community" />} />
                 </Routes>
             </div>
         </div>
