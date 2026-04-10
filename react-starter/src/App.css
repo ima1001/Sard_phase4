@@ -533,7 +533,6 @@
   margin: 0 auto;
 }
 
-
 /* Notification Pages */
 .notification-page {
   background: #E1D9BC;
@@ -615,7 +614,7 @@
   color: var(--text-color);
   font-size: 14px;
   font-weight: bold;
-}
+} 
 
 /* ===== Notifications page updated layout ===== */
 
@@ -702,7 +701,7 @@
 
 .notification-form-card {
   width: 410px;
-  background: #c7c7c7;
+  background: #d8d0bb;
   border-radius: 10px;
   padding: 28px 28px 22px;
   display: flex;
@@ -713,9 +712,10 @@
 .notification-form-card h2 {
   margin: 0 0 24px 0;
   color: #000;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  text-transform: lowercase;
+  text-align: center;
+  text-transform: none;
 }
 
 .notification-textarea {
@@ -726,14 +726,14 @@
   padding: 14px 16px;
   font-size: 1rem;
   color: #30364F;
-  background: #f4f4f4;
+  background: #f3eee2;
   resize: none;
   outline: none;
   margin-bottom: 22px;
 }
 
 .notification-textarea::placeholder {
-  color: #b3b3b3;
+  color: #b4aea1;
   font-weight: 600;
 }
 
@@ -742,7 +742,7 @@
   height: 46px;
   border: none;
   border-radius: 999px;
-  background: #8a8a8a;
+  background: #969084;
   color: white;
   font-size: 1rem;
   font-weight: 500;
@@ -751,7 +751,7 @@
 }
 
 .publish-btn:hover {
-  background: #777777;
+  background: #847d72;
 }
 
 .success-box {
@@ -759,9 +759,9 @@
   left: 50%;
   top: 50%;
   transform: translate(-340px, -10px);
-  background: #e9f6ef;
+  background: #eef6ef;
   color: #30364F;
-  border: 1px solid #67cdbb;
+  border: 1px solid #8bb8a0;
   border-radius: 12px;
   padding: 16px 18px;
   font-size: 0.9rem;
