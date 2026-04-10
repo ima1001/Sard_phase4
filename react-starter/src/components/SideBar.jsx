@@ -32,8 +32,12 @@ function SideBar({
       </div>
 
       <div
-        className="profile-box clickable-profile"
-        onClick={() => navigate("/Settings")}
+        className={`profile-box ${role?.toLowerCase() !== "admin" ? "clickable-profile" : ""}`}
+        onClick={() => {
+        if (role?.toLowerCase() !== "admin") {
+          navigate("/Settings");
+        }
+        }}
       >
       <PersonCircle className="profile-icon" />
         <div className="profile-text">
