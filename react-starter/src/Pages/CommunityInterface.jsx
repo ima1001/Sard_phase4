@@ -1,14 +1,14 @@
 import { useState } from "react";
 import CommunityCard from "../components/CommunityCard";
 import projects from "../../projectsData.json";
+import communities from "../../communityData.json";
 import { useParams } from "react-router-dom";
 
 
 function CommunityInterface() {
     const [showToast, setShowToast] = useState(false);
-
     const { id } = useParams();
-    const community = projects.find((p) => p.id === Number(id));
+    const community = communities.find((c) => c.id === Number(id));
 
     const handleJoin = () => {
         setShowToast(true);
@@ -16,22 +16,28 @@ function CommunityInterface() {
     };
 
     return (
-        <div className="text-center mt-5">
-            <h2>{community?.title || "Community"}</h2>
-            <p>collaborate with other authors</p>
-
-             <div className="card-container">
-                {projects.map((project) => (
-                    <CommunityCard
-                        key={project.id}
-                        title={project.title}
-                        text={project.text}
-                        buttonText="Join"
-                        onClick={handleJoin}
-                    />
-                ))}
+        <div className="home">
+            <div className="home-top" style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+                <h1 style={{ fontSize: "50px", paddingBottom: "40px", fontStyle: "bold" }}> 
+                    {community?.title || "Community"}
+                </h1>
+                <p>{community?.description || "Collaborate with other authors"}</p>
             </div>
-
+        
+            <section className="home-bottom">
+                <div className="communities-container">
+                    {projects.map((project) => (
+                        <CommunityCard
+                            key={project.id}
+                            title={project.title}
+                            text={project.text}
+                            buttonText="Join"
+                            onClick={handleJoin}
+                        />
+                    ))}
+                </div>  
+                
+            </section>
             {showToast && (
                 <div className="alert_toast">
                     <span className="check_mark">✓</span>
