@@ -1,10 +1,10 @@
 // the tab navigation component(todo list, chats, notification, settings)
 import { useState } from "react";
-import ToDoList from "../Pages/ProjectComponents/ToDoList";
-//import Chats from "../Pages/ProjectComponents/chats";
-import Notifications from "../Pages/ProjectComponents/ProjectNotification";
-//import Settings from "../Pages/ProjectComponents/settings";
-import DraftsSection from "../Pages/ProjectComponents/DraftsSection";       
+import ToDoList from "./ProjectComponents/ToDoList";
+//import Chats from "./ProjectComponents/chats";
+import Notifications from "./ProjectComponents/ProjectNotification";
+//import Settings from "./ProjectComponents/settings";
+import DraftsSection from "./ProjectComponents/DraftsSection";       
 
 
 function NavTabs() {

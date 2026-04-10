@@ -1,4 +1,4 @@
-import MessageCard from "../../components/MessageCard"; 
+import MessageCard from "../MessageCard"; 
 import { useState } from "react";
 
 function ProjectNotification() {

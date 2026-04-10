@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import users from "../../../users.json";
 
 function Signup() {
     const [role, setRole] = useState("");
@@ -20,6 +19,7 @@ function Signup() {
         if (!cpassword) newErrors.cpassword = "Confirm password is required";
         if (password && cpassword && password !== cpassword)
             newErrors.password = "Passwords do not match";
+        if (!role) newErrors.role = "Please select a role";
         return newErrors;
     };
 
@@ -30,25 +30,9 @@ function Signup() {
             return;
         }
 
-        const findUser = (inputEmail) =>
-          users.find((u) => u.email.toLowerCase() === inputEmail.toLowerCase());
-        
-        const routes = {
-          admin:     "/HomeAdmin",
-          author:    "/HomeAuthor",
-          editor:    "/HomeEditor",
-          reviewer:  "/HomeReviewer",
-          publisher: "/HomePublisher",
-        };
-        
-        const user = findUser(email);
-        
-        if (!user) {
-          setErrors({ email: "No account found with this email" });
-          return;
-        }
-        
-        navigate(routes[user.role]);
+        localStorage.setItem("role", role);
+        localStorage.setItem("name", name);
+        navigate("/Home");
     };
 
     return (
@@ -98,6 +82,7 @@ function Signup() {
                             <option value="reviewer">Reviewer</option>
                             <option value="publisher">Publisher</option>
                         </select>
+                        {errors.role && <p className="error-text">{errors.role}</p>}
                     </div>
 
                     <div className="input-group">

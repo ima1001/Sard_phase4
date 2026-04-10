@@ -5,19 +5,16 @@ import Home from "./components/Home";
 import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
 import NotificationsPage from "./Pages/NotificationsPage";
 import CommunityInterface from "./Pages/CommunityInterface";
-import Login from "./Pages/SignUpPages/login";
-import Signup from "./Pages/SignUpPages/signup";
+import Login from "./Pages/SignUpPages/Login";
+import Signup from "./Pages/SignUpPages/Signup";
 import NavTabs from "./components/NavTabs";
-import RoleSelect from "./Pages/RoleSelect";
 
 import "./App.css";
 
 const ROLES = {
     editor: {
         label: "EDITOR",
-        name: "Andrew Smith",
-        homeLink: "/HomeEditor",
-        notificationLink: "/EditorNotifications",
+        notificationLink: "/Notifications",
         projectLinks: [
             { name: "Book1", link: "/ProjectEditor" },
             { name: "Book2", link: "/ProjectEditor" },
@@ -29,9 +26,7 @@ const ROLES = {
     },
     publisher: {
         label: "PUBLISHER",
-        name: "Alex (Penguin House)",
-        homeLink: "/HomePublisher",
-        notificationLink: "/PublisherNotifications",
+        notificationLink: "/Notifications",
         projectLinks: [
             { name: "Book1", link: "/CommunityInterface" },
             { name: "Book2", link: "/CommunityInterface" },
@@ -44,9 +39,7 @@ const ROLES = {
     },
     reviewer: {
         label: "REVIEWER",
-        name: "Reviewer",
-        homeLink: "/HomeReviewer",
-        notificationLink: "/ReviewerNotifications",
+        notificationLink: "/Notifications",
         projectLinks: [],
         showProjects: false,
         showActionCard: false,
@@ -55,9 +48,7 @@ const ROLES = {
     },
     author: {
         label: "AUTHOR",
-        name: "Author",
-        homeLink: "/HomeAuthor",
-        notificationLink: "/AuthorNotifications",
+        notificationLink: "/Notifications",
         projectLinks: [],
         showProjects: true,
         showActionCard: true,
@@ -66,9 +57,7 @@ const ROLES = {
     },
     admin: {
         label: "ADMIN",
-        name: "Admin",
-        homeLink: "/HomeAdmin",
-        notificationLink: "/AdminNotifications",
+        notificationLink: "/Notifications",
         projectLinks: [],
         showProjects: false,
         showActionCard: true,
@@ -77,31 +66,20 @@ const ROLES = {
     },
 };
 
-const ROLE_PREFIXES = {
-    editor:    ["/HomeEditor", "/ProjectEditor", "/EditorNotifications", "/Settings"],
-    publisher: ["/HomePublisher", "/CommunityInterface", "/NavTabs", "/PublisherNotifications", "/Settings"],
-    reviewer:  ["/HomeReviewer", "/ReviewerNotifications", "/Settings"],
-    author:    ["/HomeAuthor", "/CreateProject", "/AuthorNotifications", "/Settings"],
-    admin:     ["/HomeAdmin", "/CreateCommunity", "/AdminNotifications", "/Settings"],
-};
+const AUTH_PATHS = ["/", "/login", "/signup"];
 
-function detectRole(pathname) {
-    for (const [role, prefixes] of Object.entries(ROLE_PREFIXES)) {
-        if (prefixes.some((p) => pathname.startsWith(p))) return role;
-    }
-    return null;
-}
-
-function AppLayout({ role }) {
-    const config = ROLES[role];
+function AppLayout() {
     const navigate = useNavigate();
+    const role = localStorage.getItem("role") || "editor";
+    const name = localStorage.getItem("name") || "";
+    const config = ROLES[role] || ROLES.editor;
 
     return (
         <div style={{ display: "flex" }}>
             <SideBar
                 role={config.label}
-                name={config.name}
-                homeLink={config.homeLink}
+                name={name}
+                homeLink="/Home"
                 notificationLink={config.notificationLink}
                 projectLinks={config.projectLinks}
                 showProjects={config.showProjects}
@@ -111,21 +89,12 @@ function AppLayout({ role }) {
             />
             <div style={{ flex: 1 }}>
                 <Routes>
-                    <Route path="/HomeEditor"              element={<Home role="editor" />} />
-                    <Route path="/HomePublisher"           element={<Home role="publisher" />} />
-                    <Route path="/HomeReviewer"            element={<Home role="reviewer" />} />
-                    <Route path="/HomeAuthor"              element={<Home role="author" />} />
-                    <Route path="/HomeAdmin"               element={<Home role="admin" />} />
-                    <Route path="/ProjectEditor"           element={<ProjectEditor />} />
-                    <Route path="/EditorNotifications"     element={<NotificationsPage role="editor" />} />
-                    <Route path="/PublisherNotifications"  element={<NotificationsPage role="publisher" />} />
-                    <Route path="/ReviewerNotifications"   element={<NotificationsPage role="reviewer" />} />
-                    <Route path="/AuthorNotifications"     element={<NotificationsPage role="author" />} />
-                    <Route path="/AdminNotifications"      element={<NotificationsPage role="admin" />} />
-                    <Route path="/CommunityInterface"      element={<CommunityInterface />} />
-                    <Route path="/NavTabs"                 element={<NavTabs />} />
-                    <Route path="/RoleSelect"              element={<RoleSelect />} />
-                    <Route path="/Settings" element={<div>Settings Page</div>} />
+                    <Route path="/Home"                element={<Home />} />
+                    <Route path="/Notifications"       element={<NotificationsPage />} />
+                    <Route path="/ProjectEditor"       element={<ProjectEditor />} />
+                    <Route path="/CommunityInterface"  element={<CommunityInterface />} />
+                    <Route path="/NavTabs"             element={<NavTabs />} />
+                    <Route path="/Settings"            element={<div>Settings Page</div>} />
                 </Routes>
             </div>
         </div>
@@ -134,20 +103,18 @@ function AppLayout({ role }) {
 
 function App() {
     const location = useLocation();
-    const role = detectRole(location.pathname);
 
-    if (!role) {
+    if (AUTH_PATHS.includes(location.pathname)) {
         return (
             <Routes>
                 <Route path="/"       element={<Login />} />
                 <Route path="/login"  element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="*"       element={<Login />} />
             </Routes>
         );
     }
 
-    return <AppLayout role={role} />;
+    return <AppLayout />;
 }
 
 export default App;

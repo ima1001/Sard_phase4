@@ -104,7 +104,7 @@ function SideBar({
         </div>
       )}
 
-      <div className="logout-icon" onClick={() => navigate("/login")}>
+      <div className="logout-icon" onClick={() => { localStorage.clear(); navigate("/login"); }}>
         <BoxArrowLeft />
       </div>
     </div>
