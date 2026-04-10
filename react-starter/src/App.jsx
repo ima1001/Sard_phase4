@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import SideBar from "./components/SideBar";
 
 import Home from "./components/Home";
@@ -22,6 +22,10 @@ const ROLES = {
             { name: "Book1", link: "/ProjectEditor" },
             { name: "Book2", link: "/ProjectEditor" },
         ],
+        showProjects: true,
+        showActionCard: false,
+        actionText: "",
+        actionLink: "",
     },
     publisher: {
         label: "PUBLISHER",
@@ -33,6 +37,10 @@ const ROLES = {
             { name: "Book2", link: "/CommunityInterface" },
             { name: "Nav Tabs", link: "/NavTabs" },
         ],
+        showProjects: true,
+        showActionCard: false,
+        actionText: "",
+        actionLink: "",
     },
     reviewer: {
         label: "REVIEWER",
@@ -40,6 +48,10 @@ const ROLES = {
         homeLink: "/HomeReviewer",
         notificationLink: "/Notifications",
         projectLinks: [],
+        showProjects: false,
+        showActionCard: false,
+        actionText: "",
+        actionLink: "",
     },
     author: {
         label: "AUTHOR",
@@ -47,6 +59,21 @@ const ROLES = {
         homeLink: "/HomeAuthor",
         notificationLink: "/Notifications",
         projectLinks: [],
+        showProjects: true,
+        showActionCard: true,
+        actionText: "Add New Project",
+        actionLink: "/CreateProject",
+    },
+    admin: {
+        label: "ADMIN",
+        name: "Admin",
+        homeLink: "/HomeAdmin",
+        notificationLink: "/Notifications",
+        projectLinks: [],
+        showProjects: false,
+        showActionCard: true,
+        actionText: "Add New Community",
+        actionLink: "/CreateCommunity",
     },
 };
 
@@ -54,7 +81,8 @@ const ROLE_PREFIXES = {
     editor:    ["/HomeEditor", "/ProjectEditor"],
     publisher: ["/HomePublisher", "/CommunityInterface", "/NavTabs"],
     reviewer:  ["/HomeReviewer"],
-    author:    ["/HomeAuthor"],
+    author:    ["/HomeAuthor", "/CreateProject"],
+    admin:     ["/HomeAdmin", "/CreateCommunity"],
 };
 
 function detectRole(pathname) {
@@ -67,6 +95,8 @@ function detectRole(pathname) {
 
 function AppLayout({ role }) {
     const config = ROLES[role];
+    const navigate = useNavigate();
+
     return (
         <div style={{ display: "flex" }}>
             <SideBar
@@ -75,18 +105,23 @@ function AppLayout({ role }) {
                 homeLink={config.homeLink}
                 notificationLink={config.notificationLink}
                 projectLinks={config.projectLinks}
+                showProjects={config.showProjects}
+                showActionCard={config.showActionCard}
+                actionText={config.actionText}
+                onActionClick={() => navigate(config.actionLink)}
             />
             <div style={{ flex: 1 }}>
                 <Routes>
-                    <Route path="/HomeEditor"        element={<Home role="editor" />} />
-                    <Route path="/HomePublisher"     element={<Home role="publisher" />} />
-                    <Route path="/HomeReviewer"      element={<Home role="reviewer" />} />
-                    <Route path="/HomeAuthor"        element={<Home role="author" />} />
-                    <Route path="/ProjectEditor"     element={<ProjectEditor />} />
-                    <Route path="/Notifications"     element={<NotificationsPage />} />
+                    <Route path="/HomeEditor"         element={<Home role="editor" />} />
+                    <Route path="/HomePublisher"      element={<Home role="publisher" />} />
+                    <Route path="/HomeReviewer"       element={<Home role="reviewer" />} />
+                    <Route path="/HomeAuthor"         element={<Home role="author" />} />
+                    <Route path="/HomeAdmin"          element={<Home role="admin" />} />
+                    <Route path="/ProjectEditor"      element={<ProjectEditor />} />
+                    <Route path="/Notifications"      element={<NotificationsPage />} />
                     <Route path="/CommunityInterface" element={<CommunityInterface />} />
-                    <Route path="/NavTabs"           element={<NavTabs />} />
-                    <Route path="/RoleSelect"        element={<RoleSelect />} />
+                    <Route path="/NavTabs"            element={<NavTabs />} />
+                    <Route path="/RoleSelect"         element={<RoleSelect />} />
                 </Routes>
             </div>
         </div>
