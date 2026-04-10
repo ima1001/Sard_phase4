@@ -1,52 +1,32 @@
-import { useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
-
-pdfjs.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.296/pdf.worker.min.js";
-
-function PDF_Viewer({ pdfUrl }) {
-
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-
-    const onLoadSuccess = ({ numPages }) => {
-        setNumPages(numPages);
-        setPageNumber(1);
-    };
+function ViewPDF({ pdfUrl }) {
+    if (!pdfUrl) {
+        return (
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+                <p>No PDF selected</p>
+            </div>
+        );
+    }
 
     return (
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <Document
-            file={pdfUrl}
-            onLoadSuccess={onLoadSuccess}
-            onLoadError={(err) => console.error("PDF load error:", err)}
+        <div
+            style={{
+                width: "100%",
+                height: "90vh",
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+                overflow: "hidden",
+                marginTop: "20px"
+            }}
         >
-            <Page pageNumber={pageNumber} width={600} />
-        </Document>
-
-        {numPages && (
-            <div style={{ marginTop: "10px" }}>
-            <button
-                onClick={() => setPageNumber(pageNumber - 1)}
-                disabled={pageNumber <= 1}
-            >
-                Previous
-            </button>
-
-            <span style={{ margin: "0 10px" }}>
-                Page {pageNumber} of {numPages}
-            </span>
-
-            <button
-                onClick={() => setPageNumber(pageNumber + 1)}
-                disabled={pageNumber >= numPages}
-            >
-                Next
-            </button>
-            </div>
-        )}
+            <iframe
+                src={pdfUrl}
+                width="100%"
+                height="100%"
+                style={{ border: "none" }}
+                title="PDF Viewer"
+            ></iframe>
         </div>
     );
 }
 
-export default PDF_Viewer;
+export default ViewPDF;
