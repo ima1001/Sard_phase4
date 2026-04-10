@@ -48,7 +48,9 @@ function NotificationsPage({ role }) {
 
   return (
     <div className="notifications-wrapper">
-      <h1 className="notifications-heading">previous notification</h1>
+      <h1 className={`notifications-heading ${role === "admin" ? "admin-notifications-heading" : "default-notifications-heading"}`}>
+        {role === "admin" ? "previous notification" : "Notification"}
+      </h1>
 
       <div className="notifications-list">
         {notifications.length === 0 && <p className="empty-notifications">No notifications</p>}
