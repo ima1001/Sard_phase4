@@ -25,7 +25,7 @@ function DraftsSection() {
     return (
         <>
         <div className="drafts-container">
-            {[1, 2, 3].map((num, index) => (
+            {[1, 2, 3, "4 (Final draft)"].map((num, index) => (
             <div className="drafts-button" key={index}>
                 <p>Draft {num}</p>
 
@@ -39,7 +39,13 @@ function DraftsSection() {
 
                 <button
                 className="upload-btn"
-                onClick={() => document.getElementById(`upload-${index}`).click()}
+                onClick={() => {
+                    if (pdfFiles[index]) {
+                    const confirmReplace = window.confirm("A draft is already uploaded. Do you want to replace it?");
+                    if (!confirmReplace) return;
+                    }
+                    document.getElementById(`upload-${index}`).click()
+                }}
                 >
                 Upload PDF
                 </button>
