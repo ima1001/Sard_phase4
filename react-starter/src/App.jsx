@@ -80,7 +80,7 @@ function AppLayout() {
     
 
     return (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex" , minHeight: "100vh"}}>
             <SideBar
                 role={config.label}
                 name={name}
@@ -92,7 +92,7 @@ function AppLayout() {
                 actionText={config.actionText}
                 onActionClick={() => navigate(config.actionLink)}
             />
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1}}>
                 <Routes>
                     <Route path="/Home"                element={<Home />} />
                     <Route path="/Notifications"       element={<NotificationsPage />} />
