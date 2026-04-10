@@ -1,7 +1,7 @@
 [
-  { "email": "admin@sard.com", "name": "Admin", "password": "admin123", "role": "admin" },
-  { "email": "author@sard.com", "name": "Author One", "password": "pass123", "role": "author" },
-  { "email": "editor@sard.com", "name": "Editor One", "password": "pass123", "role": "editor" },
-  { "email": "reviewer@sard.com", "name": "Reviewer One", "password": "pass123", "role": "reviewer" },
-  { "email": "publisher@sard.com", "name": "Publisher One", "password": "pass123", "role": "publisher" }
+  { "email": "admin@sard.com", "name": "Admin", "password": "123", "role": "admin" },
+  { "email": "author@sard.com", "name": "Author One", "password": "123", "role": "author" },
+  { "email": "editor@sard.com", "name": "Editor One", "password": "123", "role": "editor" },
+  { "email": "reviewer@sard.com", "name": "Reviewer One", "password": "123", "role": "reviewer" },
+  { "email": "publisher@sard.com", "name": "Publisher One", "password": "123", "role": "publisher" }
 ]
