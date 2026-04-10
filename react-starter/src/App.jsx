@@ -78,11 +78,11 @@ const ROLES = {
 };
 
 const ROLE_PREFIXES = {
-    editor:    ["/HomeEditor", "/ProjectEditor", "/EditorNotifications"],
-    publisher: ["/HomePublisher", "/CommunityInterface", "/NavTabs", "/PublisherNotifications"],
-    reviewer:  ["/HomeReviewer", "/ReviewerNotifications"],
-    author:    ["/HomeAuthor", "/CreateProject", "/AuthorNotifications"],
-    admin:     ["/HomeAdmin", "/CreateCommunity", "/AdminNotifications"],
+    editor:    ["/HomeEditor", "/ProjectEditor", "/EditorNotifications", "/Settings"],
+    publisher: ["/HomePublisher", "/CommunityInterface", "/NavTabs", "/PublisherNotifications", "/Settings"],
+    reviewer:  ["/HomeReviewer", "/ReviewerNotifications", "/Settings"],
+    author:    ["/HomeAuthor", "/CreateProject", "/AuthorNotifications", "/Settings"],
+    admin:     ["/HomeAdmin", "/CreateCommunity", "/AdminNotifications", "/Settings"],
 };
 
 function detectRole(pathname) {
@@ -117,11 +117,11 @@ function AppLayout({ role }) {
                     <Route path="/HomeAuthor"              element={<Home role="author" />} />
                     <Route path="/HomeAdmin"               element={<Home role="admin" />} />
                     <Route path="/ProjectEditor"           element={<ProjectEditor />} />
-                    <Route path="/EditorNotifications"     element={<NotificationsPage />} />
-                    <Route path="/PublisherNotifications"  element={<NotificationsPage />} />
-                    <Route path="/ReviewerNotifications"   element={<NotificationsPage />} />
-                    <Route path="/AuthorNotifications"     element={<NotificationsPage />} />
-                    <Route path="/AdminNotifications"      element={<NotificationsPage />} />
+                    <Route path="/EditorNotifications"     element={<NotificationsPage role="editor" />} />
+                    <Route path="/PublisherNotifications"  element={<NotificationsPage role="publisher" />} />
+                    <Route path="/ReviewerNotifications"   element={<NotificationsPage role="reviewer" />} />
+                    <Route path="/AuthorNotifications"     element={<NotificationsPage role="author" />} />
+                    <Route path="/AdminNotifications"      element={<NotificationsPage role="admin" />} />
                     <Route path="/CommunityInterface"      element={<CommunityInterface />} />
                     <Route path="/NavTabs"                 element={<NavTabs />} />
                     <Route path="/RoleSelect"              element={<RoleSelect />} />

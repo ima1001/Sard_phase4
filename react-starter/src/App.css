@@ -616,3 +616,155 @@
   font-size: 14px;
   font-weight: bold;
 }
+
+/* ===== Notifications page updated layout ===== */
+
+.notifications-wrapper {
+  background: #E1D9BC;
+  min-height: 100vh;
+  padding: 48px 40px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notifications-heading {
+  width: 72%;
+  max-width: 980px;
+  margin: 0 0 24px 0;
+  color: #000;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.notifications-list {
+  width: 72%;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 34px;
+}
+
+.empty-notifications {
+  color: #30364F;
+  font-size: 1rem;
+}
+
+.notification-card {
+  width: 100%;
+  max-width: 100%;
+  background: #a8a28d;
+  border-radius: 18px;
+  padding: 18px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.notification-checkbox {
+  width: 22px;
+  height: 22px;
+  accent-color: #F0F0DB;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.notification-title {
+  color: #F0F0DB;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.notification-time {
+  color: #F0F0DB;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+/* ===== Admin publish area ===== */
+
+.notification-form-wrapper {
+  width: 72%;
+  max-width: 980px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 8px;
+}
+
+.notification-form-card {
+  width: 410px;
+  background: #c7c7c7;
+  border-radius: 10px;
+  padding: 28px 28px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notification-form-card h2 {
+  margin: 0 0 24px 0;
+  color: #000;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.notification-textarea {
+  width: 100%;
+  min-height: 110px;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 1rem;
+  color: #30364F;
+  background: #f4f4f4;
+  resize: none;
+  outline: none;
+  margin-bottom: 22px;
+}
+
+.notification-textarea::placeholder {
+  color: #b3b3b3;
+  font-weight: 600;
+}
+
+.publish-btn {
+  width: 220px;
+  height: 46px;
+  border: none;
+  border-radius: 999px;
+  background: #8a8a8a;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.publish-btn:hover {
+  background: #777777;
+}
+
+.success-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-340px, -10px);
+  background: #e9f6ef;
+  color: #30364F;
+  border: 1px solid #67cdbb;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
