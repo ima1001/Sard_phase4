@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./toDoListStyle.css";
 import MessageCard from "../../components/MessageCard";
-import tasks from "../../../toDoListTasks"; // Importing tasks from json file
+import tasks from "../../../toDoListTasks.json"; // Importing tasks from json file
 
 function ToDoList() {
     // Calculate progress (Completed tasks %)
@@ -17,39 +17,42 @@ function ToDoList() {
     }
     
     function AddTaskForm() {
-        return(
-            <div className="add-task-form">
-                <form action="#" method="post">
-                    <div className="field">
-                        <label for="taskName">Task:</label>
-                        <input type="text" id="taskName" placeholder="Enter task name: " />
-                    </div>
-                    <div className="field">
-                    <label for="status">Status:</label>
-                        <select id="status">
-                            <option value="Proposed">Proposed</option>
-                            <option value="In progress">In progress</option>
-                            <option value="In review">In review</option>
-                            <option value="Completed">Completed</option>
-                        </select>
-                    </div>
-                    <div className="field">
-                        <label for="deadline">Deadline:</label>
-                        <input type="date" id="deadline" placeholder="Enter deadline date: "/>
-                    </div>
-                    <div className="field">
-                        <label for="Author">Author:</label>
-                        <select id="Author">
-                            <option value="Author">Author</option>
-                            <option value="Editor">Editor</option>
-                            <option value="Reviewer">Reviewer</option>
-                        </select>
-                    </div>
-                    <button type="submit" onClick={handleAddTask}>Add</button>
-                </form>
+    return (
+        <div className="add-task-form">
+        <form onSubmit={(e) => { e.preventDefault(); handleAddTask(); }}>
+            <div className="field">
+            <label>Task:</label>
+            <input type="text" placeholder="Enter task name" required />
             </div>
-        );
+
+            <div className="field">
+            <label>Status:</label>
+            <select required>
+                <option value="Proposed">Proposed</option>
+                <option value="In progress">In progress</option>
+                <option value="In review">In review</option>
+                <option value="Completed">Completed</option>
+            </select>
+            </div>
+
+            <div className="field">
+            <label>Deadline:</label>
+            <input type="date" required />
+            </div>
+
+            <div className="field">
+            <label>Author:</label>
+            <select required>
+                <option value="Author">Author</option>
+                <option value="Editor">Editor</option>
+                <option value="Reviewer">Reviewer</option>
+            </select>
+            </div>
+            <button type="submit">Add</button>
+        </form>
+        </div> );
     }
+
     function handlePublishEditors() {
         setMessage(<MessageCard type="success" text="Published for Editors successfully" />);
     }
@@ -70,7 +73,16 @@ function ToDoList() {
                     <button onClick={() => setShowAddForm(true)}>+ Add</button>
                 </div>
             </div>
-            {showAddForm && <AddTaskForm />}
+
+            {showAddForm && (
+                <div className="modal-overlay">
+                    <div className="modal-box">
+                    <button className="close-modal" onClick={() => setShowAddForm(false)}>×</button>
+                    <AddTaskForm />
+                    </div>
+                </div>
+            )}
+
             <table>
                 <thead>
                     <tr>

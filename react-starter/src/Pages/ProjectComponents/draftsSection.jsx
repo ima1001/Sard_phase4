@@ -1,58 +1,62 @@
-import PDF_Viewer from "./PDF_Viewer"; 
 import { useState } from "react";
+import PDF_Viewer from "./PDF_Viewer";
 
-function draftsSection() {
-    const [files, setFiles] = useState([null, null, null]);
-    const [activeFile, setActiveFile] = useState(null);
+function DraftsSection() {
+    const [pdfFiles, setPdfFiles] = useState([null, null, null]);
+    const [selectedPdf, setSelectedPdf] = useState(null);
 
-    const handleUpload = (index, e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const newFiles = [...files];
-            newFiles[index] = URL.createObjectURL(file);
-            setFiles(newFiles);
-        }
+    const handleUpload = (index, event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const updated = [...pdfFiles];
+        updated[index] = URL.createObjectURL(file);
+        setPdfFiles(updated);
     };
 
     const handleView = (index) => {
-        setActiveFile(files[index]);
+        if (!pdfFiles[index]) {
+        alert("No PDF uploaded yet");
+        return;
+        }
+        setSelectedPdf(pdfFiles[index]);
     };
-    return(
+
+    return (
         <>
         <div className="drafts-container">
-            {[0,1,2].map((i) => (
-                <div className="drafts-button" key={i}>
-                        <p>Draft {i + 1}</p>
-                        {/* Upload */}
-                        <label className="upload-btn">
-                            Upload PDF
-                            <input
-                                type="file"
-                                accept="application/pdf"
-                                hidden
-                                onChange={(e) => handleUpload(i, e)}
-                            />
-                        </label>
+            {[1, 2, 3].map((num, index) => (
+            <div className="drafts-button" key={index}>
+                <p>Draft {num}</p>
 
-                        {/* View */}
-                        <button 
-                            className="view-btn"
-                            onClick={() => handleView(i)}
-                            disabled={!files[i]} // disable if no file was uploaded
-                        >
-                            View PDF
-                        </button>
-                    </div>
-                ))}
+                <input
+                type="file"
+                accept="application/pdf"
+                id={`upload-${index}`}
+                style={{ display: "none" }}
+                onChange={(e) => handleUpload(index, e)}
+                />
+
+                <button
+                className="upload-btn"
+                onClick={() => document.getElementById(`upload-${index}`).click()}
+                >
+                Upload PDF
+                </button>
+
+                <button
+                className="view-btn"
+                onClick={() => handleView(index)}
+                >
+                View PDF
+                </button>
             </div>
+            ))}
+        </div>
 
-            {/* PDF Viewer */}
-            {activeFile && (
-                <div style={{ height: "500px", marginTop: "20px" }}>
-                    <PDF_Viewer filePath={activeFile} />
-                </div>
-            )}
+        {selectedPdf && <PDF_Viewer pdfUrl={selectedPdf} />}
         </>
     );
 }
-export default draftsSection;
+
+export default DraftsSection;
