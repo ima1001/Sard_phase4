@@ -31,7 +31,7 @@ function CommunityInterface() {
 
             {showToast && (
                 <div className="alert_toast">
-                    <span style={{ color: "green", fontSize: "18px" }}>✓</span>
+                    <span className="check_mark">✓</span>
                     <div>
                         <strong>Project Join Request</strong>
                         <p style={{ margin: 0, fontSize: "13px" }}>Your request is sent to the author</p>
