@@ -17,7 +17,7 @@ const ROLES = {
         label: "EDITOR",
         name: "Andrew Smith",
         homeLink: "/HomeEditor",
-        notificationLink: "/Notifications",
+        notificationLink: "/EditorNotifications",
         projectLinks: [
             { name: "Book1", link: "/ProjectEditor" },
             { name: "Book2", link: "/ProjectEditor" },
@@ -31,7 +31,7 @@ const ROLES = {
         label: "PUBLISHER",
         name: "Alex (Penguin House)",
         homeLink: "/HomePublisher",
-        notificationLink: "/Notifications",
+        notificationLink: "/PublisherNotifications",
         projectLinks: [
             { name: "Book1", link: "/CommunityInterface" },
             { name: "Book2", link: "/CommunityInterface" },
@@ -46,7 +46,7 @@ const ROLES = {
         label: "REVIEWER",
         name: "Reviewer",
         homeLink: "/HomeReviewer",
-        notificationLink: "/Notifications",
+        notificationLink: "/ReviewerNotifications",
         projectLinks: [],
         showProjects: false,
         showActionCard: false,
@@ -57,7 +57,7 @@ const ROLES = {
         label: "AUTHOR",
         name: "Author",
         homeLink: "/HomeAuthor",
-        notificationLink: "/Notifications",
+        notificationLink: "/AuthorNotifications",
         projectLinks: [],
         showProjects: true,
         showActionCard: true,
@@ -68,7 +68,7 @@ const ROLES = {
         label: "ADMIN",
         name: "Admin",
         homeLink: "/HomeAdmin",
-        notificationLink: "/Notifications",
+        notificationLink: "/AdminNotifications",
         projectLinks: [],
         showProjects: false,
         showActionCard: true,
@@ -78,18 +78,17 @@ const ROLES = {
 };
 
 const ROLE_PREFIXES = {
-    editor:    ["/HomeEditor", "/ProjectEditor"],
-    publisher: ["/HomePublisher", "/CommunityInterface", "/NavTabs"],
-    reviewer:  ["/HomeReviewer"],
-    author:    ["/HomeAuthor", "/CreateProject"],
-    admin:     ["/HomeAdmin", "/CreateCommunity"],
+    editor:    ["/HomeEditor", "/ProjectEditor", "/EditorNotifications"],
+    publisher: ["/HomePublisher", "/CommunityInterface", "/NavTabs", "/PublisherNotifications"],
+    reviewer:  ["/HomeReviewer", "/ReviewerNotifications"],
+    author:    ["/HomeAuthor", "/CreateProject", "/AuthorNotifications"],
+    admin:     ["/HomeAdmin", "/CreateCommunity", "/AdminNotifications"],
 };
 
 function detectRole(pathname) {
     for (const [role, prefixes] of Object.entries(ROLE_PREFIXES)) {
         if (prefixes.some((p) => pathname.startsWith(p))) return role;
     }
-    if (pathname === "/Notifications") return "editor"; // fallback
     return null;
 }
 
@@ -112,16 +111,20 @@ function AppLayout({ role }) {
             />
             <div style={{ flex: 1 }}>
                 <Routes>
-                    <Route path="/HomeEditor"         element={<Home role="editor" />} />
-                    <Route path="/HomePublisher"      element={<Home role="publisher" />} />
-                    <Route path="/HomeReviewer"       element={<Home role="reviewer" />} />
-                    <Route path="/HomeAuthor"         element={<Home role="author" />} />
-                    <Route path="/HomeAdmin"          element={<Home role="admin" />} />
-                    <Route path="/ProjectEditor"      element={<ProjectEditor />} />
-                    <Route path="/Notifications"      element={<NotificationsPage />} />
-                    <Route path="/CommunityInterface" element={<CommunityInterface />} />
-                    <Route path="/NavTabs"            element={<NavTabs />} />
-                    <Route path="/RoleSelect"         element={<RoleSelect />} />
+                    <Route path="/HomeEditor"              element={<Home role="editor" />} />
+                    <Route path="/HomePublisher"           element={<Home role="publisher" />} />
+                    <Route path="/HomeReviewer"            element={<Home role="reviewer" />} />
+                    <Route path="/HomeAuthor"              element={<Home role="author" />} />
+                    <Route path="/HomeAdmin"               element={<Home role="admin" />} />
+                    <Route path="/ProjectEditor"           element={<ProjectEditor />} />
+                    <Route path="/EditorNotifications"     element={<NotificationsPage />} />
+                    <Route path="/PublisherNotifications"  element={<NotificationsPage />} />
+                    <Route path="/ReviewerNotifications"   element={<NotificationsPage />} />
+                    <Route path="/AuthorNotifications"     element={<NotificationsPage />} />
+                    <Route path="/AdminNotifications"      element={<NotificationsPage />} />
+                    <Route path="/CommunityInterface"      element={<CommunityInterface />} />
+                    <Route path="/NavTabs"                 element={<NavTabs />} />
+                    <Route path="/RoleSelect"              element={<RoleSelect />} />
                 </Routes>
             </div>
         </div>
@@ -135,10 +138,10 @@ function App() {
     if (!role) {
         return (
             <Routes>
-                <Route path="/"        element={<Login />} />
-                <Route path="/login"   element={<Login />} />
-                <Route path="/signup"  element={<Signup />} />
-                <Route path="*"        element={<Login />} />
+                <Route path="/"       element={<Login />} />
+                <Route path="/login"  element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="*"       element={<Login />} />
             </Routes>
         );
     }
