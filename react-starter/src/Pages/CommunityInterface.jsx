@@ -16,7 +16,7 @@ function CommunityInterface() {
     };
 
     return (
-        <div className="home">
+        <div className="home"  id="community-interface">
             <div className="home-top" style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <h1 style={{ fontSize: "50px", paddingBottom: "40px", fontStyle: "bold" }}> 
                     {community?.title || "Community"}
