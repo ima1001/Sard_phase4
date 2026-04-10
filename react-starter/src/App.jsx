@@ -5,8 +5,8 @@ import Home from "./components/Home";
 import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
 import NotificationsPage from "./Pages/NotificationsPage";
 import CommunityInterface from "./Pages/CommunityInterface";
-import Login from "./Pages/SignUpPages/Login";
-import Signup from "./Pages/SignUpPages/Signup";
+import Login from "./Pages/SignUpPages/login";
+import Signup from "./Pages/SignUpPages/signup";
 import NavTabs from "./components/NavTabs";
 import RoleSelect from "./Pages/RoleSelect";
 

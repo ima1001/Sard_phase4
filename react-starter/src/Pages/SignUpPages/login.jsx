@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import users from "../../../users.json";
+
 
 function Login() {
   const navigate = useNavigate();
@@ -26,6 +28,27 @@ function Login() {
       return;
     }
 
+const findUser = (inputEmail) =>
+  users.find((u) => u.email.toLowerCase() === inputEmail.toLowerCase());
+
+const routes = {
+  admin:     "/HomeAdmin",
+  author:    "/HomeAuthor",
+  editor:    "/HomeEditor",
+  reviewer:  "/HomeReviewer",
+  publisher: "/HomePublisher",
+};
+
+const user = findUser(email);
+
+if (!user) {
+  setErrors({ email: "No account found with this email" });
+  return;
+}
+
+navigate(routes[user.role]);
+
+/*
     switch (email.toLowerCase()) {
       case "admin":
         navigate("/HomeAdmin");
@@ -45,7 +68,7 @@ function Login() {
       default:
         setErrors(newErrors => ({ ...newErrors, email: "Invalid email" }));
     };
-
+*/
   }
 
   return (
