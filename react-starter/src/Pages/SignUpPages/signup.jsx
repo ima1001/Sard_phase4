@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import users from "../../../users.json";
 
 function Signup() {
     const [role, setRole] = useState("");
@@ -29,13 +30,25 @@ function Signup() {
             return;
         }
 
-        switch (role) {
-            case "author":    navigate("/HomeAuthor"); break;
-            case "editor":    navigate("/HomeEditor"); break;
-            case "reviewer":  navigate("/HomeReviewer"); break;
-            case "publisher": navigate("/HomePublisher"); break;
-            default: alert("Choose a role.");
+        const findUser = (inputEmail) =>
+          users.find((u) => u.email.toLowerCase() === inputEmail.toLowerCase());
+        
+        const routes = {
+          admin:     "/HomeAdmin",
+          author:    "/HomeAuthor",
+          editor:    "/HomeEditor",
+          reviewer:  "/HomeReviewer",
+          publisher: "/HomePublisher",
+        };
+        
+        const user = findUser(email);
+        
+        if (!user) {
+          setErrors({ email: "No account found with this email" });
+          return;
         }
+        
+        navigate(routes[user.role]);
     };
 
     return (
