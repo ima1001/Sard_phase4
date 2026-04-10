@@ -47,13 +47,22 @@ function NotificationsPage({ role }) {
   };
 
   return (
-    <div className="notifications-wrapper">
-      <h1 className={`notifications-heading ${role === "admin" ? "admin-notifications-heading" : "default-notifications-heading"}`}>
+  <div className="notifications-page">
+    
+    {/* Top light section */}
+    <div className="notifications-top">
+      <h1 className="notifications-title">
         {role === "admin" ? "previous notification" : "Notification"}
       </h1>
+    </div>
+
+    {/* Bottom darker section */}
+    <div className="notifications-bottom">
 
       <div className="notifications-list">
-        {notifications.length === 0 && <p className="empty-notifications">No notifications</p>}
+        {notifications.length === 0 && (
+          <p className="empty-notifications">No notifications</p>
+        )}
 
         {notifications.map((item) => (
           <NotificationItem
@@ -67,11 +76,14 @@ function NotificationsPage({ role }) {
         ))}
       </div>
 
+      {/* Admin only form */}
       {role === "admin" && (
         <NotificationForm onAddNotification={addNotification} />
       )}
+      
     </div>
-  );
+  </div>
+);
 }
 
 export default NotificationsPage;
