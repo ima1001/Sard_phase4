@@ -1,8 +1,17 @@
 import { useState } from "react";
+import CommunityCard from "../components/CommunityCard";
+import projects from "../../projectsData.json";
 
 function CommunityInterface() {
     const [showMessage, setShowMessage] = useState(false);
 
+    const handleJoin = (projectName) => {
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 3000);
+    }   
+    
     return (
         <div className="text-center mt-5">
             <h2>Fantasy Community</h2>
@@ -17,7 +26,7 @@ function CommunityInterface() {
                     Your request is sent to the author
                 </div>
             )}
-        </div>
+        </div>  
     );
 }
 
