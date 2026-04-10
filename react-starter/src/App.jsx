@@ -9,6 +9,7 @@ import Login from "./Pages/SignUpPages/Login";
 import Signup from "./Pages/SignUpPages/Signup";
 import NavTabs from "./components/NavTabs";
 import BookInterface from "./Pages/BookInterface";
+import SettingsPage from "./Pages/SettingsPage";
 
 import "./App.css";
 
@@ -96,7 +97,7 @@ function AppLayout() {
                     <Route path="/CommunityInterface/:id" element={<CommunityInterface />} />
                     <Route path="/BookInterface"       element={<BookInterface />} />
                     <Route path="/NavTabs"             element={<NavTabs />} />
-                    <Route path="/Settings"            element={<div>Settings Page</div>} />
+                    <Route path="/Settings" element={<SettingsPage />} />
                 </Routes>
             </div>
         </div>
