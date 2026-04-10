@@ -801,6 +801,10 @@
 }
 
 #community-interface .home-top {
-  min-height: 38vh;
-  padding: 20px 30px 40px;
+  min-height: 25vh;
+  padding: 20px 30px;
+}
+
+#community-interface .communities-container {
+  gap: 40px;
 }
