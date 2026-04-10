@@ -149,6 +149,7 @@ function ToDoList() {
                 </div>
             )}
 
+            <div className="table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -176,6 +177,7 @@ function ToDoList() {
                     ))}
                 </tbody>
                 </table>
+                </div>
             </div>
 
             <div className="progress-card">
