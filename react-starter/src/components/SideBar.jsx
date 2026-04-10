@@ -31,8 +31,11 @@ function SideBar({
         <img src={logo} alt="Sard Logo" className="logo" />
       </div>
 
-      <div className="profile-box">
-        <PersonCircle className="profile-icon" />
+      <div
+        className="profile-box clickable-profile"
+        onClick={() => navigate("/Settings")}
+      >
+      <PersonCircle className="profile-icon" />
         <div className="profile-text">
           <p className="role-text">{role}</p>
           <p className="name-text">{name}</p>
