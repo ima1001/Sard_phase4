@@ -909,7 +909,7 @@
 }
 
 .settings-success-box {
-  position: absolute;
+  position: static;
   top: 28px;
   left: -140px;
   background: #EAF7F1;
@@ -919,5 +919,7 @@
   padding: 14px 18px;
   font-size: 0.9rem;
   font-weight: 500;
+  margin-top: -10px;
+  margin-bottom: 28px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }

@@ -19,13 +19,14 @@ function SettingsPage() {
     <div className="settings-page">
       <h1 className="settings-title">Account Settings</h1>
 
-      <div className="settings-card-wrapper">
         {showSuccess && (
           <div className="settings-success-box">
             <span>Changes saved</span>
           </div>
         )}
-
+        
+      <div className="settings-card-wrapper">
+        
         <div className="settings-card">
           <PersonCircle className="settings-profile-icon" />
 
