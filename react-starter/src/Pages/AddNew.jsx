@@ -9,9 +9,10 @@ function AddNew({ action }) {
     const [role, setRole] = useState("");
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [errors, setErrors] = useState({});
+    
     return (
-    <div className="login-container" style={{ padding: "50px", backgroundColor: "a8a28d"}}>
-            <div className="login-card">
+    <div className="login-container" id="add-new" style={{ padding: "50px"}}>
+            <div className="login-card" id="add-new-card" >
                 <div className="card-content">
                     <h3 className="card-title" style={{ textAlign: "center" }}>Create New {action.charAt(0).toUpperCase() + action.slice(1)}</h3>
 
@@ -60,20 +61,10 @@ function AddNew({ action }) {
                         {errors.role && <p className="error-text">{errors.role}</p>}
                     </div>
 
-                    <div className="input-group">
-                        <span className="input-label">I agree to the Terms and Conditions</span>
-                        <input type="checkbox" className="input-field"
-                            checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} />
-                    </div>
-
-                    <div className="button-container">
-                        <button className="btn login-btn" >Sign Up</button>
-                    </div>
-                    <p>
-                        Already have an account?{" "}
-                        <a href="/login" className="signup-link">Login</a>
-                    </p>
                 </div>
+            </div>
+            <div className="button-container" style={{padding: "30px"}}>
+                <button className="btn login-btn" style={{width: "100%"}} >Publish</button>
             </div>
         </div>
     );
