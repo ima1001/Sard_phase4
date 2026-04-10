@@ -302,7 +302,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding-left: 28px;   /* container indentation */
+  padding-left: 28px;   
 }
 
 .dropdown-menu-projects .project-link {
@@ -312,7 +312,7 @@
   font-size: 0.8rem ;
   font-weight: 400 ;
   line-height: 1.2;
-  padding: 4px 0 4px 8px;   /* text indentation */
+  padding: 4px 0 4px 8px;   
   border-radius: 8px;
   transition: background 0.2s ease;
 }
@@ -381,6 +381,17 @@
   cursor: pointer;
   padding-left: 4px;
   padding-bottom: 4px;
+}
+
+.clickable-profile {
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.clickable-profile:hover {
+  background: rgba(172, 186, 196, 0.12);
 }
 
 

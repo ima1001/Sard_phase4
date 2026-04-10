@@ -125,6 +125,7 @@ function AppLayout({ role }) {
                     <Route path="/CommunityInterface"      element={<CommunityInterface />} />
                     <Route path="/NavTabs"                 element={<NavTabs />} />
                     <Route path="/RoleSelect"              element={<RoleSelect />} />
+                    <Route path="/Settings" element={<div>Settings Page</div>} />
                 </Routes>
             </div>
         </div>
