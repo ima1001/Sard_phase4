@@ -11,23 +11,37 @@ function CommunityInterface() {
             setShowMessage(false);
         }, 3000);
     }   
-    
+
     return (
         <div className="text-center mt-5">
             <h2>Fantasy Community</h2>
-            <h4 className="mt-4">Projects</h4>
-            <div className="d-flex justify-content-center gap-3 mt-4">
-                <button className="btn btn-secondary" onClick={() => setShowMessage(true)}>Project1</button>
-                <button className="btn btn-secondary" onClick={() => setShowMessage(true)}>Project2</button>
-                <button className="btn btn-secondary" onClick={() => setShowMessage(true)}>Project3</button>
+            <p>collaborate with other authors</p>
+
+             <div className="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+                {projects.map((project) => (
+                    <CommunityCard
+                        key={project.id}
+                        title={project.title}
+                        text={project.text}
+                        buttonText="Join"
+                        onClick={handleJoin}
+                    />
+                ))}
             </div>
-            {showMessage && (
-                <div className="alert alert-success mt-4">
-                    Your request is sent to the author
+
+            {showToast && (
+                <div className="alert_toast">
+                    <span style={{ color: "green", fontSize: "18px" }}>✓</span>
+                    <div>
+                        <strong>Project Join Request</strong>
+                        <p style={{ margin: 0, fontSize: "13px" }}>Your request is sent to the author</p>
+                    </div>
+                    <span style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => setShowToast(false)}>✕</span>
                 </div>
             )}
-        </div>  
+        </div>
     );
+    
 }
 
 export default CommunityInterface;
