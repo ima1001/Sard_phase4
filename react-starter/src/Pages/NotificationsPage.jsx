@@ -1,28 +1,25 @@
 import { useState, useEffect } from "react";
 import NotificationItem from "../components/NotificationItem";
+import NotificationForm from "../components/NotificationForm";
 
-function NotificationsPage() {
+function NotificationsPage({ role }) {
   const [notifications, setNotifications] = useState([
-    // Store notifications (each has creation time instead of fixed text)
     { id: 1, title: "Your project was updated", createdAt: Date.now() },
     { id: 2, title: "New review added", createdAt: Date.now() - 60000 },
     { id: 3, title: "Editor accepted request", createdAt: Date.now() - 3600000 },
     { id: 4, title: "New community created", createdAt: Date.now() - 86400000 },
   ]);
-  // Store notifications (each has creation time instead of fixed text)
+
   const [timeNow, setTimeNow] = useState(Date.now());
 
-  //  update time every 30 sec
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeNow(Date.now());
     }, 30000);
 
-    // cleanup when component unmounts
     return () => clearInterval(interval);
   }, []);
 
-  // Function to convert timestamp → "time ago"
   const getTimeAgo = (createdAt) => {
     const diff = Math.floor((timeNow - createdAt) / 1000);
 
@@ -33,25 +30,29 @@ function NotificationsPage() {
 
     return `${Math.floor(diff / 604800)} weeks ago`;
   };
-  // Remove notification when checkbox is clicked
+
   const removeNotification = (id) => {
     setNotifications(notifications.filter((item) => item.id !== id));
   };
 
+  const addNotification = (message) => {
+    setNotifications([
+      {
+        id: Date.now(),
+        title: message,
+        createdAt: Date.now(),
+      },
+      ...notifications,
+    ]);
+  };
+
   return (
-    <div className="home">
-      <div className="home-top">
-        <h1>Notifications</h1>
-      </div>
+    <div className="notifications-wrapper">
+      <h1 className="notifications-heading">previous notification</h1>
 
-      <div className="notification-page">
+      <div className="notifications-list">
+        {notifications.length === 0 && <p className="empty-notifications">No notifications</p>}
 
-        {/* If no notifications left */}
-        {notifications.length === 0 && (
-          <p>No notifications</p>
-        )}
-
-        {/* Render each notification */}
         {notifications.map((item) => (
           <NotificationItem
             key={item.id}
@@ -63,6 +64,10 @@ function NotificationsPage() {
           />
         ))}
       </div>
+
+      {role === "admin" && (
+        <NotificationForm onAddNotification={addNotification} />
+      )}
     </div>
   );
 }
