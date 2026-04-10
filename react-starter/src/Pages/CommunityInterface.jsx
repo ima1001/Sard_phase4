@@ -3,6 +3,8 @@ import CommunityCard from "../components/CommunityCard";
 import projects from "../../projectsData.json";
 import communities from "../../communityData.json";
 import { useParams } from "react-router-dom";
+import MessageCard from "../components/MessageCard";
+
 
 
 function CommunityInterface() {
@@ -21,10 +23,11 @@ function CommunityInterface() {
                 <h1 style={{ fontSize: "50px", paddingBottom: "40px", fontStyle: "bold" }}> 
                     {community?.title || "Community"}
                 </h1>
-                <p>{community?.description || "Collaborate with other authors"}</p>
+                <p>{community?.description}</p>
             </div>
         
             <section className="home-bottom">
+                <h2>Collaborate with other authors</h2>
                 <div className="communities-container">
                     {projects.map((project) => (
                         <CommunityCard
@@ -40,12 +43,7 @@ function CommunityInterface() {
             </section>
             {showToast && (
                 <div className="alert_toast">
-                    <span className="check_mark">✓</span>
-                    <div>
-                        <strong>Project Join Request</strong>
-                        <p style={{ margin: 0, fontSize: "13px" }}>Your request is sent to the author</p>
-                    </div>
-                    <span style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => setShowToast(false)}>✕</span>
+                    <MessageCard type="success" text="Your request is sent to the author" style={{backgroundColor: "eef6ef"}} />
                 </div>
             )}
         </div>

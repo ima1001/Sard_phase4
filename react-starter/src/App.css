@@ -808,3 +808,11 @@
 #community-interface .communities-container {
   gap: 40px;
 }
+#community-interface .home-bottom {
+  min-height: 75vh;
+  padding: 48px 40px;
+}
+
+#community-interface .home-bottom h2 {
+  font-size: 30px;
+}
