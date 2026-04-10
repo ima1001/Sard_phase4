@@ -93,7 +93,7 @@ function AppLayout() {
                     <Route path="/Home"                element={<Home />} />
                     <Route path="/Notifications"       element={<NotificationsPage />} />
                     <Route path="/ProjectEditor"       element={<ProjectEditor />} />
-                    <Route path="/CommunityInterface"  element={<CommunityInterface />} />
+                    <Route path="/CommunityInterface/:id" element={<CommunityInterface />} />
                     <Route path="/BookInterface"       element={<BookInterface />} />
                     <Route path="/NavTabs"             element={<NavTabs />} />
                     <Route path="/Settings"            element={<div>Settings Page</div>} />

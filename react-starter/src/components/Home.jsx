@@ -1,7 +1,9 @@
 import CommunityCard from "./CommunityCard.jsx";
 import communities from "../../communityData.json";
+import { useNavigate } from "react-router-dom";
 
 function Home({ role }) {
+    const navigate = useNavigate();
     return (
         <div className="home">
             <div className="home-top">
@@ -15,7 +17,7 @@ function Home({ role }) {
                             key={community.id}
                             title={community.title}
                             text={community.text}
-                            onClick={() => console.log(`Community ${community.title} entered`)}
+                            onClick={() => navigate(`/CommunityInterface/${community.id}`)}
                         />
                     ))}
                 </div>

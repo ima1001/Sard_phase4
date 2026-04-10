@@ -1,23 +1,26 @@
 import { useState } from "react";
 import CommunityCard from "../components/CommunityCard";
 import projects from "../../projectsData.json";
+import { useParams } from "react-router-dom";
+
 
 function CommunityInterface() {
-    const [showMessage, setShowMessage] = useState(false);
+    const [showToast, setShowToast] = useState(false);
 
-    const handleJoin = (projectName) => {
-        setShowMessage(true);
-        setTimeout(() => {
-            setShowMessage(false);
-        }, 3000);
-    }   
+    const { id } = useParams();
+    const community = projects.find((p) => p.id === Number(id));
+
+    const handleJoin = () => {
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+    };
 
     return (
         <div className="text-center mt-5">
-            <h2>Fantasy Community</h2>
+            <h2>{community?.title || "Community"}</h2>
             <p>collaborate with other authors</p>
 
-             <div className="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+             <div className="card-container">
                 {projects.map((project) => (
                     <CommunityCard
                         key={project.id}
