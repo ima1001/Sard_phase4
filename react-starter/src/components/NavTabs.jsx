@@ -1,33 +1,54 @@
-// the tab navigation component(todo list, chats, notification, settings)
 import { useState } from "react";
 import ToDoList from "./ProjectComponents/ToDoList";
-//import Chats from "./ProjectComponents/chats";
+import ChatList from "./ChatList";
 import Notifications from "./ProjectComponents/ProjectNotification";
-//import Settings from "./ProjectComponents/settings";
-import DraftsSection from "./ProjectComponents/DraftsSection";       
+import DraftsSection from "./ProjectComponents/DraftsSection";
 
+function ChatEmptyState() {
+    return (
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", color: "#aaa" }}>
+            <p>lets get started</p>
+            <p>select a chat to start</p>
+            <p>communication</p>
+        </div>
+    );
+}
+
+function Chats() {
+    const [selectedChat, setSelectedChat] = useState(null);
+    return (
+        <div style={{ display: "flex", flex: 1 }}>
+            <ChatList onSelect={setSelectedChat} />
+            {selectedChat ? (
+                <div style={{ flex: 1, padding: "20px" }}>
+                    <h3>{selectedChat.name}</h3>
+                </div>
+            ) : (
+                <ChatEmptyState />
+            )}
+        </div>
+    );
+}
 
 function NavTabs() {
-const [activeTab, setActiveTab] = useState("todo");
+    const [activeTab, setActiveTab] = useState("todo");
 
-return (
-    <>
-      {/* Top Navigation Bar */}
+    return (
+        <>
             <nav className="project-nav-bar">
-            <button onClick={() => setActiveTab("todo")}>todo list</button>
-            {/* <button onClick={() => setActiveTab("chats")}>chats</button> */}
-            <button onClick={() => setActiveTab("notifications")}>notification</button>
-            <button onClick={() => setActiveTab("drafts")}>drafts</button>
-            {/* <button onClick={() => setActiveTab("settings")}>settings</button> */}
-        </nav>
+                <button onClick={() => setActiveTab("todo")}>todo list</button>
+                <button onClick={() => setActiveTab("chats")}>chats</button>
+                <button onClick={() => setActiveTab("notifications")}>notification</button>
+                <button onClick={() => setActiveTab("drafts")}>drafts</button>
+            </nav>
 
-      {/* Content below the navigation bar based on the active tab */}
-        <div className="project-content-box">
-            {activeTab === "todo" && <ToDoList />}
-            {activeTab === "notifications" && <Notifications />}
-            {activeTab === "drafts" && <DraftsSection />}
-        </div>
-    </>
+            <div className="project-content-box">
+                {activeTab === "todo"          && <ToDoList />}
+                {activeTab === "chats"         && <Chats />}
+                {activeTab === "notifications" && <Notifications />}
+                {activeTab === "drafts"        && <DraftsSection />}
+            </div>
+        </>
     );
 }
 

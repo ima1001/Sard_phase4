@@ -8,6 +8,7 @@ import CommunityInterface from "./Pages/CommunityInterface";
 import Login from "./Pages/SignUpPages/Login";
 import Signup from "./Pages/SignUpPages/Signup";
 import NavTabs from "./components/NavTabs";
+import BookInterface from "./Pages/BookInterface";
 
 import "./App.css";
 
@@ -16,8 +17,8 @@ const ROLES = {
         label: "EDITOR",
         notificationLink: "/Notifications",
         projectLinks: [
-            { name: "Book1", link: "/ProjectEditor" },
-            { name: "Book2", link: "/ProjectEditor" },
+            { name: "Book1", link: "/BookInterface" },
+            { name: "Book2", link: "/BookInterface" },
         ],
         showProjects: true,
         showActionCard: false,
@@ -28,8 +29,8 @@ const ROLES = {
         label: "PUBLISHER",
         notificationLink: "/Notifications",
         projectLinks: [
-            { name: "Book1", link: "/CommunityInterface" },
-            { name: "Book2", link: "/CommunityInterface" },
+            { name: "Book1", link: "/BookInterface" },
+            { name: "Book2", link: "/BookInterface" },
             { name: "Nav Tabs", link: "/NavTabs" },
         ],
         showProjects: true,
@@ -93,6 +94,7 @@ function AppLayout() {
                     <Route path="/Notifications"       element={<NotificationsPage />} />
                     <Route path="/ProjectEditor"       element={<ProjectEditor />} />
                     <Route path="/CommunityInterface"  element={<CommunityInterface />} />
+                    <Route path="/BookInterface"       element={<BookInterface />} />
                     <Route path="/NavTabs"             element={<NavTabs />} />
                     <Route path="/Settings"            element={<div>Settings Page</div>} />
                 </Routes>
