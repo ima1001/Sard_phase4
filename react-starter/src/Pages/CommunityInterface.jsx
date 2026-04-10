@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Community() {
+function CommunityInterface() {
     const [showMessage, setShowMessage] = useState(false);
 
     return (
@@ -21,4 +21,4 @@ function Community() {
     );
 }
 
-export default Community;
+export default CommunityInterface;

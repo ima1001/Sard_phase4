@@ -5,11 +5,10 @@ import Home from "./components/Home";
 import ProjectEditor from "./Pages/EditorPages/ProjectEditor";
 import NotificationsPage from "./Pages/NotificationsPage";
 import CommunityInterface from "./Pages/CommunityInterface";
-import Login from "./Pages/SignUpPages/login";
-import Signup from "./Pages/SignUpPages/signup";
-import ToDoList from "./Pages/ProjectComponents/toDoList";
-import ProjectNotification from "./Pages/ProjectComponents/projectNotification";
+import Login from "./Pages/SignUpPages/Login";
+import Signup from "./Pages/SignUpPages/Signup";
 import NavTabs from "./components/NavTabs";
+import RoleSelect from "./Pages/RoleSelect";
 
 import "./App.css";
 
@@ -21,7 +20,7 @@ const ROLES = {
         notificationLink: "/Notifications",
         projectLinks: [
             { name: "Book1", link: "/ProjectEditor" },
-            { name: "Book2", link: "/ProjectEditor" }
+            { name: "Book2", link: "/ProjectEditor" },
         ],
     },
     publisher: {
@@ -32,10 +31,39 @@ const ROLES = {
         projectLinks: [
             { name: "Book1", link: "/CommunityInterface" },
             { name: "Book2", link: "/CommunityInterface" },
-            { name: "nav tabs", link: "/NavTabs"}
+            { name: "Nav Tabs", link: "/NavTabs" },
         ],
     },
+    reviewer: {
+        label: "REVIEWER",
+        name: "Reviewer",
+        homeLink: "/HomeReviewer",
+        notificationLink: "/Notifications",
+        projectLinks: [],
+    },
+    author: {
+        label: "AUTHOR",
+        name: "Author",
+        homeLink: "/HomeAuthor",
+        notificationLink: "/Notifications",
+        projectLinks: [],
+    },
 };
+
+const ROLE_PREFIXES = {
+    editor:    ["/HomeEditor", "/ProjectEditor"],
+    publisher: ["/HomePublisher", "/CommunityInterface", "/NavTabs"],
+    reviewer:  ["/HomeReviewer"],
+    author:    ["/HomeAuthor"],
+};
+
+function detectRole(pathname) {
+    for (const [role, prefixes] of Object.entries(ROLE_PREFIXES)) {
+        if (prefixes.some((p) => pathname.startsWith(p))) return role;
+    }
+    if (pathname === "/Notifications") return "editor"; // fallback
+    return null;
+}
 
 function AppLayout({ role }) {
     const config = ROLES[role];
@@ -50,14 +78,15 @@ function AppLayout({ role }) {
             />
             <div style={{ flex: 1 }}>
                 <Routes>
-                    <Route path="/HomeEditor" element={<Home role="editor" />} />
-                    <Route path="/HomePublisher" element={<Home role="publisher" />} />
-                    <Route path="/ProjectEditor" element={<ProjectEditor />} />
-                    <Route path="/Notifications" element={<NotificationsPage />} />
+                    <Route path="/HomeEditor"        element={<Home role="editor" />} />
+                    <Route path="/HomePublisher"     element={<Home role="publisher" />} />
+                    <Route path="/HomeReviewer"      element={<Home role="reviewer" />} />
+                    <Route path="/HomeAuthor"        element={<Home role="author" />} />
+                    <Route path="/ProjectEditor"     element={<ProjectEditor />} />
+                    <Route path="/Notifications"     element={<NotificationsPage />} />
                     <Route path="/CommunityInterface" element={<CommunityInterface />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<Signup />} />
-                    <Route path="/NavTabs" element={<NavTabs />} />
+                    <Route path="/NavTabs"           element={<NavTabs />} />
+                    <Route path="/RoleSelect"        element={<RoleSelect />} />
                 </Routes>
             </div>
         </div>
@@ -66,22 +95,19 @@ function AppLayout({ role }) {
 
 function App() {
     const location = useLocation();
-    const isPublisher = location.pathname.startsWith("/HomePublisher") || location.pathname.startsWith("/Community") || location.pathname.startsWith("/NavTabs");
-;
-    const isEditor = location.pathname.startsWith("/HomeEditor") || location.pathname.startsWith("/ProjectEditor");
+    const role = detectRole(location.pathname);
 
-    if (!isPublisher && !isEditor && location.pathname !== "/Notifications") {
+    if (!role) {
         return (
             <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="*" element={<Login />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/"        element={<Login />} />
+                <Route path="/login"   element={<Login />} />
+                <Route path="/signup"  element={<Signup />} />
+                <Route path="*"        element={<Login />} />
             </Routes>
         );
     }
 
-    const role = isPublisher ? "publisher" : "editor";
     return <AppLayout role={role} />;
 }
 

@@ -49,44 +49,44 @@ function Login() {
   }
 
   return (
-    <div class="login-container" style={{ padding: "50px" }}>
-      <div class="logo-container">
-        <img src="src/assets/logoDT.png" class="logo" alt="Sard logo"/>
+    <div className="login-container" style={{ padding: "50px" }}>
+      <div className="logo-container">
+        <img src="src/assets/logoDT.png" className="logo" alt="Sard logo"/>
       </div>
 
-      <div class="login-card">
-          <div class="login-content">              
-            <h3 class="card-title" style={{textAlign: "center"}}>Log In</h3>
+      <div className="login-card">
+          <div className="login-content">              
+            <h3 className="card-title" style={{textAlign: "center"}}>Log In</h3>
 
-            <div class="input-group">
-              <text class="input-label">Email</text>
+            <div className="input-group">
+              <span className="input-label">Email</span>
               <input type="email" 
               placeholder="Email" 
-              class="input-field" 
+              className="input-field" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)}/>
               {errors.email && <p className="error-text">{errors.email}</p>}
             </div>
 
-            <div class="input-group">
-              <text class="input-label">Password</text>
+            <div className="input-group">
+              <span className="input-label">Password</span>
               <input type="password"
                placeholder="Password" 
-               class="input-field"
+               className="input-field"
                value={password}
                onChange={(e) => setPassword(e.target.value)}/>
               {errors.password && <p className="error-text">{errors.password}</p>}
             </div>
 
-            <div class="button-container">
+            <div className="button-container">
               <button 
-              class="btn login-btn"
+              className="btn login-btn"
               onClick={handleLogin}>Login</button>
             </div>
 
             <p>
               Don't have an account? 
-              <a href="/signup" class="signup-link">Sign up</a>
+              <a href="/signup" className="signup-link">Sign up</a>
             </p>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./toDoListStyle.css";
 import MessageCard from "../../components/MessageCard";
-import tasks from "../../../toDoListTasks"; // Importing tasks from json file
+import tasks from "../../../toDoListTasks.json"; // Importing tasks from json file
 
 function ToDoList() {
     // Calculate progress (Completed tasks %)
