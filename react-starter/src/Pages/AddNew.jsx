@@ -9,7 +9,23 @@ function AddNew({ action }) {
     const [role, setRole] = useState("");
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [errors, setErrors] = useState({});
-    
+    const [form, setForm] = useState({
+        name: "",
+        description: "",
+        numAuthors: "",
+        selectedCommunities: [],
+        accessibility: "",
+    });
+        const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+    const toggleCommunity = (title) => {
+        setForm((f) => ({
+            ...f,
+            selectedCommunities: f.selectedCommunities.includes(title)
+                ? f.selectedCommunities.filter((c) => c !== title)
+                : [...f.selectedCommunities, title],
+        }));
+    };
+
     return (
     <div className="login-container" id="add-new" style={{ padding: "50px"}}>
             <div className="login-card" id="add-new-card" >
@@ -39,25 +55,28 @@ function AddNew({ action }) {
 
                     <div className="input-group">
                         <span className="input-label">Related Communities</span>
-                        <select className="form-select" value={relatedCommunities} onChange={(e) => setRelatedCommunities(e.target.value)}>
-                            <option value="" disabled>Select related communities</option>
-                            {communities.map((community) => (
-                                <option key={community.id} value={community.id}>
-                                    {community.name}
-                                </option>
-                            ))}
-                        </select>
+                        {communities.map((c) => (
+                            <div key={c.id}>
+                                <input type="checkbox"
+                                    checked={form.selectedCommunities.includes(c.title)}
+                                    onChange={() => toggleCommunity(c.title)} />
+                                <span style={{ marginLeft: "8px" }}>{c.title}</span>
+                            </div>
+                        ))}
                         {errors.relatedCommunities && <p className="error-text">{errors.relatedCommunities}</p>}
                     </div>
 
                     <div className="input-group">
                         <span className="input-label">Accessibility</span>
-                        <select className="form-select" value={role} onChange={(e) => setRole(e.target.value)}>
-                            <option value="" disabled>Select accessibility level</option>
-                            <option value="public">Public</option>
-                            <option value="private">Private</option>
-                            <option value="restricted">Restricted</option>
-                        </select>
+                        {["Private", "Public"].map((opt) => (
+                            <div key={opt}>
+                                <input type="radio" name="accessibility" value={opt}
+                                    checked={form.accessibility === opt}
+                                    onChange={set("accessibility")} />
+                                <span style={{ marginLeft: "8px" }}>{opt}</span>
+                            </div>
+                        ))}
+
                         {errors.role && <p className="error-text">{errors.role}</p>}
                     </div>
 
