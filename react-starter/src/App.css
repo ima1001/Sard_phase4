@@ -634,7 +634,7 @@
 /*project navigation*/
 .project-nav-bar {
   display: flex;
-  
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -1474,6 +1474,8 @@
     max-width: 100%;
     padding: 14px 10px 16px;
     border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   }
 
   .settings-profile-icon {
@@ -1482,22 +1484,32 @@
   }
 
   .settings-form {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 
   .settings-row {
-    grid-template-columns: 1fr;
-    row-gap: 4px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
   }
+
 
   .settings-row label {
-    font-size: 0.68rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+    font-size: 0.9rem;
   }
 
+
   .settings-row input {
-    height: 30px;
-    font-size: 0.68rem;
+    height: 34px;
+    font-size: 0.85rem;
     border-radius: 8px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
   }
 
   .settings-save-btn {
@@ -1506,9 +1518,48 @@
     font-size: 0.68rem;
   }
 
-  .settings-success-box {
-    font-size: 0.6rem;
-    padding: 7px 9px;
-    margin-bottom: 12px;
+  .settings-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
+
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+
+  .settings-row:not(:last-child) {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+  }
+
+  .success-box,
+  .settings-success-box {
+    position: static;
+    transform: none;
+    margin-bottom: 12px;
+    padding: 7px 9px;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    background: #e8f8ec;
+    color: #1a7f3c;
+  }
+  
+  .settings-footer {
+    margin-top: 30px;
+    text-align: right;
+  }
+
+  .settings-footer button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  
 }
