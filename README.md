@@ -148,8 +148,9 @@ Sard_phase4/
 
 1. From your dashboard, navigate to **Settings**.
 2. You can update your **display name**.
-3. You can update your **password** by entering your new password and confirming it.
-4. Click **Save** to apply the changes.
+3. You can update your **email**.
+4. You can update your **password** by entering your new password and confirming it.
+5. Click **Save** to apply the changes.
 
 ---
 
@@ -178,7 +179,7 @@ Sard_phase4/
 ### Managing Drafts (Author)
 
 1. Open one of your projects from the dashboard.
-2. View and edit your draft content.
+2. View and upload your draft content.
 3. When ready, mark the draft status:
    - **Waiting for Review** — makes the draft visible to reviewers.
    - **Waiting for Editing** — makes the draft visible to editors.
@@ -192,7 +193,6 @@ Sard_phase4/
 2. Navigate to the **TODO** section within the project.
 3. Click **Add Task** and enter a task title.
 4. The task is saved and visible to all project members.
-5. Any project member can mark a task as **completed** by clicking the checkbox next to it.
 
 ---
 
@@ -260,12 +260,12 @@ Sard_phase4/
 
 ## Team Members
 
-| Name | Role |
+| Name | ID |
 |------|------|
-| Fatemah AL Jawad | ID: 202248340 |
-| Layan Alasmari | ID: 202223720 |
-| Naba AL Antaif | ID: 202278160 |
-| Hawra AL Majed | ID: 202333090 |
+| Fatemah AL Jawad |  202248340 |
+| Layan Alasmari |  202223720 |
+| Naba AL Antaif |  202278160 |
+| Hawra AL Majed |  202333090 |
 
 
 ---
