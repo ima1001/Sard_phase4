@@ -54,7 +54,8 @@ Key benefits:
 
 Make sure the following is installed on your machine before getting started:
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended) — required to run the development server and install packages via npm
+- npm
+- Git
 
 ---
 
