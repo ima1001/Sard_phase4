@@ -89,7 +89,7 @@ function AppLayout() {
             <div style={{ flex: 1}}>
                 <Routes>
                     <Route path="/Home"                element={<Home />} />
-                    <Route path="/Notifications"       element={<NotificationsPage />} />
+                    <Route path="/Notifications" element={<NotificationsPage role={role} />} />
                     <Route path="/ProjectEditor"       element={<ProjectEditor />} />
                     <Route path="/CommunityInterface/:id" element={<CommunityInterface />} />
                     <Route path="/BookInterface" element={<BookInterface />} />
