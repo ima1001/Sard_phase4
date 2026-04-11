@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ConfirmCard, SuccessToast } from "./MessageCard";
 import ToDoList from "./ProjectComponents/ToDoList";
 import ChatList from "./ChatList";
+import ChatWindow from "./ChatWindow";
 import Notifications from "./ProjectComponents/ProjectNotification";
 import DraftsSection from "./ProjectComponents/DraftsSection";
 
@@ -21,9 +22,7 @@ function Chats() {
         <div style={{ display: "flex", flex: 1 }}>
             <ChatList onSelect={setSelectedChat} />
             {selectedChat ? (
-                <div style={{ flex: 1, padding: "20px" }}>
-                    <h3>{selectedChat.name}</h3>
-                </div>
+                <ChatWindow />
             ) : (
                 <ChatEmptyState />
             )}
