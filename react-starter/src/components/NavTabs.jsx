@@ -284,9 +284,9 @@ function BookSettings({ book, onSave, communitiies }) {
                 ))}
                 <div className="settings-row">
                     <label>Related Communities</label>
-                    <div>
+                    <div className="settings-options">
                         {communities.map((c) => (
-                            <div key={c.id}>
+                            <div key={c.id} className="option-item">
                                 <input
                                     type="checkbox"
                                     checked={fields.selectedCommunities.includes(c.title)}
@@ -300,9 +300,9 @@ function BookSettings({ book, onSave, communitiies }) {
 
                 <div className="settings-row">
                     <label>Accessibility</label>
-                    <div>
+                    <div className="settings-options">
                         {["Private", "Public"].map((opt) => (
-                            <div key={opt}>
+                            <div key={opt} className="option-item">
                                 <input
                                     type="radio"
                                     name="accessibility"
