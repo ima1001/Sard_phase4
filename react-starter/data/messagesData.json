@@ -1,0 +1,8 @@
+[
+  { "id": 1, "from": "me", "type": "text", "text": "Hello! Jhon Abraham", "time": "09:25 AM" },
+  { "id": 2, "from": "other", "name": "Jhon Abraham", "type": "text", "text": "Hello! Andrew, how are you?", "time": "09:25 AM" },
+  { "id": 3, "from": "me", "type": "text", "text": "You did your job well!", "time": "09:25 AM" },
+  { "id": 4, "from": "other", "name": "Jhon Abraham", "type": "text", "text": "Have a great working week!!", "time": "" },
+  { "id": 5, "from": "other", "name": "Jhon Abraham", "type": "text", "text": "Hope you like it", "time": "09:25 AM" },
+  { "id": 6, "from": "me", "type": "voice", "duration": "00:16", "time": "09:25 AM" }
+]

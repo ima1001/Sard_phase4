@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CommunityCard from "../components/CommunityCard";
-import projects from "../../projectsData.json";
-import communities from "../../communityData.json";
+import projects from "../../data/projectsData.json";
+import communities from "../../data/communityData.json";
 import { useParams } from "react-router-dom";
 import MessageCard from "../components/MessageCard";
 

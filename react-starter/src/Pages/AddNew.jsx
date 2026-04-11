@@ -1,5 +1,5 @@
 import { useState } from "react";
-import communities from "../../communityData.json";
+import communities from "../../data/communityData.json";
 
 function AddNew({ action }) {
     const [name, setName] = useState("");

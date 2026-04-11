@@ -1,5 +1,5 @@
 import CommunityCard from "../../components/CommunityCard.jsx";
-import projects from "../../../projectsData.json";
+import projects from "../../../data/projectsData.json";
 
 function ProjectEditor() {
     return (

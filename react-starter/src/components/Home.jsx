@@ -1,5 +1,5 @@
 import CommunityCard from "./CommunityCard.jsx";
-import communities from "../../communityData.json";
+import communities from "../../data/communityData.json";
 import { useNavigate } from "react-router-dom";
 
 function Home({ role }) {

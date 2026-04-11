@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./toDoListStyle.css";
 import MessageCard from "../MessageCard";
-import tasks from "../../../toDoListTasks.json";
+import tasks from "../../../data/toDoListTasks.json";
 
 function AddTaskForm({ newTask, handleChange, handleAddTask }) {
     return (

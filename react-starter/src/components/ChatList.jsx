@@ -1,4 +1,4 @@
-import chats from "../../chatsData.json";
+import chats from "../../data/chatsData.json";
 
 function ChatList({ onSelect }) {
     return (
