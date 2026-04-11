@@ -1,332 +1,274 @@
-# Sard Phase 4
+# SARD — Literary Collaboration Platform
 
 SARD is a web-based platform that streamlines the book production process by connecting authors, editors, reviewers, and publishers in one centralized space. Whether you're a casual writer looking for feedback or a publisher searching for the next great manuscript, SARD brings every key stakeholder together to transform rough drafts into polished, high-quality books.
 
-## 📋 Table of Contents
+---
 
-- [Project Overview](#project-overview)
+## Table of Contents
+
+- [Project Description](#project-description)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
 - [Setup & Installation](#setup--installation)
-- [Usage Instructions](#usage-instructions)
-- [Environment Variables](#environment-variables)
-- [Available Scripts](#available-scripts)
+- [Project Structure](#project-structure)
+- [Usage & Examples](#usage--examples)
 - [Team Members](#team-members)
-- [Contributing](#contributing)
-- [Support](#support)
-
-## 🎯 Project Overview
-
-Sard Phase 4 is a React-based PDF viewer application that provides users with a seamless experience for viewing and interacting with PDF documents. Built with modern web technologies and best practices, this project showcases professional development standards with clean code architecture and responsive design.
-
-## ✨ Features
-
-- **PDF Viewing**: View PDF documents using multiple PDF viewer libraries
-- **React 19**: Modern React with latest features and hooks
-- **Vite**: Lightning-fast build tool and development server with Hot Module Replacement (HMR)
-- **Bootstrap Integration**: Responsive UI components with React-Bootstrap
-- **Icon Libraries**: Beautiful icons via react-icons and react-bootstrap-icons
-- **Code Quality**: ESLint for maintaining code standards
-- **Responsive Design**: Works seamlessly across all device sizes
-
-## 🛠️ Tech Stack
-
-- **Frontend Framework**: React 19.2.4
-- **Build Tool**: Vite 8.0.1
-- **Styling**: Bootstrap 5.3.8 with React-Bootstrap 2.10.10
-- **PDF Libraries**:
-  - react-pdf 10.4.1
-  - @embedpdf/react-pdf-viewer 2.14.0
-  - pdfjs-dist 5.6.205
-- **Routing**: React Router DOM 7.13.2
-- **Icons**: 
-  - react-icons 5.6.0
-  - react-bootstrap-icons 1.11.6
-- **Code Quality**: ESLint 9.39.4
-
-## 📁 Project Structure
-
-```
-Sard_phase4/
-├── react-starter/                 # Main React application
-│   ├── src/
-│   │   ├── components/           # Reusable React components
-│   │   ├── pages/                # Page components
-│   │   ├── App.jsx               # Main App component
-│   │   └── main.jsx              # Entry point
-│   ├── public/                   # Static assets
-│   ├── vite.config.js            # Vite configuration
-│   ├── eslint.config.js          # ESLint rules
-│   ├── package.json              # Project dependencies
-│   └── .env.example              # Example environment variables
-├── node_modules/                 # Installed dependencies
-├── package.json                  # Root dependencies
-├── package-lock.json             # Locked versions
-└── README.md                      # Project documentation
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-Before you begin, ensure you have the following installed on your system:
-
-- **Node.js** (v16 or higher recommended) - [Download here](https://nodejs.org/)
-- **npm** (v7 or higher) or **yarn** (v1.22 or higher)
-- **Git** for version control
-
-You can verify your installation by running:
-```bash
-node --version
-npm --version
-```
-
-### Setup & Installation
-
-#### Step 1: Clone the Repository
-
-```bash
-git clone https://github.com/ima1001/Sard_phase4.git
-cd Sard_phase4
-```
-
-#### Step 2: Install Root Dependencies
-
-```bash
-npm install
-```
-
-#### Step 3: Install Application Dependencies
-
-```bash
-cd react-starter
-npm install
-cd ..
-```
-
-#### Step 4: Configure Environment Variables
-
-Create a `.env` file in the `react-starter` directory. Copy the contents from `.env.example` and update as needed:
-
-```bash
-cd react-starter
-cp .env.example .env
-```
-
-Edit the `.env` file with your configuration (see [Environment Variables](#environment-variables) section).
-
-## 📖 Usage Instructions
-
-### Development Server
-
-To start the development server with hot module replacement:
-
-```bash
-cd react-starter
-npm run dev
-```
-
-The application will be available at `http://localhost:5173`
-
-**Features during development:**
-- Hot Module Replacement (HMR) for instant updates
-- Source maps for easier debugging
-- Fast refresh for component changes
-
-### Production Build
-
-To create an optimized production build:
-
-```bash
-cd react-starter
-npm run build
-```
-
-The optimized build will be output to the `dist` directory, ready for deployment.
-
-### Preview Production Build
-
-To test the production build locally before deployment:
-
-```bash
-cd react-starter
-npm run preview
-```
-
-Open `http://localhost:4173` to view the production build.
-
-### Code Quality & Linting
-
-Run ESLint to check code quality and maintain consistent code standards:
-
-```bash
-cd react-starter
-npm run lint
-```
-
-Fix auto-fixable linting issues:
-```bash
-npm run lint -- --fix
-```
-
-### Example Usage
-
-#### Viewing a PDF
-
-```javascript
-import PDFViewer from './components/PDFViewer';
-
-function App() {
-  return (
-    <PDFViewer 
-      file="/path/to/pdf.pdf" 
-      title="My Document"
-    />
-  );
-}
-```
-
-## 🔐 Environment Variables
-
-Environment variables should be configured in a `.env` file in the `react-starter` directory. This file should **never be committed** to version control.
-
-### Required Environment Variables
-
-Create a `.env` file with the following variables:
-
-```env
-# API Configuration
-VITE_API_BASE_URL=http://localhost:3000/api
-
-# PDF Viewer Configuration
-VITE_PDF_WORKER_URL=/pdf.worker.min.js
-
-# Application Settings
-VITE_APP_TITLE=Sard Phase 4 - PDF Viewer
-VITE_APP_VERSION=1.0.0
-
-# Feature Flags (optional)
-VITE_ENABLE_ANALYTICS=false
-VITE_ENABLE_DEBUG_MODE=false
-```
-
-### .env.example Template
-
-```env
-# Copy this file to .env and fill in your values
-# DO NOT commit .env to version control
-
-# API Configuration
-VITE_API_BASE_URL=http://localhost:3000/api
-
-# PDF Viewer Configuration
-VITE_PDF_WORKER_URL=/pdf.worker.min.js
-
-# Application Settings
-VITE_APP_TITLE=Sard Phase 4 - PDF Viewer
-VITE_APP_VERSION=1.0.0
-
-# Feature Flags (optional)
-VITE_ENABLE_ANALYTICS=false
-VITE_ENABLE_DEBUG_MODE=false
-```
-
-### Accessing Environment Variables in Code
-
-```javascript
-// Access environment variables using import.meta.env
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-const appTitle = import.meta.env.VITE_APP_TITLE;
-```
-
-⚠️ **Important Security Notes:**
-- Environment variables prefixed with `VITE_` are exposed to client-side code
-- **Never store sensitive data** (API keys, tokens, passwords) in the client-side environment
-- Sensitive configurations should only exist on the backend
-- Always use `.env` in `.gitignore` to prevent accidental commits
-
-## 📋 Available Scripts
-
-### Development
-
-| Script | Command | Description |
-|--------|---------|-------------|
-| `dev` | `npm run dev` | Start Vite development server with HMR |
-| `build` | `npm run build` | Build for production |
-| `preview` | `npm run preview` | Preview the production build locally |
-| `lint` | `npm run lint` | Run ESLint to check code quality |
-
-### Full Command Reference
-
-```bash
-# Development
-npm run dev          # Start dev server
-
-# Production
-npm run build        # Create production build
-npm run preview      # Preview production build
-
-# Code Quality
-npm run lint         # Check code quality
-npm run lint --fix   # Auto-fix linting issues
-```
-
-## 👥 Team Members
-
-| Name | Role | Responsibilities |
-|------|------|------------------|
-| Ima (ima1001) | Project Lead & Developer | Project setup, PDF viewer implementation, repository management |
-| [Team Member 2] | Frontend Developer | UI/UX components, styling, responsive design |
-| [Team Member 3] | Backend Integration | API integration, environment configuration |
-| [Team Member 4] | QA & Testing | Testing, bug fixes, documentation review |
-
-*Note: Update this section with actual team member information*
-
-## 🤝 Contributing
-
-Contributions are welcome! To contribute to this project:
-
-1. **Fork** the repository
-2. **Create a feature branch**: `git checkout -b feature/your-feature-name`
-3. **Make your changes** and commit: `git commit -m 'Add new feature'`
-4. **Push to the branch**: `git push origin feature/your-feature-name`
-5. **Submit a Pull Request** with a clear description of your changes
-
-### Development Guidelines
-
-- Follow the ESLint rules configured in the project
-- Write clean, readable code with meaningful variable names
-- Add comments for complex logic
-- Test your changes before submitting a PR
-- Update documentation as needed
-
-## 📝 License
-
-This project is open source and available under the MIT License.
-
-## 💬 Support
-
-For issues, questions, or suggestions:
-
-1. **Search existing issues** in the [GitHub Issues](https://github.com/ima1001/Sard_phase4/issues)
-2. **Create a new issue** if your problem isn't listed
-3. **Include detailed information**:
-   - Steps to reproduce the issue
-   - Expected vs. actual behavior
-   - Browser and OS information
-   - Error messages or screenshots
-
-## 📚 Additional Resources
-
-- [React Documentation](https://react.dev)
-- [Vite Documentation](https://vitejs.dev)
-- [Bootstrap Documentation](https://getbootstrap.com)
-- [React-Bootstrap Documentation](https://react-bootstrap.github.io)
-- [React-PDF Documentation](https://react-pdf.org)
 
 ---
 
-**Last Updated**: 2026-04-11
-**Repository**: [ima1001/Sard_phase4](https://github.com/ima1001/Sard_phase4)
+## Project Description
+
+SARD solves the challenge of fragmented collaboration in book creation. The platform supports five distinct user roles — **Admin**, **Author**, **Reviewer**, **Editor**, and **Publisher** — each with a tailored dashboard and feature set. Authors can create writing projects, manage drafts, and invite collaborators. Reviewers and editors can provide structured feedback. Publishers can browse ready-to-publish work. Admins oversee communities and platform activity.
+
+Key benefits:
+- Saves time by centralizing all collaboration in one place
+- Improves book quality through structured professional feedback
+- Builds a supportive creative community across experience levels
+
+---
+
+## Features
+
+| Role | Key Features |
+|------|-------------|
+| **Admin** | Manage communities (add/edit/delete), send platform-wide notifications |
+| **Author** | Create and manage writing projects, manage drafts, TODO task list, accept/reject join requests |
+| **Reviewer** | Browse communities, join projects, mark projects as reviewed |
+| **Editor** | Browse communities, join projects, mark projects as ready for publishing |
+| **Publisher** | Browse communities, preview projects, send join requests to authors |
+| **All Roles** | Sign up with role selection, login/logout, account settings, join communities, in-project chat |
+
+---
+
+## Tech Stack
+
+- **Framework:** React.js
+- **Languages:** HTML, CSS, JavaScript
+- **Build Tool:** Vite
+- **Package Manager:** npm
+
+---
+
+## Prerequisites
+
+Make sure the following is installed on your machine before getting started:
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended) — required to run the development server and install packages via npm
+
+---
+
+## Setup & Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/ima1001/Sard_phase4.git
+   ```
+
+2. Move into the project folder:
+   ```
+   cd Sard_phase4/react-starter
+   ```
+
+3. Install the required node modules:
+   ```
+   npm install
+   ```
+   or
+   ```
+   npm i
+   ```
+
+4. To start the development server:
+   ```
+   npm run dev
+   ```
+   The app will be available at `http://localhost:5173`
+
+> **Note:** If you get an error like "running scripts is disabled" or the system blocks npm commands, run this first:
+> ```
+> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+> ```
+> Then re-run your npm commands.
+
+---
+
+## Project Structure
+
+```
+Sard_phase4/
+├── react-starter/                # Main React application
+│   ├── src/
+│   │   ├── components/           # Reusable React components
+│   │   ├── Pages/                # Page components
+│   │   ├── assets/               # Images and static assets
+│   │   ├── App.css               # Global app styles
+│   │   ├── App.jsx               # Main App component
+│   │   ├── index.css             # Base styles
+│   │   └── main.jsx              # Entry point
+│   ├── data/                     # Static JSON data files
+│   ├── public/                   # Static assets served directly
+│   ├── .gitignore
+│   ├── vite.config.js            # Vite configuration
+│   ├── eslint.config.js          # ESLint rules
+│   ├── index.html                # HTML entry point
+│   ├── package.json              # App dependencies
+│   └── package-lock.json         # Locked versions
+├── node_modules/                 # Root installed dependencies
+├── package.json                  # Root dependencies
+├── package-lock.json             # Locked versions
+└── README.md                     # Project documentation
+```
+
+---
+
+## Usage & Examples
+
+### Signing Up
+
+1. Open the app and navigate to the **Sign Up** page.
+2. Enter your full name, email address, and password.
+3. Select your role from the dropdown: **Author**, **Editor**, **Reviewer**, or **Publisher**.
+4. Accept the terms and conditions.
+5. Click **Sign Up** to create your account.
+
+---
+
+### Logging In & Out
+
+1. Navigate to the **Login** page.
+2. Enter your registered email and password.
+3. Click **Login** — you will be redirected to your role-specific dashboard.
+4. To log out, click the **Logout** button from your dashboard or sidebar.
+
+---
+
+### Account Settings
+
+1. From your dashboard, navigate to **Settings**.
+2. You can update your **display name**.
+3. You can update your **password** by entering your new password and confirming it.
+4. Click **Save** to apply the changes.
+
+---
+
+### Joining Communities
+
+1. From the home page, browse the list of available communities.
+2. Click the **Join** button on any community you'd like to be part of.
+3. You will now have access to projects listed inside that community.
+
+---
+
+### Creating a Project (Author)
+
+1. Log in as an **Author**.
+2. From your dashboard, click **Create Project**.
+3. Fill in the required fields:
+   - Project title
+   - Description
+   - Number of authors
+   - Related communities
+   - Accessibility: **Public** or **Private**
+4. Click **Publish** — the project will appear in your dashboard.
+
+---
+
+### Managing Drafts (Author)
+
+1. Open one of your projects from the dashboard.
+2. View and edit your draft content.
+3. When ready, mark the draft status:
+   - **Waiting for Review** — makes the draft visible to reviewers.
+   - **Waiting for Editing** — makes the draft visible to editors.
+4. You will receive join requests from reviewers/editors and can **accept** or **reject** them from the project page.
+
+---
+
+### TODO Task List (Author)
+
+1. Open a project from your dashboard.
+2. Navigate to the **TODO** section within the project.
+3. Click **Add Task** and enter a task title.
+4. The task is saved and visible to all project members.
+5. Any project member can mark a task as **completed** by clicking the checkbox next to it.
+
+---
+
+### In-Project Chat
+
+1. Open a project you are a member of.
+2. Navigate to the **Chat** section within the project.
+3. Type your message in the input field and press **Send**.
+4. All project members can view and participate in the conversation.
+
+> Note: Only members who have been accepted into the project can access the chat.
+
+---
+
+### Reviewing a Project (Reviewer)
+
+1. Log in as a **Reviewer**.
+2. Browse communities and join one that has projects open for review.
+3. Find a project marked **Waiting for Review** and send a join request.
+4. Once the author accepts, open the project and read the draft.
+5. Click **Mark as Reviewed** to submit your feedback.
+6. The system updates the project status and notifies the author.
+
+---
+
+### Editing a Project (Editor)
+
+1. Log in as an **Editor**.
+2. Browse communities and join one that has projects open for editing.
+3. Find a project marked **Waiting for Editing** and send a join request.
+4. Once the author accepts, open the project and make your edits.
+5. Click **Mark as Ready for Publishing** when done.
+6. The system updates the project status and notifies the author.
+
+---
+
+### Previewing a Project (Publisher)
+
+1. Log in as a **Publisher**.
+2. Browse communities and find projects marked **Ready for Publishing**.
+3. Click **Preview** to view an overview of the project.
+4. Send a join request to the author if you'd like to proceed.
+5. Once accepted, you gain full access to the project.
+
+---
+
+### Managing Communities (Admin)
+
+1. Log in as an **Admin**.
+2. Navigate to **Community Management** from the sidebar.
+3. To **add** a community: click **Add**, fill in the name and description, then click **Publish**.
+4. To **edit** a community: click **Edit** next to a community, update the fields, then save.
+5. To **delete** a community: click **Delete** next to a community and confirm the action.
+
+---
+
+### Sending Notifications (Admin)
+
+1. Log in as an **Admin**.
+2. Navigate to **Notifications** from the sidebar.
+3. Write your notification message in the text field.
+4. Click **Publish** — the notification will be sent to all platform users.
+
+---
+
+## Team Members
+
+| Name | Role |
+|------|------|
+| Fatemah AL Jawad | ID: 202248340 |
+| Layan Alasmari | ID: 202223720 |
+| Naba AL Antaif | ID: 202278160 |
+| Hawra AL Majed | ID: 202333090 |
+
+
+---
+
+## License
+
+This project was developed as part of the SWE363 course at KFUPM — Team 18.
