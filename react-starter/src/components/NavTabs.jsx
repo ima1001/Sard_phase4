@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ConfirmCard, SuccessToast } from "./MessageCard";
+import { ConfirmCard, SuccessToast, ErrorToast } from "./MessageCard";
 import ToDoList from "./ProjectComponents/ToDoList";
 import ChatList from "./ChatList";
 import ChatWindow from "./ChatWindow";
@@ -18,13 +18,25 @@ function ChatEmptyState() {
 
 function Chats() {
     const [selectedChat, setSelectedChat] = useState(null);
+    const [showError, setShowError] = useState(false);
+
+    const handleLockedClick = () => {
+        setShowError(true);
+        setTimeout(() => setShowError(false), 3000);
+    };
+
     return (
-        <div style={{ display: "flex", flex: 1 }}>
-            <ChatList onSelect={setSelectedChat} />
+        <div style={{ display: "flex", flex: 1, position: "relative" }}>
+            <ChatList onSelect={setSelectedChat} onLockedClick={handleLockedClick} />
             {selectedChat ? (
                 <ChatWindow />
             ) : (
                 <ChatEmptyState />
+            )}
+            {showError && (
+                <div style={{ position: "absolute", bottom: "24px", left: "24px", zIndex: 10 }}>
+                    <ErrorToast onClose={() => setShowError(false)} />
+                </div>
             )}
         </div>
     );

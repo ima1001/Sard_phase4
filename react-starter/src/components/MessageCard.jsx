@@ -43,4 +43,17 @@ export function SuccessToast({ text }) {
     );
 }
 
+export function ErrorToast({ onClose }) {
+    return (
+        <div style={{ ...baseStyle, border: "1.5px solid #e74c3c" }}>
+            <div style={{ width: "28px", height: "28px", backgroundColor: "#e74c3c", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: "bold", flexShrink: 0 }}>×</div>
+            <div>
+                <p style={{ margin: 0, fontSize: "0.9rem", fontWeight: "bold", color: "#333" }}>Error Occurred</p>
+                <p style={{ margin: 0, fontSize: "0.8rem", color: "#555" }}>You don't have access to this chat.</p>
+            </div>
+            <button onClick={onClose} style={{ background: "none", border: "none", fontSize: "1.1rem", cursor: "pointer", color: "#888", position: "absolute", top: "6px", right: "10px" }}>×</button>
+        </div>
+    );
+}
+
 export default MessageCard;
