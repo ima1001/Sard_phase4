@@ -38,8 +38,8 @@ const ROLES = {
     reviewer: {
         label: "REVIEWER",
         notificationLink: "/Notifications",
-        projectLinks: [],
-        showProjects: false,
+        projectLinks: books,
+        showProjects: true,
         showActionCard: false,
         actionText: "",
         actionLink: "",
