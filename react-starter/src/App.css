@@ -162,16 +162,12 @@
 /* Side Bar */
 .sidebar {
   width: 185px;
-  height: 100vh;
   min-height: 100vh;
   background: #30364F;
   padding: 18px 14px 14px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  position: sticky;
-  top: 0;
-  align-self: flex-start;
 }
 
 .logo-container {
@@ -182,7 +178,7 @@
 }
 
 .logo {
-  width: 74px;
+  width: 140px;
   height: auto;
 }
 
@@ -533,50 +529,111 @@
   margin: 0 auto;
 }
 
-/* Notification Pages */
-.notification-page {
-  background: #E1D9BC;
+/* ===== Settings Page ===== */
+
+.settings-page {
+  background: #F0F0DB;
   min-height: 100vh;
-  padding: 70px 0;
+  padding: 48px 40px 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 34px;
 }
 
-.notification-card {
-  width: 72%;
-  max-width: 980px;
-  background: #9d9883;
-  border-radius: 18px;
-  padding: 18px 26px;
+.settings-title {
+  margin: 0 0 42px 0;
+  color: #000;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 3rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.settings-card-wrapper {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.settings-card {
+  width: 460px;
+  background: #D9D1B5;
+  border-radius: 14px;
+  padding: 34px 36px 40px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.notification-left {
+.settings-profile-icon {
+  font-size: 4.8rem;
+  color: #30364F;
+  margin-bottom: 28px;
+}
+
+.settings-form {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.settings-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
   align-items: center;
-  gap: 16px;
+  column-gap: 18px;
 }
 
-.notification-checkbox {
-  width: 22px;
-  height: 22px;
-  accent-color: #F0F0DB;
-  cursor: pointer;
-}
-
-.notification-title {
-  color: #F0F0DB;
-  font-size: 18px;
+.settings-row label {
+  color: #30364F;
+  font-size: 1rem;
   font-weight: 500;
 }
 
-.notification-time {
-  color: #F0F0DB;
-  font-size: 16px;
+.settings-row input {
+  height: 40px;
+  border: none;
+  border-radius: 12px;
+  background: #F4F4F4;
+  padding: 0 14px;
+  font-size: 1rem;
+  color: #30364F;
+  outline: none;
+}
+
+.settings-save-btn {
+  width: 250px;
+  height: 50px;
+  border: none;
+  border-radius: 999px;
+  background: #30364F;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.settings-save-btn:hover {
+  opacity: 0.92;
+}
+
+.settings-success-box {
+  position: static;
+  top: 28px;
+  left: -140px;
+  background: #EAF7F1;
+  color: #30364F;
+  border: 1px solid #67CDBB;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: -10px;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .drafts-container {
@@ -835,4 +892,293 @@
   font-size: 0.9rem;
   font-weight: 500;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Global responsive layout ===== */
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 96px;
+    padding: 10px 7px 8px;
+  }
+
+  .logo-container {
+    margin-bottom: 12px;
+  }
+
+  .logo {
+    width: 36px;
+  }
+
+  .profile-box {
+    gap: 4px;
+    margin-bottom: 10px;
+    padding: 2px;
+  }
+
+  .profile-icon {
+    font-size: 16px;
+  }
+
+  .role-text {
+    font-size: 0.38rem;
+  }
+
+  .name-text {
+    font-size: 0.46rem;
+    line-height: 1.05;
+  }
+
+  .sidebar-nav {
+    gap: 0;
+  }
+
+  .nav-item {
+    padding: 5px 5px;
+    border-radius: 7px;
+  }
+
+  .nav-item,
+  .sidebar a.nav-item,
+  .project-toggle,
+  .nav-left span,
+  .project-toggle span,
+  .nav-icon,
+  .arrow-icon {
+    font-size: 0.54rem;
+  }
+
+  .nav-left {
+    gap: 4px;
+  }
+
+  .dropdown-menu-projects {
+    padding-left: 10px;
+    margin-bottom: 3px;
+  }
+
+  .dropdown-menu-projects .project-link {
+    font-size: 0.5rem;
+    padding: 2px 0 2px 2px;
+  }
+
+  .action-card {
+    padding: 7px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+
+  .action-title {
+    font-size: 0.55rem;
+    margin-bottom: 3px;
+  }
+
+  .action-subtitle {
+    font-size: 0.42rem;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+
+  .action-btn {
+    font-size: 0.5rem;
+    padding: 5px;
+    border-radius: 6px;
+  }
+
+  .logout-icon {
+    font-size: 1rem;
+    padding-left: 1px;
+    padding-bottom: 1px;
+  }
+
+  .home-top {
+    min-height: 20vh;
+    padding: 16px 8px;
+  }
+
+  .home-top h1 {
+    font-size: 1.45rem;
+    line-height: 0.96;
+    max-width: 180px;
+  }
+
+  .home-bottom {
+    padding: 18px 8px 24px;
+  }
+
+  .home-bottom h2 {
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+  }
+
+  .communities-container {
+    gap: 12px;
+  }
+
+  .card {
+    width: 112px;
+    min-height: 126px;
+    border-radius: 12px;
+  }
+
+  .card .card-body {
+    padding: 12px 8px 10px;
+  }
+
+  .card .card-title {
+    font-size: 0.72rem;
+    min-height: 34px;
+    line-height: 1.15;
+  }
+
+  .card button,
+  .card .btn,
+  .card .btn-primary {
+    width: 74px;
+    height: 24px;
+    font-size: 0.6rem;
+  }
+
+  .notifications-top {
+    min-height: 88px;
+    padding: 12px 8px;
+  }
+
+  .notifications-title {
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .notifications-bottom {
+    padding: 14px 0 20px;
+  }
+
+  .notifications-list {
+    width: 95%;
+    gap: 10px;
+  }
+
+  .notification-card {
+    padding: 9px 8px;
+    border-radius: 10px;
+    align-items: flex-start;
+  }
+
+  .notification-left {
+    gap: 7px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .notification-checkbox {
+    width: 14px;
+    height: 14px;
+    margin-top: 2px;
+  }
+
+  .notification-title {
+    font-size: 0.66rem;
+    line-height: 1.1;
+    word-break: break-word;
+  }
+
+  .notification-time {
+    font-size: 0.56rem;
+    white-space: nowrap;
+    margin-left: 4px;
+    padding-top: 1px;
+  }
+
+  .notification-form-wrapper {
+    width: 95%;
+  }
+
+  .notification-form-card {
+    width: 100%;
+    padding: 12px 10px;
+    border-radius: 8px;
+  }
+
+  .notification-form-card h2 {
+    font-size: 0.72rem;
+    margin-bottom: 8px;
+  }
+
+  .notification-textarea {
+    min-height: 64px;
+    padding: 8px 9px;
+    font-size: 0.7rem;
+    margin-bottom: 8px;
+  }
+
+  .publish-btn {
+    width: 116px;
+    height: 30px;
+    font-size: 0.68rem;
+  }
+
+  .success-box {
+    position: static;
+    transform: none;
+    margin-bottom: 8px;
+    padding: 7px 9px;
+    font-size: 0.6rem;
+  }
+
+  .settings-page {
+    padding: 18px 8px 24px;
+  }
+
+  .settings-title {
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+
+  .settings-card-wrapper {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .settings-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 10px 16px;
+    border-radius: 10px;
+  }
+
+  .settings-profile-icon {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+  }
+
+  .settings-form {
+    gap: 10px;
+  }
+
+  .settings-row {
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+  }
+
+  .settings-row label {
+    font-size: 0.68rem;
+  }
+
+  .settings-row input {
+    height: 30px;
+    font-size: 0.68rem;
+    border-radius: 8px;
+  }
+
+  .settings-save-btn {
+    width: 130px;
+    height: 34px;
+    font-size: 0.68rem;
+  }
+
+  .settings-success-box {
+    font-size: 0.6rem;
+    padding: 7px 9px;
+    margin-bottom: 12px;
+  }
 }
