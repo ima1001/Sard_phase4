@@ -423,6 +423,10 @@
   gap: 10px;
 }
 
+.drafts-container{
+  flex-wrap: wrap;
+}
+
 .notification-project_card .buttons button {
   min-width: 90px;
   padding: 10px 16px;
@@ -630,6 +634,7 @@
 /*project navigation*/
 .project-nav-bar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 10px;

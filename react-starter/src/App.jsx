@@ -74,7 +74,7 @@ function AppLayout() {
     
 
     return (
-        <div style={{ display: "flex" , minHeight: "100vh"}}>
+        <div className style={{ display: "flex" , minHeight: "100vh"}}>
             <SideBar
                 role={config.label}
                 name={name}
