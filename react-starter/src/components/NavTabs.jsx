@@ -99,11 +99,68 @@ function ReviewerNavTabs() {
     );
 }
 
+function EditorNavTabs() {
+    const [edited, setEdited] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+
+    const handleButtonClick = () => {
+        if (edited) {
+            setEdited(false);
+        } else {
+            setShowConfirm(true);
+        }
+    };
+
+    const handleConfirm = () => {
+        setEdited(true);
+        setShowConfirm(false);
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 3000);
+    };
+
+    return (
+        <>
+            <nav className="project-nav-bar" style={{ display: "flex", alignItems: "center" }}>
+                <button
+                    onClick={handleButtonClick}
+                    style={{ backgroundColor: edited ? "#4caf50" : "#30364F", color: "white" }}
+                >
+                    {edited ? "Edited" : "Mark Edited"}
+                </button>
+                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                    <button>chats</button>
+                </div>
+            </nav>
+
+            {showConfirm && (
+                <div style={{ position: "absolute", top: "16px", left: "16px", zIndex: 10 }}>
+                    <ConfirmCard
+                        text="Are you sure you want to mark this project Edited?"
+                        onConfirm={handleConfirm}
+                        onClose={() => setShowConfirm(false)}
+                    />
+                </div>
+            )}
+            {showSuccess && (
+                <div style={{ position: "absolute", top: "16px", left: "16px", zIndex: 10 }}>
+                    <SuccessToast text="You have marked this project Edited." />
+                </div>
+            )}
+
+            <div className="project-content-box">
+                <Chats />
+            </div>
+        </>
+    );
+}
+
 function NavTabs() {
     const [activeTab, setActiveTab] = useState("todo");
     const role = localStorage.getItem("role");
 
     if (role === "reviewer") return <ReviewerNavTabs />;
+    if (role === "editor") return <EditorNavTabs />;
 
     return (
         <>
