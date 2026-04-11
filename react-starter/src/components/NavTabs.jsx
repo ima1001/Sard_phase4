@@ -155,6 +155,7 @@ function EditorNavTabs() {
     );
 }
 
+/*
 function BookSettings({ book }) {
     const [fields, setFields] = useState({
         title: book.name,
@@ -217,7 +218,7 @@ function BookSettings({ book }) {
                                 <>
                                     <input
                                         value={draftValue}
-                                        onChange={(event) => setDraftValue(event.target.value)}
+                                        onChange={(event) => setDraftValue(event.target.value)} required
                                     />
                                     <div className="edit-actions">
                                         <button className="edit-save" onClick={saveEdit}>
@@ -249,10 +250,120 @@ function BookSettings({ book }) {
             </div>
         </div>
     );
+}*/
+function BookSettings({ book, onSave }) {
+    const [fields, setFields] = useState({
+        title: book.name,
+        category: "Fiction",
+        authors: "1",
+        visibility: "Private",
+    });
+
+    const [editingField, setEditingField] = useState(null);
+    const [draftValue, setDraftValue] = useState(fields.title);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+    setFields({
+        title: book.name,
+        category: "Fiction",
+        authors: "1",
+        visibility: "Private",
+    });
+        }, [book.id]); 
+
+    const beginEdit = (field) => {
+        setEditingField(field);
+        setDraftValue(fields[field]);
+        setError("");
+    };
+
+    const saveEdit = () => {
+        if (!draftValue.trim()) {
+            setError("Field cannot be empty");
+            return;
+        }
+
+        setFields((prev) => ({ ...prev, [editingField]: draftValue }));
+        setEditingField(null);
+        setError("");
+    };
+
+    const cancelEdit = () => {
+        setDraftValue(fields[editingField]);
+        setEditingField(null);
+        setError("");
+    };
+
+    const handleSaveChanges = () => {
+        if (onSave) {
+            onSave(fields); 
+        }
+        return alert("Changes saved");
+    };
+
+    const rows = [
+        { key: "title", label: "Book title" },
+        { key: "category", label: "Project category" },
+        { key: "authors", label: "Number of authors" },
+        { key: "visibility", label: "Visibility" },
+    ];
+
+    return (
+        <div className="book-settings-card">
+            <div className="settings-header">
+                <div>
+                    <p className="settings-label">settings</p>
+                    <h2>{book.name}</h2>
+                </div>
+            </div>
+
+            <div className="settings-grid">
+                {rows.map((row) => (
+                    <div key={row.key} className="settings-row settings-row-editable">
+                        <label>{row.label}</label>
+                        <div className="editable-field">
+                            {editingField === row.key ? (
+                                <>
+                                    <input
+                                        value={draftValue}
+                                        onChange={(event) => setDraftValue(event.target.value)}
+                                    />
+                                    <div className="edit-actions">
+                                        <button className="edit-save" onClick={saveEdit}>✓</button>
+                                        <button className="edit-cancel" onClick={cancelEdit}>✕</button>
+                                    </div>
+
+                                    {error && <p className="error-text">{error}</p>}
+                                </>
+                            ) : (
+                                <>
+                                    <span className="field-value">{fields[row.key]}</span>
+                                    <button
+                                        className="edit-trigger"
+                                        onClick={() => beginEdit(row.key)}
+                                        aria-label={`Edit ${row.label}`}
+                                    >
+                                        ✎
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div className="settings-footer">
+                <button onClick={handleSaveChanges}>Save changes</button>
+            </div>
+        </div>
+    );
 }
 
 function NavTabs({ book }) {
     const [activeTab, setActiveTab] = useState("todo");
+    const [currentBook, setCurrentBook] = useState(book);
+
     const role = localStorage.getItem("role");
     const tabs = [
         { key: "todo", label: "todo list" },
@@ -287,7 +398,13 @@ function NavTabs({ book }) {
                 {activeTab === "chats"         && <Chats />}
                 {activeTab === "notifications" && <Notifications />}
                 {activeTab === "drafts"        && <DraftsSection />}
-                {activeTab === "settings"      && role === "author" && <BookSettings book={book} />}
+                {activeTab === "settings"      && role === "author" && <BookSettings book={currentBook} 
+                onSave={(updatedFields) => {
+                    setCurrentBook((prev) => ({
+                        ...prev,
+                        ...updatedFields
+                    }));
+                }} />}
             </div>
         </>
     );
