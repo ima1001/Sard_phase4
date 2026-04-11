@@ -13,6 +13,7 @@ function CommunityInterface() {
     const community = communities.find((c) => c.id === Number(id));
 
     const handleJoin = () => {
+        console.log("Join button clicked");
         setShowToast(true);
         setTimeout(() => setShowToast(false), 3000);
     };
@@ -36,7 +37,7 @@ function CommunityInterface() {
                             title={project.title}
                             text={project.text}
                             buttonText="Join"
-                            onClick={handleJoin}
+                            primaryOnClick={handleJoin}
                         />
                     ))}
                 </div>  
@@ -44,7 +45,7 @@ function CommunityInterface() {
             </section>
             {showToast && (
                 <div className="alert_toast" style={{backgroundColor: "transparent", boxShadow: "none",border: "none"}}>
-                    <MessageCard type="success" text="Your request is sent to the author" style={{backgroundColor: "eef6ef"}} />
+                    <MessageCard type="success" text="Your request is sent to the author"/>
                 </div>
             )}
         </div>
