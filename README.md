@@ -1,6 +1,6 @@
-# Sard Phase 4 - React PDF Viewer Application
+# Sard Phase 4
 
-A modern React-based application built with Vite for viewing and interacting with PDF files. This project demonstrates a complete setup with PDF viewing capabilities, Bootstrap styling, and icon libraries.
+SARD is a web-based platform that streamlines the book production process by connecting authors, editors, reviewers, and publishers in one centralized space. Whether you're a casual writer looking for feedback or a publisher searching for the next great manuscript, SARD brings every key stakeholder together to transform rough drafts into polished, high-quality books.
 
 ## 📋 Table of Contents
 
