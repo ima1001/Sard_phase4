@@ -138,8 +138,17 @@ Sard_phase4/
 ### Logging In & Out
 
 1. Navigate to the **Login** page.
-2. Enter your registered email and password.
-3. Click **Login** — you will be redirected to your role-specific dashboard.
+2. Use one of the following test accounts to log in:
+
+   | Role      | Email                  | Password |
+   |-----------|------------------------|----------|
+   | Admin     | admin@sard.com         | 123      |
+   | Author    | author@sard.com        | 123      |
+   | Editor    | editor@sard.com        | 123      |
+   | Reviewer  | reviewer@sard.com      | 123      |
+   | Publisher | publisher@sard.com     | 123      |
+
+3. Click **Login**. You will be redirected to your role-specific dashboard.
 4. To log out, click the **Logout** button from your dashboard or sidebar.
 
 ---
