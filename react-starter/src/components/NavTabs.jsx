@@ -48,6 +48,7 @@ function ReviewerNavTabs() {
     const [reviewed, setReviewed] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+    const [activeTab, setActiveTab] = useState("chats");
 
     const handleButtonClick = () => {
         if (reviewed) {
@@ -64,6 +65,12 @@ function ReviewerNavTabs() {
         setTimeout(() => setShowSuccess(false), 3000);
     };
 
+    const tabs = [
+        { key: "todo", label: "todo list" },
+        { key: "chats", label: "chats" },
+        { key: "drafts", label: "drafts" },
+    ];
+
     return (
         <>
             <nav className="project-nav-bar" style={{ display: "flex", alignItems: "center" }}>
@@ -73,8 +80,16 @@ function ReviewerNavTabs() {
                 >
                     {reviewed ? "Reviewed" : "Mark Reviewed"}
                 </button>
-                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-                    <button>chats</button>
+                <div style={{ flex: 1, display: "flex", justifyContent: "center", gap: "10px" }}>
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.key}
+                            className={activeTab === tab.key ? "active" : ""}
+                            onClick={() => setActiveTab(tab.key)}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
                 </div>
             </nav>
 
@@ -95,7 +110,9 @@ function ReviewerNavTabs() {
             )}
 
             <div className="project-content-box">
-                <Chats />
+                {activeTab === "todo" && <ToDoList />}
+                {activeTab === "chats" && <Chats />}
+                {activeTab === "drafts" && <DraftsSection />}
             </div>
         </>
     );
@@ -105,6 +122,7 @@ function EditorNavTabs() {
     const [edited, setEdited] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+    const [activeTab, setActiveTab] = useState("chats");
 
     const handleButtonClick = () => {
         if (edited) {
@@ -121,6 +139,12 @@ function EditorNavTabs() {
         setTimeout(() => setShowSuccess(false), 3000);
     };
 
+    const tabs = [
+        { key: "todo", label: "todo list" },
+        { key: "chats", label: "chats" },
+        { key: "drafts", label: "drafts" },
+    ];
+
     return (
         <>
             <nav className="project-nav-bar" style={{ display: "flex", alignItems: "center" }}>
@@ -130,8 +154,16 @@ function EditorNavTabs() {
                 >
                     {edited ? "Edited" : "Mark Edited"}
                 </button>
-                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-                    <button>chats</button>
+                <div style={{ flex: 1, display: "flex", justifyContent: "center", gap: "10px" }}>
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.key}
+                            className={activeTab === tab.key ? "active" : ""}
+                            onClick={() => setActiveTab(tab.key)}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
                 </div>
             </nav>
 
@@ -151,7 +183,9 @@ function EditorNavTabs() {
             )}
 
             <div className="project-content-box">
-                <Chats />
+                {activeTab === "todo" && <ToDoList />}
+                {activeTab === "chats" && <Chats />}
+                {activeTab === "drafts" && <DraftsSection />}
             </div>
         </>
     );
@@ -331,6 +365,36 @@ function BookSettings({ book, onSave, communitiies }) {
     );
 }
 
+function PublisherNavTabs() {
+    const [activeTab, setActiveTab] = useState("drafts");
+
+    const tabs = [
+        { key: "drafts", label: "drafts" },
+        { key: "chats", label: "chats" },
+    ];
+
+    return (
+        <>
+            <nav className="project-nav-bar">
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.key}
+                        className={activeTab === tab.key ? "active" : ""}
+                        onClick={() => setActiveTab(tab.key)}
+                    >
+                        {tab.label}
+                    </button>
+                ))}
+            </nav>
+
+            <div className="project-content-box">
+                {activeTab === "drafts" && <DraftsSection />}
+                {activeTab === "chats" && <Chats />}
+            </div>
+        </>
+    );
+}
+
 function NavTabs({ book }) {
     const [activeTab, setActiveTab] = useState("todo");
     const [currentBook, setCurrentBook] = useState(book);
@@ -339,17 +403,17 @@ function NavTabs({ book }) {
     const tabs = [
         { key: "todo", label: "todo list" },
         { key: "chats", label: "chats" },
-        { key: "notifications", label: "notification" },
         { key: "drafts", label: "drafts" },
     ];
 
     if (role === "author") {
-        tabs.push({ key: "settings", label: "settings" });
+        tabs.push({ key: "notifications", label: "notification" },{ key: "settings", label: "settings" });
     }
 
     if (role === "reviewer") return <ReviewerNavTabs />;
     if (role === "editor") return <EditorNavTabs />;
-
+    if (role === "publisher") return <PublisherNavTabs />;
+    
     return (
         <>
             <nav className="project-nav-bar">
@@ -367,7 +431,7 @@ function NavTabs({ book }) {
             <div className="project-content-box">
                 {activeTab === "todo"          && <ToDoList />}
                 {activeTab === "chats"         && <Chats />}
-                {activeTab === "notifications" && <Notifications />}
+                {activeTab === "notifications" && role === "author" && <Notifications />}
                 {activeTab === "drafts"        && <DraftsSection />}
                 {activeTab === "settings"      && role === "author" && <BookSettings book={currentBook} 
                 onSave={(updatedFields) => {
