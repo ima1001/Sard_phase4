@@ -18,7 +18,7 @@ export default function BookInterface() {
 
             {/* Row 2 — NavTabs bar + content area with position:relative for card anchoring */}
             <div style={{ flex: 1 }}>
-                <NavTabs />
+                <NavTabs book={book} />
             </div>
 
         </div>
