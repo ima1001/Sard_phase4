@@ -28,6 +28,7 @@ function CommunityInterface() {
         
             <section className="home-bottom">
                 <h2>Collaborate with other authors</h2>
+      
                 <div className="communities-container">
                     {projects.map((project) => (
                         <CommunityCard
@@ -39,10 +40,10 @@ function CommunityInterface() {
                         />
                     ))}
                 </div>  
-                
+            
             </section>
             {showToast && (
-                <div className="alert_toast">
+                <div className="alert_toast" style={{backgroundColor: "transparent", boxShadow: "none",border: "none"}}>
                     <MessageCard type="success" text="Your request is sent to the author" style={{backgroundColor: "eef6ef"}} />
                 </div>
             )}
