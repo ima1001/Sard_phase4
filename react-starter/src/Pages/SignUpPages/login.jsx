@@ -33,7 +33,6 @@ function Login() {
 
         localStorage.setItem("role", user.role);
         localStorage.setItem("name", user.name);
-        localStorage.setItem("books", JSON.stringify(user.books || []));
         navigate("/Home");
     };
 

@@ -1,16 +1,7 @@
 [
-  { "email": "admin@sard.com", "name": "Admin", "password": "123", "role": "admin", "books": [] },
-  { "email": "author@sard.com", "name": "Author One", "password": "123", "role": "author", "books": [
-    { "name": "Book1", "link": "/BookInterface" },
-    { "name": "Book2", "link": "/BookInterface" }
-  ]},
-  { "email": "editor@sard.com", "name": "Editor One", "password": "123", "role": "editor", "books": [
-    { "name": "Book1", "link": "/BookInterface" }
-  ]},
-  { "email": "reviewer@sard.com", "name": "Reviewer One", "password": "123", "role": "reviewer", "books": [] },
-  { "email": "publisher@sard.com", "name": "Publisher One", "password": "123", "role": "publisher", "books": [
-    { "name": "Book1", "link": "/BookInterface" },
-    { "name": "Book2", "link": "/BookInterface" },
-    { "name": "Book3", "link": "/BookInterface" }
-  ]}
+  { "email": "admin@sard.com", "name": "Admin", "password": "123", "role": "admin" },
+  { "email": "author@sard.com", "name": "Author One", "password": "123", "role": "author" },
+  { "email": "editor@sard.com", "name": "Editor One", "password": "123", "role": "editor" },
+  { "email": "reviewer@sard.com", "name": "Reviewer One", "password": "123", "role": "reviewer" },
+  { "email": "publisher@sard.com", "name": "Publisher One", "password": "123", "role": "publisher" }
 ]
