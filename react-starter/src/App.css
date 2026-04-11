@@ -636,6 +636,29 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
+.settings-input-group {
+  width: 100%;
+}
+
+.input-error {
+  color: #d9534f;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+.settings-input-error {
+  border: 1px solid #d9534f !important;
+}
+.settings-input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-input-wrapper input {
+  width: 100%;
+}
+
 .drafts-container {
   display: flex;
   flex-direction: row;
