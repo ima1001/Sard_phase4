@@ -11,6 +11,7 @@ import NavTabs from "./components/NavTabs";
 import BookInterface from "./Pages/BookInterface";
 import SettingsPage from "./Pages/SettingsPage";
 import AddNew from "./Pages/AddNew";
+import books from "../data/booksData.json";
 
 
 import "./App.css";
@@ -19,10 +20,7 @@ const ROLES = {
     editor: {
         label: "EDITOR",
         notificationLink: "/Notifications",
-        projectLinks: [
-            { name: "Book1", link: "/BookInterface" },
-            { name: "Book2", link: "/BookInterface" },
-        ],
+        projectLinks: books,
         showProjects: true,
         showActionCard: false,
         actionText: "",
@@ -31,11 +29,7 @@ const ROLES = {
     publisher: {
         label: "PUBLISHER",
         notificationLink: "/Notifications",
-        projectLinks: [
-            { name: "Book1", link: "/BookInterface" },
-            { name: "Book2", link: "/BookInterface" },
-            { name: "Nav Tabs", link: "/NavTabs" },
-        ],
+        projectLinks: books,
         showProjects: true,
         showActionCard: false,
         actionText: "",
@@ -53,7 +47,7 @@ const ROLES = {
     author: {
         label: "AUTHOR",
         notificationLink: "/Notifications",
-        projectLinks: [],
+        projectLinks: books,
         showProjects: true,
         showActionCard: true,
         actionText: "Add New Project",
