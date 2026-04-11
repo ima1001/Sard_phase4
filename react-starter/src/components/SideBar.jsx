@@ -59,7 +59,7 @@ function SideBar({
     <div
       className="nav-item project-toggle"
       role="button"
-      onClick={() => setOpenProjects(!openProjects)}
+      onClick={() => { setOpenProjects(!openProjects); navigate("/BookInterface"); }}
     >
       <div className="nav-left">
         <Pencil className="nav-icon" />
