@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ConfirmCard, SuccessToast } from "./MessageCard";
 import ToDoList from "./ProjectComponents/ToDoList";
 import ChatList from "./ChatList";
 import Notifications from "./ProjectComponents/ProjectNotification";
@@ -30,8 +31,68 @@ function Chats() {
     );
 }
 
+function ReviewerNavTabs() {
+    const [reviewed, setReviewed] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+
+    const handleButtonClick = () => {
+        if (reviewed) {
+            setReviewed(false);
+        } else {
+            setShowConfirm(true);
+        }
+    };
+
+    const handleConfirm = () => {
+        setReviewed(true);
+        setShowConfirm(false);
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 3000);
+    };
+
+    return (
+        <>
+            <nav className="project-nav-bar" style={{ display: "flex", alignItems: "center" }}>
+                <button
+                    onClick={handleButtonClick}
+                    style={{ backgroundColor: reviewed ? "#4caf50" : "#30364F", color: "white" }}
+                >
+                    {reviewed ? "Reviewed" : "Mark Reviewed"}
+                </button>
+                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                    <button>chats</button>
+                </div>
+            </nav>
+
+            {/* anchors to position:relative in BookInterface — sits just below the NavTabs bar */}
+            {showConfirm && (
+                <div style={{ position: "absolute", top: "16px", left: "16px", zIndex: 10 }}>
+                    <ConfirmCard
+                        text="Are you sure you want to mark this project Reviewed?"
+                        onConfirm={handleConfirm}
+                        onClose={() => setShowConfirm(false)}
+                    />
+                </div>
+            )}
+            {showSuccess && (
+                <div style={{ position: "absolute", top: "16px", left: "16px", zIndex: 10 }}>
+                    <SuccessToast text="You have marked this project Reviewed." />
+                </div>
+            )}
+
+            <div className="project-content-box">
+                <Chats />
+            </div>
+        </>
+    );
+}
+
 function NavTabs() {
     const [activeTab, setActiveTab] = useState("todo");
+    const role = localStorage.getItem("role");
+
+    if (role === "reviewer") return <ReviewerNavTabs />;
 
     return (
         <>

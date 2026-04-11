@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/logoD.png";
+import books from "../../data/booksData.json";
 import {
   House,
   Pencil,
@@ -59,7 +60,7 @@ function SideBar({
     <div
       className="nav-item project-toggle"
       role="button"
-      onClick={() => { setOpenProjects(!openProjects); navigate("/BookInterface"); }}
+      onClick={() => { setOpenProjects(!openProjects); navigate(books[0].link); }}
     >
       <div className="nav-left">
         <Pencil className="nav-icon" />
