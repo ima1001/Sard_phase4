@@ -3,9 +3,50 @@ import CommunityCard from "./CommunityCard.jsx";
 import communities from "../../data/communityData.json";
 import { useNavigate } from "react-router-dom";
 
+function AddCommunityForm({ newCommunity, handleChange, handleAddCommunity }) {
+    return (
+        <div className="add-task-form">
+            <form onSubmit={(e) => { e.preventDefault(); handleAddCommunity(); }}>
+                
+                <div className="field">
+                    <label>Community Name</label>
+                    <input 
+                        type="text"
+                        name="title"
+                        value={newCommunity.title}
+                        onChange={handleChange}
+                        placeholder="Community name"
+                        required
+                    />
+                </div>
+
+                <div className="field">
+                    <label>Community Description</label>
+                    <input 
+                        type="text"
+                        name="description"
+                        value={newCommunity.description}
+                        onChange={handleChange}
+                        placeholder="Description"
+                    />
+                </div>
+
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    );
+}
+
 function Home({ role }) {
     const [communityList, setCommunityList] = useState(communities);
     const [toastMessage, setToastMessage] = useState(null);
+    const [showAddForm, setShowAddForm] = useState(false);
+
+    const [newCommunity, setNewCommunity] = useState({
+        title: "",
+        description: ""
+    });
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,20 +64,26 @@ function Home({ role }) {
         setToastMessage(`${community.title} deleted`);
     };
 
-    const handleEdit = (community) => {
-        const newTitle = window.prompt("Edit community title", community.title);
-        if (newTitle === null) return;
-        const newText = window.prompt("Edit community description", community.text);
-        if (newText === null) return;
+    const handleChange = (e) => {
+        setNewCommunity({ ...newCommunity, [e.target.name]: e.target.value });
+    };
 
-        setCommunityList((prev) =>
-            prev.map((item) =>
-                item.id === community.id
-                    ? { ...item, title: newTitle.trim() || item.title, text: newText.trim() || item.text }
-                    : item
-            )
-        );
-        setToastMessage(`${community.title} updated`);
+    const handleAddCommunity = () => {
+        const communityToAdd = {
+            id: communityList.length + 1,
+            title: newCommunity.title,
+            description: newCommunity.description
+        };
+
+        setCommunityList([...communityList, communityToAdd]);
+        setToastMessage("Community added successfully");
+        setShowAddForm(false);
+
+        // Reset form
+        setNewCommunity({
+            title: "",
+            description: ""
+        });
     };
 
     return (
@@ -44,25 +91,42 @@ function Home({ role }) {
             <div className="home-top">
                 <h1>Welcome to SARD Platform</h1>
             </div>
+
             <div className="home-bottom">
                 <h2>Communities</h2>
+
                 <div className="communities-container">
                     {communityList.map((community) => (
                         <CommunityCard
                             key={community.id}
                             title={community.title}
-                            text={community.text}
+                            text={community.description}
                             primaryButtonText={role === "admin" ? "Edit" : "Join"}
                             primaryOnClick={() =>
                                 role === "admin"
-                                    ? handleEdit(community)
+                                    ? setShowAddForm(true)
                                     : navigate(`/CommunityInterface/${community.id}`)
                             }
                             secondaryButtonText={role === "admin" ? "Delete" : undefined}
                             secondaryOnClick={role === "admin" ? () => handleDelete(community) : undefined}
                         />
                     ))}
+
+                    {showAddForm && (
+                        <div className="modal-overlay">
+                            <div className="modal-box">
+                                <button className="close-modal" onClick={() => setShowAddForm(false)}>×</button>
+
+                                <AddCommunityForm 
+                                    newCommunity={newCommunity}
+                                    handleChange={handleChange}
+                                    handleAddCommunity={handleAddCommunity}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
+
                 {toastMessage && <div className="home-toast">{toastMessage}</div>}
             </div>
         </div>
