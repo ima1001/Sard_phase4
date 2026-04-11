@@ -166,9 +166,6 @@ function ChatWindow() {
                         onKeyDown={e => e.key === "Enter" && sendText()}
                         style={{ flex: 1, background: "none", border: "none", outline: "none", fontSize: "14px", color: "#333" }}
                     />
-
-                    <button style={{ background: "none", border: "none", cursor: "pointer", fontSize: "18px", color: "#666" }}>😊</button>
-                    <button style={{ background: "none", border: "none", cursor: "pointer", fontSize: "18px", color: "#666" }}>📷</button>
                     <button onClick={sendText}
                         style={{ background: "#2d3a4a", border: "none", cursor: "pointer", borderRadius: "50%", width: "34px", height: "34px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "14px" }}>
                         ➤
