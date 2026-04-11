@@ -76,6 +76,7 @@ function AppLayout() {
     const navigate = useNavigate();
     const role = localStorage.getItem("role") || "editor";
     const name = localStorage.getItem("name") || "";
+    const books = JSON.parse(localStorage.getItem("books") || "[]");
     const config = ROLES[role] || ROLES.editor;
     
 
@@ -86,8 +87,8 @@ function AppLayout() {
                 name={name}
                 homeLink="/Home"
                 notificationLink={config.notificationLink}
-                projectLinks={config.projectLinks}
-                showProjects={config.showProjects}
+                projectLinks={books}
+                showProjects={books.length > 0}
                 showActionCard={config.showActionCard}
                 actionText={config.actionText}
                 onActionClick={() => navigate(config.actionLink)}
