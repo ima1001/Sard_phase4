@@ -395,6 +395,121 @@
   margin-bottom: 20px;
 }
 
+.notification-project_card .buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.notification-project_card .buttons button {
+  min-width: 90px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.notification-project_card .buttons button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.notification-project_card .buttons button:first-child {
+  background: #4caf50;
+}
+
+.notification-project_card .buttons button:last-child {
+  background: #f44336;
+}
+
+.notification-confirm-card {
+  margin: 20px auto 0;
+  width: 100%;
+  max-width: 520px;
+  background: rgba(250, 247, 247, 0.96);
+  border: 1px solid rgba(210, 174, 174, 0.4);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #3d3434;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: confirmAppear 0.28s ease forwards;
+}
+
+.notification-confirm-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.confirm-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.confirm-buttons button {
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0.75;
+  color: #333;
+}
+
+.confirm-buttons button:hover {
+  opacity: 1;
+}
+
+.confirm-buttons .confirm-yes {
+  background: #f5f5f5;
+}
+
+.confirm-buttons .confirm-no {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+}
+
+.notification-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: min(92%, 360px);
+  animation: floatUp 0.35s ease;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateX(-50%) translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes confirmAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .message-container{
   margin-top: 20px;
   margin-top: 20px;

@@ -1,49 +1,74 @@
 import MessageCard from "../MessageCard"; 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import notificationsData from "../../../data/projectNotifications.json";
 
 function ProjectNotification() {
-    const [notifications, setNotifications] = useState([
-        { id: 1, message: "Author request to join the project" },
-        { id: 2, message: "Reviewer request to join the project" },
-        { id: 3, message: "Editor request to join the project" }
-    ]);
+    const [notifications, setNotifications] = useState(notificationsData);
+    const [pendingConfirmation, setPendingConfirmation] = useState(null);
+    const [toast, setToast] = useState(null);
 
-    const [message, setMessage] = useState(null);
+    useEffect(() => {
+        if (!toast) return;
+        const timer = setTimeout(() => setToast(null), 3000);
+        return () => clearTimeout(timer);
+    }, [toast]);
 
-    const handleAccept = (id) => {
-    const confirmed = window.confirm("Are you sure you want to ACCEPT this request?");
-    if (confirmed) {
-        setNotifications(notifications.filter(n => n.id !== id));
-        setMessage({ type: "info", text: "Request accepted successfully" });
-    }
-};
+    const requestConfirmation = (id, action) => {
+        setPendingConfirmation({ id, action });
+    };
 
-const handleReject = (id) => {
-    const confirmed = window.confirm("Are you sure you want to REJECT this request?");
-    if (confirmed) {
-        setNotifications(notifications.filter(n => n.id !== id));
-        setMessage({ type: "info", text: "Request rejected" });
-    }
-};
+    const handleConfirm = () => {
+        if (!pendingConfirmation) return;
 
+        const { id, action } = pendingConfirmation;
+        setNotifications(notifications.filter((n) => n.id !== id));
+        setToast({
+            type: "success",
+            text: action === "accept" ? "Request accepted successfully" : "Request rejected",
+        });
+        setPendingConfirmation(null);
+    };
+
+    const handleCancel = () => {
+        setPendingConfirmation(null);
+    };
 
     return (
         <div className="project-notifications">
             <div>
-                <h1>Project Notifications</h1> 
+                <h1>Project Notifications</h1>
             </div>
             <div className="project-notification-content">
                 {notifications.map((notification) => (
                     <div key={notification.id} className="notification-project_card">
                         <p>{notification.message}</p>
                         <div className="buttons">
-                            <button onClick={() => handleAccept(notification.id)}>Accept</button>
-                            <button onClick={() => handleReject(notification.id)}>Reject</button>
+                            <button onClick={() => requestConfirmation(notification.id, "accept")}>Accept</button>
+                            <button onClick={() => requestConfirmation(notification.id, "reject")}>Reject</button>
                         </div>
                     </div>
                 ))}
+
+                {pendingConfirmation && (
+                    <div className="notification-confirm-card">
+                        <p>
+                            {pendingConfirmation.action === "accept"
+                                ? "Are you sure you want to accept this request?"
+                                : "Are you sure you want to reject this request?"}
+                        </p>
+                        <div className="confirm-buttons">
+                            <button className="confirm-yes" onClick={handleConfirm}>Yes</button>
+                            <button className="confirm-no" onClick={handleCancel}>No</button>
+                        </div>
+                    </div>
+                )}
             </div>
-            {message && <MessageCard type={message.type} text={message.text} />}
+
+            {toast && (
+                <div className="notification-toast">
+                    <MessageCard type={toast.type} text={toast.text} />
+                </div>
+            )}
         </div>
     );
 }

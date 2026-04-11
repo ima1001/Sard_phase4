@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "message": "Author request to join the project"
+  },
+  {
+    "id": 2,
+    "message": "Reviewer request to join the project"
+  },
+  {
+    "id": 3,
+    "message": "Editor request to join the project"
+  }
+]
