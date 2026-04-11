@@ -5,6 +5,8 @@ import ChatList from "./ChatList";
 import ChatWindow from "./ChatWindow";
 import Notifications from "./ProjectComponents/ProjectNotification";
 import DraftsSection from "./ProjectComponents/DraftsSection";
+import communities from "../../data/communityData.json";
+
 
 function ChatEmptyState() {
     return (
@@ -155,122 +157,32 @@ function EditorNavTabs() {
     );
 }
 
-/*
-function BookSettings({ book }) {
+
+function BookSettings({ book, onSave, communitiies }) {
     const [fields, setFields] = useState({
         title: book.name,
         category: "Fiction",
         authors: "1",
-        visibility: "Private",
+        selectedCommunities: book.selectedCommunities || [],
+        accessibility: book.accessibility || "Private",
     });
-    const [editingField, setEditingField] = useState(null);
-    const [draftValue, setDraftValue] = useState(fields.title);
 
-    useEffect(() => {
-        const initialFields = {
-            title: book.name,
-            category: "Fiction",
-            authors: "1",
-            visibility: "Private",
-        };
-        setFields(initialFields);
-        setEditingField(null);
-        setDraftValue(initialFields.title);
-    }, [book.name]);
-
-    const beginEdit = (field) => {
-        setEditingField(field);
-        setDraftValue(fields[field]);
-    };
-
-    const saveEdit = () => {
-        setFields((prev) => ({ ...prev, [editingField]: draftValue }));
-        setEditingField(null);
-    };
-
-    const cancelEdit = () => {
-        setDraftValue(fields[editingField]);
-        setEditingField(null);
-    };
-
-    const rows = [
-        { key: "title", label: "Book title" },
-        { key: "category", label: "Project category" },
-        { key: "authors", label: "Number of authors" },
-        { key: "visibility", label: "Visibility" },
-    ];
-
-    return (
-        <div className="book-settings-card">
-            <div className="settings-header">
-                <div>
-                    <p className="settings-label">settings</p>
-                    <h2>{book.name}</h2>
-                </div>
-            </div>
-
-            <div className="settings-grid">
-                {rows.map((row) => (
-                    <div key={row.key} className="settings-row settings-row-editable">
-                        <label>{row.label}</label>
-                        <div className="editable-field">
-                            {editingField === row.key ? (
-                                <>
-                                    <input
-                                        value={draftValue}
-                                        onChange={(event) => setDraftValue(event.target.value)} required
-                                    />
-                                    <div className="edit-actions">
-                                        <button className="edit-save" onClick={saveEdit}>
-                                            ✓
-                                        </button>
-                                        <button className="edit-cancel" onClick={cancelEdit}>
-                                            ✕
-                                        </button>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <span className="field-value">{fields[row.key]}</span>
-                                    <button
-                                        className="edit-trigger"
-                                        onClick={() => beginEdit(row.key)}
-                                        aria-label={`Edit ${row.label}`}
-                                    >
-                                        ✎
-                                    </button>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div className="settings-footer">
-                <button>Save changes</button>
-            </div>
-        </div>
-    );
-}*/
-function BookSettings({ book, onSave }) {
-    const [fields, setFields] = useState({
-        title: book.name,
-        category: "Fiction",
-        authors: "1",
-        visibility: "Private",
-    });
 
     const [editingField, setEditingField] = useState(null);
     const [draftValue, setDraftValue] = useState(fields.title);
     const [error, setError] = useState("");
+    const [showToast, setShowToast] = useState(false);
+
 
     useEffect(() => {
-    setFields({
-        title: book.name,
-        category: "Fiction",
-        authors: "1",
-        visibility: "Private",
-    });
-        }, [book.id]); 
+        setFields({
+            title: book.name,
+            category: "Fiction",
+            authors: "1",
+            selectedCommunities: book.selectedCommunities || [],
+            accessibility: book.accessibility || "Private",
+        });
+    }, [book.id]);
 
     const beginEdit = (field) => {
         setEditingField(field);
@@ -297,16 +209,35 @@ function BookSettings({ book, onSave }) {
 
     const handleSaveChanges = () => {
         if (onSave) {
-            onSave(fields); 
+            onSave(fields);
         }
-        return alert("Changes saved");
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2000);
     };
+
+
+    const toggleCommunity = (title) => {
+        setFields(prev => {
+            const exists = prev.selectedCommunities.includes(title);
+            return {
+                ...prev,
+                selectedCommunities: exists
+                    ? prev.selectedCommunities.filter(c => c !== title)
+                    : [...prev.selectedCommunities, title]
+            };
+        });
+    };
+
+    const setAccessibility = (value) => {
+        setFields(prev => ({ ...prev, accessibility: value }));
+    };
+
+
 
     const rows = [
         { key: "title", label: "Book title" },
         { key: "category", label: "Project category" },
         { key: "authors", label: "Number of authors" },
-        { key: "visibility", label: "Visibility" },
     ];
 
     return (
@@ -314,7 +245,7 @@ function BookSettings({ book, onSave }) {
             <div className="settings-header">
                 <div>
                     <p className="settings-label">settings</p>
-                    <h2>{book.name}</h2>
+                    <h2>{fields.title}</h2>
                 </div>
             </div>
 
@@ -351,11 +282,51 @@ function BookSettings({ book, onSave }) {
                         </div>
                     </div>
                 ))}
+                <div className="settings-row">
+                    <label>Related Communities</label>
+                    <div>
+                        {communities.map((c) => (
+                            <div key={c.id}>
+                                <input
+                                    type="checkbox"
+                                    checked={fields.selectedCommunities.includes(c.title)}
+                                    onChange={() => toggleCommunity(c.title)}
+                                />
+                                <span style={{ marginLeft: "8px" }}>{c.title}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="settings-row">
+                    <label>Accessibility</label>
+                    <div>
+                        {["Private", "Public"].map((opt) => (
+                            <div key={opt}>
+                                <input
+                                    type="radio"
+                                    name="accessibility"
+                                    value={opt}
+                                    checked={fields.accessibility === opt}
+                                    onChange={() => setAccessibility(opt)}
+                                />
+                                <span style={{ marginLeft: "8px" }}>{opt}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
             </div>
 
             <div className="settings-footer">
                 <button onClick={handleSaveChanges}>Save changes</button>
             </div>
+            {showToast && (
+                <div className="alert_toast">
+                    <SuccessToast text="Changes saved successfully!" />
+                </div>
+            )}
+
         </div>
     );
 }
@@ -363,7 +334,7 @@ function BookSettings({ book, onSave }) {
 function NavTabs({ book }) {
     const [activeTab, setActiveTab] = useState("todo");
     const [currentBook, setCurrentBook] = useState(book);
-
+    
     const role = localStorage.getItem("role");
     const tabs = [
         { key: "todo", label: "todo list" },
@@ -404,7 +375,9 @@ function NavTabs({ book }) {
                         ...prev,
                         ...updatedFields
                     }));
-                }} />}
+                }} 
+                communities={communities}
+                />}
             </div>
         </>
     );
