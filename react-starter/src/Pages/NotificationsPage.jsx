@@ -3,12 +3,7 @@ import NotificationItem from "../components/NotificationItem";
 import NotificationForm from "../components/NotificationForm";
 
 function NotificationsPage({ role }) {
-  const [notifications, setNotifications] = useState([
-    { id: 1, title: "Your project was updated", createdAt: Date.now() },
-    { id: 2, title: "New review added", createdAt: Date.now() - 60000 },
-    { id: 3, title: "Editor accepted request", createdAt: Date.now() - 3600000 },
-    { id: 4, title: "New community created", createdAt: Date.now() - 86400000 },
-  ]);
+  const [notifications, setNotifications] = useState([]);
 
   const [timeNow, setTimeNow] = useState(Date.now());
 

@@ -11,7 +11,7 @@ function NotificationItem({ notification, onRemove }) {
     // wait 500ms so user sees the tick
     // then remove the notification from the list
     setTimeout(() => {
-      onRemove(notification.id);
+      onRemove(notification._id);
     }, 500);
   };
 
