@@ -1,7 +1,6 @@
-import { Community } from "./models/community.model.js";
-import express from "express";
-
+const express = require("express");
 const router = express.Router();
+const Community = require("../models/community.model.js");
 
 //Create a new community
 router.post("/api/communities", async (req, res) => {

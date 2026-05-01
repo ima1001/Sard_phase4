@@ -1,13 +1,12 @@
-import { Users } from "./models/user.model.js";
-import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;  
-
+const express = require("express");
 const router = express.Router();
+const Users = require("../models/user.model.js");
 
 //Registering new user
 router.post("api/auth/signup", async (req, res) => {
