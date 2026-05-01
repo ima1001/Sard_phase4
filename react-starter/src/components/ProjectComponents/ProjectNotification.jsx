@@ -7,6 +7,8 @@ function ProjectNotification({ projectId }) {
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
+    console.log("Author is fetching notifications for project:", projectId);
+    
     fetch(`http://localhost:5000/api/notifications/project/${projectId}`)
       .then((res) => res.json())
       .then((data) => setNotifications(data))
@@ -15,7 +17,7 @@ function ProjectNotification({ projectId }) {
 
   useEffect(() => {
     if (!toast) return;
-    const timer = setTimeout(() => setToast(null), 5000);
+    const timer = setTimeout(() => setToast(null), 3000);
     return () => clearTimeout(timer);
   }, [toast]);
 
