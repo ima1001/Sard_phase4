@@ -7,7 +7,7 @@ function ProjectNotification({ projectId }) {
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/notifications/project/${projectId}`)
+    fetch(`http://localhost:5000/api/notifications/project/${projectId}`)
       .then((res) => res.json())
       .then((data) => setNotifications(data))
       .catch((err) => console.log(err));
@@ -15,7 +15,7 @@ function ProjectNotification({ projectId }) {
 
   useEffect(() => {
     if (!toast) return;
-    const timer = setTimeout(() => setToast(null), 3000);
+    const timer = setTimeout(() => setToast(null), 5000);
     return () => clearTimeout(timer);
   }, [toast]);
 
@@ -28,7 +28,7 @@ function ProjectNotification({ projectId }) {
 
     const { id, action } = pendingConfirmation;
 
-    await fetch(`http://localhost:3000/api/notifications/${id}/respond`, {
+    await fetch(`http://localhost:5000/api/notifications/${id}/respond`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -431,7 +431,7 @@ function NavTabs({ book }) {
             <div className="project-content-box">
                 {activeTab === "todo"          && <ToDoList />}
                 {activeTab === "chats"         && <Chats />}
-                {activeTab === "notifications" && role === "author" && <Notifications />}
+                {activeTab === "notifications" && role === "author" && (<Notifications projectId={book.id} />)}
                 {activeTab === "drafts"        && <DraftsSection />}
                 {activeTab === "settings"      && role === "author" && <BookSettings book={currentBook} 
                 onSave={(updatedFields) => {

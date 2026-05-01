@@ -15,7 +15,7 @@ function Login() {
         return newErrors;
     };
 
-    /*const handleLogin = () => {
+    const handleLogin = () => {
         const newErrors = validate();
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
@@ -34,8 +34,8 @@ function Login() {
         localStorage.setItem("role", user.role);
         localStorage.setItem("name", user.name);
         navigate("/Home");
-    };*/
-
+    };
+/*
     const handleLogin = async () => {
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
@@ -54,7 +54,7 @@ function Login() {
     localStorage.setItem("name", data.name);
     localStorage.setItem("userId", data.id);
     navigate("/Home");
-    };
+    };*/
 
     return (
         <div className="login-container" style={{ padding: "50px" }}>
