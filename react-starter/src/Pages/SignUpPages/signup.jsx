@@ -22,13 +22,32 @@ function Signup() {
         if (!role) newErrors.role = "Please select a role";
         return newErrors;
     };
-
+/*
     const handlesignup = () => {
         const newErrors = validate();
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
+
+        localStorage.setItem("role", role);
+        localStorage.setItem("name", name);
+        navigate("/Home");
+    };
+*/
+
+    const handlesignup = async () => {
+        const newErrors = validate();
+        if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+
+        const res = await fetch("http://localhost:5000/api/auth/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password, role })
+        });
+        const data = await res.json();
+
+        if (!res.ok) { setErrors({ email: data.error }); return; }
 
         localStorage.setItem("role", role);
         localStorage.setItem("name", name);

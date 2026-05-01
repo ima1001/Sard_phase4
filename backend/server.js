@@ -14,6 +14,7 @@ app.use(express.json());
 
 // routes
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/communities", require("./routes/communityRoutes"));
 
 // test route
 app.get("/", (req, res) => {
