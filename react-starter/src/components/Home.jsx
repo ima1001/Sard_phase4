@@ -42,10 +42,17 @@ function Home({ role }) {
     const [toastMessage, setToastMessage] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
 
-    const [newCommunity, setNewCommunity] = useState({
+    /*const [newCommunity, setNewCommunity] = useState({
         title: "",
         description: ""
-    });
+    });*/
+
+    const [newCommunity, setNewCommunity] =  useState([]);
+    useEffect(() => {
+    fetch("http://localhost:5000/api/communities")
+        .then(res => res.json())
+        .then(data => setCommunityList(data));
+    }, []);
 
     const navigate = useNavigate();
 
@@ -59,14 +66,12 @@ function Home({ role }) {
         setToastMessage(`Request sent to join ${community.title}`);
     };
 
-    const handleDelete = (community) => {
+     /*const handleDelete = (community) => {
         setCommunityList((prev) => prev.filter((item) => item.id !== community.id));
         setToastMessage(`${community.title} deleted`);
     };
 
-    const handleChange = (e) => {
-        setNewCommunity({ ...newCommunity, [e.target.name]: e.target.value });
-    };
+    
 
     const handleAddCommunity = () => {
         const communityToAdd = {
@@ -84,6 +89,31 @@ function Home({ role }) {
             title: "",
             description: ""
         });
+    };*/
+    
+    const handleChange = (e) => {
+        setNewCommunity({ ...newCommunity, [e.target.name]: e.target.value });
+    };
+
+    const handleDelete = async (community) => {
+        await fetch(`http://localhost:5000/api/communities/${community._id}`, {
+            method: "DELETE"
+        });
+        setCommunityList(prev => prev.filter(c => c._id !== community._id));
+        setToastMessage(`${community.title} deleted`);
+    };
+
+    const handleAddCommunity = async () => {
+        const res = await fetch("http://localhost:5000/api/communities", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newCommunity)
+        });
+        const created = await res.json();
+        setCommunityList(prev => [created, ...prev]);
+        setToastMessage("Community added successfully");
+        setShowAddForm(false);
+        setNewCommunity({ title: "", description: "" });
     };
 
     return (
