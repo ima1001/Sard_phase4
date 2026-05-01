@@ -3,7 +3,7 @@ const router = express.Router();
 const Community = require("../models/community.model.js");
 
 //Create a new community
-router.post("/api/communities", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { name="", description="" } = req.body||{};
     const created = await Community.create({ 

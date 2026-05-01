@@ -40,7 +40,7 @@ function Signup() {
         const newErrors = validate();
         if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
 
-        const res = await fetch("http://localhost:5000/api/auth/signup", {
+        const res = await fetch("http://localhost:5000/api/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password, role })

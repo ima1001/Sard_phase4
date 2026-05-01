@@ -1,7 +1,6 @@
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;  
 const express = require("express");
@@ -9,7 +8,8 @@ const router = express.Router();
 const Users = require("../models/user.model.js");
 
 //Registering new user
-router.post("api/auth/signup", async (req, res) => {
+router.post("/register", async (req, res) => {
+    
     try {
         const { name, email, password, role } = req.body||{};
         const hashed = await bcrypt.hash(password.trim(), 10);
@@ -21,10 +21,26 @@ router.post("api/auth/signup", async (req, res) => {
     catch (error) {
         res.status(400).json({ message: error.message }); 
     }
+    /*    
+    const { email, password } = req.body || {};
+    if (!email || !password) {
+        return res.status(400).json({ error: "Email and password are required" });
+    }
+    const existing = users.find((u) => u.email === email);
+    if (existing) {
+        return res.status(400).json({ error: "User already exists" });
+    }
+    const hash = await bcrypt.hash(password, 10);
+    users.push({ name, email, passwordHash: hash, role });
+    return res.status(201).json({ message: "User registered!" });
+    console.error("Register error:", err);
+    return res.status(500).json({ error: "Server error during register" });
+*/
 });
 
 //Logging in user
-router.post("/api/auht/login", async (req, res) => {
+router.post("/login", async (req, res) => {
+    /*
     try {
         const { email, password } = req.body;
         const user = await Users.findOne({ email: email.trim() });
@@ -36,6 +52,27 @@ router.post("/api/auht/login", async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+    */
+    const { email, password } = req.body || {};
+    if (!email || !password) {
+        return res.status(400).json({ error: "Email and password are required" });
+    }
+    const user = users.find((u) => u.email === email);
+    if (!user) {
+        return res.status(400).json({ error: "User not found" });
+    }
+    const match = await bcrypt.compare(password, user.passwordHash);
+    if (!match) {
+        return res.status(400).json({ error: "Wrong password" });
+    }
+    const token = jwt.sign(
+        { email },
+        JWT_SECRET,
+        { expiresIn: "3h" }
+    );
+    return res.json({ token });
+    console.error("Login error:", err);
+    return res.status(500).json({ error: "Server error during login" });
 });
 
 //Updating user information

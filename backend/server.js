@@ -9,6 +9,8 @@ require("dotenv").config();
 // import routes
 const notificationRoutes = require("./routes/notificationRoutes");
 const taskRoutes= require("./routes/taskRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
+const communityRoutes = require("./routes/communityRoutes.js");
 const app = express();
 
 // middleware
@@ -17,8 +19,9 @@ app.use(express.json());
 
 // routes
 app.use("/api/notifications", notificationRoutes);
-app.use("/api/communities", require("./routes/communityRoutes"));
+app.use("/api/communities", communityRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/auth", require("./routes/userRoutes"));
 
 // test route
 app.get("/", (req, res) => {
