@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./toDoListStyle.css";
 import MessageCard from "../MessageCard";
 import tasks from "../../../data/toDoListTasks.json";
@@ -74,7 +74,14 @@ function ToDoList() {
 
     const [progressStep, setProgressStep] = useState(0);
 
-    const [taskList, setTaskList] = useState(tasks);
+    const [taskList, setTaskList] = useState([]);
+
+    useEffect(() => {
+    fetch("http://localhost:3000/api/tasks")
+        .then(res => res.json())
+        .then(data => setTaskList(data));
+    }, []);
+
     const [newTask, setNewTask] = useState({
     title: "",
     status: "Proposed",
@@ -96,7 +103,15 @@ function ToDoList() {
             lastUpdate: new Date().toISOString().split("T")[0],
         };
 
-        setTaskList([...taskList, taskToAdd]);
+        fetch("http://localhost:3000/api/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(taskToAdd)
+        })
+        .then(res => res.json())
+        .then(data => {
+            setTaskList([...taskList, data.task]);
+        });
 
         setMessage(<MessageCard type="success" text="Task added successfully" />);
         setShowAddForm(false);

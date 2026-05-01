@@ -1,5 +1,5 @@
-import express from "express";
-import Task from "../models/Task.js";
+const express = require("express");
+const Task = require("../models/Task.js");
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.post("/", async (req, res) => {
     res.json({ message: "Task added", task: newTask });
 });
 
-export default router;
+module.exports = router;

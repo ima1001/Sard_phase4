@@ -3,9 +3,12 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
+
+
+
 // import routes
 const notificationRoutes = require("./routes/notificationRoutes");
-
+const taskRoutes= require("./routes/taskRoutes.js");
 const app = express();
 
 // middleware
@@ -15,6 +18,7 @@ app.use(express.json());
 // routes
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/communities", require("./routes/communityRoutes"));
+app.use("/api/tasks", taskRoutes);
 
 // test route
 app.get("/", (req, res) => {
