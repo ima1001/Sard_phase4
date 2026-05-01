@@ -70,7 +70,7 @@ router.post("/login", async (req, res) => {
         JWT_SECRET,
         { expiresIn: "3h" }
     );
-    return res.json({ token });
+    return res.json({ token, role: user.role, name: user.name, id: user._id });
     console.error("Login error:", err);
     return res.status(500).json({ error: "Server error during login" });
 });

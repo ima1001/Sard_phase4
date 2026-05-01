@@ -68,10 +68,17 @@ const AUTH_PATHS = ["/", "/login", "/signup"];
 
 function AppLayout() {
     const navigate = useNavigate();
-    const role = localStorage.getItem("role") || "editor";
+    const role = localStorage.getItem("role")||"editor";
     const name = localStorage.getItem("name") || "";
     const config = ROLES[role] || ROLES.editor;
-    
+    /*useEffect(() => {
+        if (!role) navigate("/login");
+    }, []);*/
+
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate("/login");
+    };
 
     return (
         <div style={{ display: "flex" , minHeight: "100vh"}}>

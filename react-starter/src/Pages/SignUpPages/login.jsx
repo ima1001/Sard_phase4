@@ -50,6 +50,7 @@ function Login() {
     if (!res.ok) { setErrors({ email: data.error }); return; }
 
     localStorage.setItem("role", data.role);
+    console.log("Login successful, role:", data.role);
     localStorage.setItem("name", data.name);
     localStorage.setItem("userId", data.id);
     navigate("/Home");
