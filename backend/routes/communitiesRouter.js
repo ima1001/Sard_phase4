@@ -1,4 +1,4 @@
-import { Community } from "./models/Communities.model.js";
+import { Community } from "./models/community.model.js";
 import express from "express";
 
 const router = express.Router();
@@ -66,4 +66,4 @@ router.delete("/api/communities/:id", async (req, res) => {
     }
 });
 
-export default router;
+module.exports = router;
