@@ -15,7 +15,7 @@ function Login() {
         return newErrors;
     };
 
-    const handleLogin = () => {
+    /*const handleLogin = () => {
         const newErrors = validate();
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
@@ -34,6 +34,25 @@ function Login() {
         localStorage.setItem("role", user.role);
         localStorage.setItem("name", user.name);
         navigate("/Home");
+    };*/
+
+    const handleLogin = async () => {
+    const newErrors = validate();
+    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+
+    if (!res.ok) { setErrors({ email: data.error }); return; }
+
+    localStorage.setItem("role", data.role);
+    localStorage.setItem("name", data.name);
+    localStorage.setItem("userId", data.id);
+    navigate("/Home");
     };
 
     return (

@@ -10,7 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const router = express.Router();
 
 //Registering new user
-router.post("api/signup", async (req, res) => {
+router.post("api/auth/signup", async (req, res) => {
     try {
         const { name, email, password, role } = req.body||{};
         const hashed = await bcrypt.hash(password.trim(), 10);
@@ -25,7 +25,7 @@ router.post("api/signup", async (req, res) => {
 });
 
 //Logging in user
-router.post("/api/login", async (req, res) => {
+router.post("/api/auht/login", async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await Users.findOne({ email: email.trim() });
