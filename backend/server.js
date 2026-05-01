@@ -21,7 +21,7 @@ app.use(express.json());
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/communities", communityRoutes);
 app.use("/api/tasks", taskRoutes);
-app.use("/api/auth", require("./routes/userRoutes"));
+app.use("/api/auth", userRoutes);
 
 // test route
 app.get("/", (req, res) => {
