@@ -997,6 +997,18 @@
   color: var(--side-color);
 }
 
+.drafts-button button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.drafts-button button:disabled:hover {
+  background: var(--side-color) !important;
+  color: white !important;
+  transform: none !important;
+}
+
+
 .drafts-button p {
   color: var(--text-color);
   font-size: 14px;
