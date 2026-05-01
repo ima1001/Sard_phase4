@@ -57,11 +57,11 @@ router.post("/login", async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({ error: "Email and password are required" });
     }
-    const user = await Users.findOne({ email: email.trim() });
+    const user = await Users.findOne({ email: email});
     if (!user) {
         return res.status(400).json({ error: "User not found" });
     }
-    const match = await bcrypt.compare(password.trim(), user.password);
+    const match = await bcrypt.compare(password, user.password);
     if (!match) {
         return res.status(400).json({ error: "Wrong password" });
     }
