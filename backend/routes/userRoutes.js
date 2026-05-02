@@ -78,28 +78,28 @@ router.post("/login", async (req, res) => {
 //Updating user information
 // PUT /api/auth/update/:id
 router.put("/update/:id", async (req, res) => {
-  const { name, email, password } = req.body;
+    const { name, password } = req.body;
 
-  try {
-    const updateFields = {};
+    try {
+        const updateFields = {};
 
-    if (name) updateFields.name = name;
-    if (email) updateFields.email = email;
-    if (password) updateFields.password = await bcrypt.hash(password, 10);
+        if (name && name.trim() !== "") updateFields.name = name;
+        if (password && password.trim() !== "") updateFields.password = await bcrypt.hash(password, 10);
 
-    const updated = await User.findByIdAndUpdate(
-      req.params.id,
-      updateFields,
-      { new: true, runValidators: true }
-    );
+        const updated = await Users.findByIdAndUpdate(
+        req.params.id,
+        updateFields,
+        { new: true, runValidators: true }
+        );
 
-    if (!updated) return res.status(404).json({ error: "User not found" });
+        if (!updated) return res.status(404).json({ error: "User not found" });
 
-    res.json({ message: "User updated", user: { name: updated.name, email: updated.email } });
+        res.json({ message: "User updated", user: { name: updated.name, email: updated.email } });
 
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+
 });
 
 module.exports = router;
