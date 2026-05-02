@@ -42,11 +42,19 @@ Key benefits:
 ---
 
 ## Tech Stack
-
+Front-End:
 - **Framework:** React.js
 - **Languages:** HTML, CSS, JavaScript
 - **Build Tool:** Vite
 - **Package Manager:** npm
+- **RoutingReact:** Router DOM
+
+Back-End: 
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **DataBase:** MongoDB Atlas
+- **Dependencies:** JSON Web Tokens (JWT), bcryptjs, Multer, dotenv, cors
+
 
 ---
 
@@ -59,14 +67,16 @@ Make sure the following is installed on your machine before getting started:
 
 ---
 
-## Setup & Installation
+# Setup & Installation
+
+## Frontend
 
 1. Clone the repository:
    ```
    git clone https://github.com/ima1001/Sard_phase4.git
    ```
 
-2. Move into the project folder:
+2. Move into the frontend folder:
    ```
    cd Sard_phase4/react-starter
    ```
@@ -75,12 +85,8 @@ Make sure the following is installed on your machine before getting started:
    ```
    npm install
    ```
-   or
-   ```
-   npm i
-   ```
 
-4. To start the development server:
+4. Start the development server:
    ```
    npm run dev
    ```
@@ -92,6 +98,61 @@ Make sure the following is installed on your machine before getting started:
 > ```
 > Then re-run your npm commands.
 
+---
+
+## Backend
+
+1. Move into the backend folder:
+   ```
+   cd Sard_phase4/backend
+   ```
+
+2. Install the required node modules:
+   ```
+   npm install
+   ```
+   Then install each dependency in this table using the same command above following it by the name of the package:
+
+   | Package | Purpose |
+   |---|---|
+   | `express` | Web framework for building the API |
+   | `mongoose` | MongoDB object modeling |
+   | `cors` | Enables cross-origin requests from the frontend |
+   | `dotenv` | Loads environment variables from `.env` |
+   | `bcryptjs` | Password hashing |
+   | `jsonwebtoken` | Authentication tokens |
+   | `multer` | File upload handling |
+
+3. Create a `.env` file inside the `backend` folder with the following variables:
+   ```
+   MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/sard
+   PORT=5000
+   JWT_SECRET=your_secret_key
+   ```
+
+   | Variable | Description |
+   |---|---|
+   | `MONGO_URI` | Your MongoDB Atlas connection string — get it from Atlas → Database → Connect → Connect your application |
+   | `PORT` | The port the backend will run on (`5000` is the default) |
+   | `JWT_SECRET` | Any long random string used to sign authentication tokens |
+
+   > **Note:** Never push your `.env` file to GitHub. Make sure it is listed in `.gitignore`.  
+   > Share these values with teammates privately (e.g. via WhatsApp or a private group chat).
+
+4. Start the backend server:
+   ```
+   node server.js
+   ```
+   Or, to auto-restart on file changes:
+   ```
+   nodemon server.js
+   ```
+   The server will be available at `http://localhost:5000`
+
+---
+
+> ⚠️ **Important:** The frontend and backend must run in **two separate terminals** at the same time.  
+> Open one terminal for `react-starter` and another for `backend`, and start both before using the app.
 ---
 
 ## Project Structure
@@ -115,6 +176,26 @@ Sard_phase4/
 │   ├── index.html                # HTML entry point
 │   ├── package.json              # App dependencies
 │   └── package-lock.json         # Locked versions
+├── backend/                      # Express + MongoDB backend
+│   ├── models/                   # Mongoose models
+│   │   ├── community.model.js    # Community schema
+│   │   ├── Draft.js              # Draft schema
+│   │   ├── Notification.js       # Notification schema
+│   │   ├── Project.js            # Project schema
+│   │   ├── Task.js               # Task schema
+│   │   └── user.model.js         # User schema
+│   ├── routes/                   # Express route handlers
+│   │   ├── communityRoutes.js    # /api/communities
+│   │   ├── draftRoutes.js        # /api/drafts
+│   │   ├── notificationRoutes.js # /api/notifications
+│   │   ├── projectRoutes.js      # /api/projects
+│   │   ├── taskRoutes.js         # /api/tasks
+│   │   └── userRoutes.js         # /api/auth
+│   ├── node_modules/             # Backend dependencies
+│   ├── .env                      # Environment variables (not pushed to GitHub)
+│   ├── package.json              # Backend dependencies
+│   ├── package-lock.json         # Locked versions
+│   └── server.js                 # Entry point
 ├── node_modules/                 # Root installed dependencies
 ├── package.json                  # Root dependencies
 ├── package-lock.json             # Locked versions
@@ -138,16 +219,7 @@ Sard_phase4/
 ### Logging In & Out
 
 1. Navigate to the **Login** page.
-2. Use one of the following test accounts to log in:
-
-   | Role      | Email                  | Password |
-   |-----------|------------------------|----------|
-   | Admin     | admin@sard.com         | 123      |
-   | Author    | author@sard.com        | 123      |
-   | Editor    | editor@sard.com        | 123      |
-   | Reviewer  | reviewer@sard.com      | 123      |
-   | Publisher | publisher@sard.com     | 123      |
-
+2. Enter your existing credentials.
 3. Click **Login**. You will be redirected to your role-specific dashboard.
 4. To log out, click the **Logout** button from your dashboard or sidebar.
 
@@ -269,12 +341,12 @@ Sard_phase4/
 
 ## Team Members
 
-| Name | ID |
-|------|------|
-| Fatemah AL Jawad |  202248340 |
-| Layan Alasmari |  202223720 |
-| Naba AL Antaif |  202278160 |
-| Hawra AL Majed |  202333090 |
+| Name | ID | Front-End Roles | Back-End Roles |
+|------|------|------|------|
+| Fatemah Al Jawad |  202248340 | Log-in/Sign-up, Communities Interface, Adding new(projects or communities) and overall maintenance | Log-in/Sign-up and Communities | 
+| Layan Alasmari |  202223720 | SideBar, General Notifications and Account Settings | General and Project Notifications |
+| Naba Al Antaif |  202278160 | TodoList, Project Drafts, Notifications and overall maintenance |Project Todolist Tasks and Drafts |
+| Hawra Al Majed |  202333090 | Home Page, Book Interface, Project Settings and Chats | Chats and Poject Settings |
 
 
 ---
