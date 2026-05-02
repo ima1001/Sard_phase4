@@ -10,6 +10,7 @@ router.post("/", async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             numAuthors: req.body.numAuthors,
+            communityNames: req.body.communityNames,
             accessibility: req.body.accessibility
         });
 

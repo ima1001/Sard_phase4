@@ -32,6 +32,7 @@ function AddNew({ action }) {
                 ? f.selectedCommunities.filter((c) => c !== title)
                 : [...f.selectedCommunities, title],
         }));
+        console.log("Selected communities:", form.selectedCommunities);
     };
 
     const validateAndSubmit = async () => {
