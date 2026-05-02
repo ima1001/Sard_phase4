@@ -16,7 +16,7 @@ function CommunityInterface() {
 
     console.log("Sending request for project:", projectId);
 
-    await fetch("http://localhost:5000/api/notifications", {
+    await fetch("http://localhost:3000/api/notifications", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

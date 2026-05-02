@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PDF_Viewer from "./PDF_Viewer";
 
 function DraftsSection({ projectId }) {
     const [pdfFiles, setPdfFiles] = useState([null, null, null, null]);
     const [selectedPdf, setSelectedPdf] = useState(null);
+
+        useEffect(() => {
+        fetch("http://localhost:3000/api/drafts")
+            .then(res => res.json())
+            .then(data => {
+                const arr = [null, null, null, null];
+                data.forEach(d => {
+                    arr[d.draftNumber] = d.fileUrl;
+                });
+                setPdfFiles(arr);
+            });
+    }, []);
+
 
     const handleUpload = async (index, event) => {
     const file = event.target.files[0];
@@ -30,6 +43,15 @@ function DraftsSection({ projectId }) {
             updated[index] = data.fileUrl;
             setPdfFiles(updated);
         }
+    };
+
+    const handleView = (index) => {
+            if (!pdfFiles[index]) {
+        alert("No PDF uploaded yet");
+        return;
+        }
+        const fullUrl = `http://localhost:3000/${pdfFiles[index]}`;
+        setSelectedPdf(fullUrl);
     };
 
 
