@@ -27,6 +27,7 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/drafts", draftRoutes);
 app.use("/api/projects", projectRoutes);
+
 // test route
 app.get("/", (req, res) => {
   res.send("Server is running");
