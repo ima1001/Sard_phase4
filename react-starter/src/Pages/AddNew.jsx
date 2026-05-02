@@ -61,6 +61,19 @@ function AddNew({ action }) {
                 return;
             }
         }
+        if (action === "project") {
+            const res = await fetch("http://localhost:5000/api/projects", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: form.name,
+                    description: form.description,
+                    numAuthors: form.numAuthors,
+                    accessibility: form.accessibility,
+                    communityNames: form.selectedCommunities
+                })
+            });
+        }   
 
         if (Object.keys(newErrors).length === 0) {
             setShowToast(true);

@@ -3,25 +3,57 @@ const Project = require("../models/Project");
 
 const router = express.Router();
 
-// Get all projects for a community
-router.get("/:communityId", async (req, res) => {
+// Create Project
+router.post("/", async (req, res) => {
     try {
-        const projects = await Project.find({ communityId: req.params.communityId });
-        res.json(projects);
+        const project = await Project.create({
+            name: req.body.name,
+            description: req.body.description,
+            numAuthors: req.body.numAuthors,
+            accessibility: req.body.accessibility
+        });
+
+        res.json(project);
     } catch (err) {
-        res.status(500).json({ error: "Failed to fetch projects" });
+        console.error("Project creation error:", err);
+        res.status(500).json({ error: err.message });
     }
 });
 
-// Create a new project inside a community
-router.post("/", async (req, res) => {
+
+// Get all projects
+router.get("/", async (req, res) => {
     try {
-        const project = new Project(req.body);
-        const saved = await project.save();
-        res.json(saved);
+        const projects = await Project.find();
+        res.json(projects);
     } catch (err) {
-        res.status(500).json({ error: "Failed to create project" });
+        res.status(500).json({ error: err.message });
     }
 });
+
+// Get single project
+router.get("/:id", async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id);
+        res.json(project);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Get projects by community name
+router.get("/by-community/:name", async (req, res) => {
+    try {
+        const projects = await Project.find({
+            communityNames: req.params.name
+        });
+        res.json(projects);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
+
 
 module.exports = router;
