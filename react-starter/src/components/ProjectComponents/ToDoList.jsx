@@ -79,7 +79,7 @@ function ToDoList() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/tasks`)
+        fetch(`http://localhost:5000/api/tasks`)
             .then(res => res.json())
             .then(data => setTaskList(data));
         }, []);
@@ -106,7 +106,7 @@ function ToDoList() {
             lastUpdate: new Date().toISOString().split("T")[0],
         };
 
-        fetch("http://localhost:3000/api/tasks", {
+        fetch("http://localhost:5000/api/tasks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(taskToAdd)
