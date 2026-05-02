@@ -7,7 +7,7 @@ function NotificationsPage({ role }) {
   const [timeNow, setTimeNow] = useState(Date.now());
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URI}/api/notifications/general`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/notifications/general`)
       .then((res) => res.json())
       .then((data) => setNotifications(data))
       .catch((err) => console.log(err));

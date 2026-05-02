@@ -45,7 +45,7 @@ async function sendJoinRequest(book) {
 
   console.log("Sending request for project:", book.id);
 
-  await fetch(`${import.meta.env.VITE_API_URI}/api/notifications`, {
+  await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

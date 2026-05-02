@@ -7,7 +7,7 @@ export default function BookInterface() {
     const book = books.find(b => b.name === bookId) || books[0];
 
     const handleSave = async (updatedFields) => {
-        await fetch(`${import.meta.env.VITE_API_URI}/api/projects/${book._id}`, {
+        await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${book._id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -9,7 +9,7 @@ function ProjectNotification({ projectId }) {
   useEffect(() => {
     console.log("Author is fetching notifications for project:", projectId);
     
-    fetch(`http://localhost:5000/api/notifications/project/${projectId}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/notifications/project/${projectId}`)
       .then((res) => res.json())
       .then((data) => setNotifications(data))
       .catch((err) => console.log(err));
@@ -30,7 +30,7 @@ function ProjectNotification({ projectId }) {
 
     const { id, action } = pendingConfirmation;
 
-    await fetch(`http://localhost:5000/api/notifications/${id}/respond`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/notifications/${id}/respond`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

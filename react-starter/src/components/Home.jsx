@@ -49,7 +49,7 @@ function Home({ role }) {
 
     const [newCommunity, setNewCommunity] =  useState([]);
     useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URI}/api/communities/all`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/communities/all`)
         .then(res => res.json())
         .then(data => setCommunityList(data));
     }, []);
@@ -96,7 +96,7 @@ function Home({ role }) {
     };
 
     const handleDelete = async (community) => {
-        await fetch(`${import.meta.env.VITE_API_URI}/api/communities/${community._id}`, {
+        await fetch(`${import.meta.env.VITE_API_URL}/api/communities/${community._id}`, {
             method: "DELETE"
         });
         setCommunityList(prev => prev.filter(c => c._id !== community._id));
@@ -104,7 +104,7 @@ function Home({ role }) {
     };
 
     const handleAddCommunity = async () => {
-        const res = await fetch(`${import.meta.env.VITE_API_URI}/api/communities`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/communities`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newCommunity)
