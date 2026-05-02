@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema({
-    communityId: { type: mongoose.Schema.Types.ObjectId, ref: "Community", required: true },
-    title: { type: String, required: true },
-    description: String,
+    name: { type: String, required: true },
+    description: { type: String },
+    numAuthors: { type: Number, required: true },
+    accessibility: { type: String, required: true },
+    communityNames: [{ type: String, required: true }],
     createdAt: { type: Date, default: Date.now }
 });
 
