@@ -5,7 +5,6 @@ const taskSchema = new mongoose.Schema({
     status: { type: String, default: "Proposed" },
     deadline: { type: String, required: true },
     author: { type: String, required: true },
-    projectId: { type: String, required: true },
     lastUpdate: { type: String, default: new Date().toISOString().split("T")[0] }
 });
 

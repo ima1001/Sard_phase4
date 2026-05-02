@@ -7,28 +7,29 @@ function DraftsSection({ projectId }) {
 
     const handleUpload = async (index, event) => {
     const file = event.target.files[0];
-    if (!file) return;
+        if (!file) return;
 
-    if (index > 0 && !pdfFiles[index - 1]) {
-        alert(`You must upload Draft ${index} before uploading Draft ${index + 1}`);
-        return;
-    }
+        // Prevent uploading Draft 2 before Draft 1, etc.
+        if (index > 0 && !pdfFiles[index - 1]) {
+            alert(`You must upload Draft ${index} before uploading Draft ${index + 1}`);
+            return;
+        }
 
-    const formData = new FormData();
-    formData.append("pdf", file);
+        const formData = new FormData();
+        formData.append("pdf", file);
 
-    const res = await fetch(`http://localhost:3000/api/drafts/upload/${projectId}/${index}`, {
-        method: "POST",
-        body: formData
-    });
+        const res = await fetch(`http://localhost:3000/api/drafts/upload/${index}`, {
+            method: "POST",
+            body: formData
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    if (data.draft) {
-        const updated = [...pdfFiles];
-        updated[index] = data.draft.fileUrl;
-        setPdfFiles(updated);
-    }
+        if (data.fileUrl) {
+            const updated = [...pdfFiles];
+            updated[index] = data.fileUrl;
+            setPdfFiles(updated);
+        }
     };
 
 

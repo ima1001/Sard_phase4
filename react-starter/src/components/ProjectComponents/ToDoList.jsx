@@ -67,7 +67,7 @@ function AddTaskForm({ newTask, handleChange, handleAddTask }) {
     );
 }
 
-function ToDoList({ projectId }) {
+function ToDoList() {
     // change the progress bar length based on the button clicks
 
     const [message, setMessage] = useState(null);
@@ -77,14 +77,12 @@ function ToDoList({ projectId }) {
 
     const [taskList, setTaskList] = useState([]);
 
-    const { projectId } = useParams();
-
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/tasks?projectId=${projectId}`)
+        fetch(`http://localhost:3000/api/tasks`)
             .then(res => res.json())
             .then(data => setTaskList(data));
-        }, [projectId]);
+        }, []);
 
 
     const [newTask, setNewTask] = useState({
@@ -105,7 +103,6 @@ function ToDoList({ projectId }) {
             status: newTask.status,
             deadline: newTask.deadline,
             author: newTask.author,
-            projectId: projectId,
             lastUpdate: new Date().toISOString().split("T")[0],
         };
 
@@ -113,11 +110,12 @@ function ToDoList({ projectId }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(taskToAdd)
-        })
-        .then(res => res.json())
-        .then(data => {
-            setTaskList([...taskList, data.task]);
+            })
+            .then(res => res.json())
+            .then(data => {
+                setTaskList([...taskList, data]);
         });
+
 
         setMessage(<MessageCard type="success" text="Task added successfully" />);
         setShowAddForm(false);
