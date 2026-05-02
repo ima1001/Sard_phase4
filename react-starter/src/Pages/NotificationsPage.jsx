@@ -7,7 +7,7 @@ function NotificationsPage({ role }) {
   const [timeNow, setTimeNow] = useState(Date.now());
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/notifications/general")
+    fetch(`${import.meta.env.VITE_API_URI}/api/notifications/general`)
       .then((res) => res.json())
       .then((data) => setNotifications(data))
       .catch((err) => console.log(err));
@@ -33,7 +33,7 @@ function NotificationsPage({ role }) {
   };
 
   const removeNotification = async (id) => {
-    await fetch(`http://localhost:5000/api/notifications/${id}/read`, {
+    await fetch(`${import.meta.env.VITE_API_URI}/api/notifications/${id}/read`, {
       method: "PATCH",
     });
 
@@ -41,7 +41,7 @@ function NotificationsPage({ role }) {
   };
 
   const addNotification = async (message) => {
-    const res = await fetch("http://localhost:5000/api/notifications", {
+    const res = await fetch(`${import.meta.env.VITE_API_URI}/api/notifications`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
