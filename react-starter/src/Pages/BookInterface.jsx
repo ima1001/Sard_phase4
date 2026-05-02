@@ -6,6 +6,20 @@ export default function BookInterface() {
     const { bookId } = useParams();
     const book = books.find(b => b.name === bookId) || books[0];
 
+    const handleSave = async (updatedFields) => {
+        await fetch(`${import.meta.env.VITE_API_URI}/api/projects/${book._id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+            name: updatedFields.name,
+            category: updatedFields.category,
+            numAuthors: updatedFields.authors,
+            accessibility: updatedFields.accessibility,
+            communityNames: updatedFields.selectedCommunities
+            })
+        });
+    };  
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', flex: 1, position: 'relative' }}>
 
@@ -18,7 +32,7 @@ export default function BookInterface() {
 
             {/* Row 2 — NavTabs bar + content area with position:relative for card anchoring */}
             <div style={{ flex: 1 }}>
-                <NavTabs book={book} />
+                <NavTabs book={book} handleSave={handleSave} />
             </div>
 
         </div>
