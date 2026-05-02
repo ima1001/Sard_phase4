@@ -67,7 +67,7 @@ function AddTaskForm({ newTask, handleChange, handleAddTask }) {
     );
 }
 
-function ToDoList() {
+function ToDoList({ projectId }) {
     // change the progress bar length based on the button clicks
 
     const [message, setMessage] = useState(null);

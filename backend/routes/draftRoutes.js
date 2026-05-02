@@ -5,7 +5,7 @@ const Draft = require("../models/Draft");
 
 const router = express.Router();
 
-// إعداد التخزين
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploads/");
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// رفع PDF لمسودة معينة
+
 router.post("/upload/:bookId/:index", upload.single("pdf"), async (req, res) => {
     const { bookId, index } = req.params;
 

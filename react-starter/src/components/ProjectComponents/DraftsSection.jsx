@@ -1,31 +1,36 @@
 import { useState } from "react";
 import PDF_Viewer from "./PDF_Viewer";
 
-function DraftsSection() {
+function DraftsSection({ projectId }) {
     const [pdfFiles, setPdfFiles] = useState([null, null, null, null]);
     const [selectedPdf, setSelectedPdf] = useState(null);
 
-    const handleUpload = (index, event) => {
-        const file = event.target.files[0];
-        if (!file) return;
+    const handleUpload = async (index, event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-        if (index > 0 && !pdfFiles[index - 1]) {
-            alert(`You must upload Draft ${index} before uploading Draft ${index + 1}`);
-            return;
-        }
+    if (index > 0 && !pdfFiles[index - 1]) {
+        alert(`You must upload Draft ${index} before uploading Draft ${index + 1}`);
+        return;
+    }
 
+    const formData = new FormData();
+    formData.append("pdf", file);
+
+    const res = await fetch(`http://localhost:3000/api/drafts/upload/${projectId}/${index}`, {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.draft) {
         const updated = [...pdfFiles];
-        updated[index] = URL.createObjectURL(file);
+        updated[index] = data.draft.fileUrl;
         setPdfFiles(updated);
+    }
     };
 
-    const handleView = (index) => {
-        if (!pdfFiles[index]) {
-            alert("No PDF uploaded yet");
-            return;
-        }
-        setSelectedPdf(pdfFiles[index]);
-    };
 
     return (
         <>

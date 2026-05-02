@@ -119,9 +119,9 @@ function ReviewerNavTabs({ book }) {
       )}
 
       <div className="project-content-box">
-        {activeTab === "todo" && <ToDoList />}
+        {activeTab === "todo" && <ToDoList projectId={project._id} />}
         {activeTab === "chats" && <Chats />}
-        {activeTab === "drafts" && <DraftsSection />}
+        {activeTab === "drafts" && <DraftsSection projectId={project._id} />}
       </div>
     </>
   );
@@ -187,9 +187,9 @@ function EditorNavTabs({ book }) {
       )}
 
       <div className="project-content-box">
-        {activeTab === "todo" && <ToDoList />}
+        {activeTab === "todo" && <ToDoList projectId={project._id} />}
         {activeTab === "chats" && <Chats />}
-        {activeTab === "drafts" && <DraftsSection />}
+        {activeTab === "drafts" && <DraftsSection projectId={project._id} />}
       </div>
     </>
   );
