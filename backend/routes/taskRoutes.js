@@ -8,10 +8,15 @@ router.get("/", async (req, res) => {
     res.json(tasks);
 });
 
+// Add new task
 router.post("/", async (req, res) => {
-    const newTask = new Task(req.body);
-    await newTask.save();
-    res.json({ message: "Task added", task: newTask });
+    try {
+        const task = new Task(req.body);
+        const saved = await task.save();
+        res.json(saved);
+    } catch (err) {
+        res.status(500).json({ error: "Failed to create task" });
+    }
 });
 
 module.exports = router;

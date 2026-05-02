@@ -68,7 +68,7 @@ const AUTH_PATHS = ["/", "/login", "/signup"];
 
 function AppLayout() {
     const navigate = useNavigate();
-    const role = localStorage.getItem("role")||"editor";
+    const role = localStorage.getItem("role") || "editor"; // This should be dynamically set based on logged-in user data
     const name = localStorage.getItem("name") || "";
     const config = ROLES[role] || ROLES.editor;
     /*useEffect(() => {

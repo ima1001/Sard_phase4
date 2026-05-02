@@ -1,31 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PDF_Viewer from "./PDF_Viewer";
 
-function DraftsSection() {
+function DraftsSection({ projectId }) {
     const [pdfFiles, setPdfFiles] = useState([null, null, null, null]);
     const [selectedPdf, setSelectedPdf] = useState(null);
 
-    const handleUpload = (index, event) => {
-        const file = event.target.files[0];
+        useEffect(() => {
+        fetch("http://localhost:3000/api/drafts")
+            .then(res => res.json())
+            .then(data => {
+                const arr = [null, null, null, null];
+                data.forEach(d => {
+                    arr[d.draftNumber] = d.fileUrl;
+                });
+                setPdfFiles(arr);
+            });
+    }, []);
+
+
+    const handleUpload = async (index, event) => {
+    const file = event.target.files[0];
         if (!file) return;
 
+        // Prevent uploading Draft 2 before Draft 1, etc.
         if (index > 0 && !pdfFiles[index - 1]) {
             alert(`You must upload Draft ${index} before uploading Draft ${index + 1}`);
             return;
         }
 
-        const updated = [...pdfFiles];
-        updated[index] = URL.createObjectURL(file);
-        setPdfFiles(updated);
+        const formData = new FormData();
+        formData.append("pdf", file);
+
+        const res = await fetch(`http://localhost:3000/api/drafts/upload/${index}`, {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        if (data.fileUrl) {
+            const updated = [...pdfFiles];
+            updated[index] = data.fileUrl;
+            setPdfFiles(updated);
+        }
     };
 
     const handleView = (index) => {
-        if (!pdfFiles[index]) {
-            alert("No PDF uploaded yet");
-            return;
+            if (!pdfFiles[index]) {
+        alert("No PDF uploaded yet");
+        return;
         }
-        setSelectedPdf(pdfFiles[index]);
+        const fullUrl = `http://localhost:3000/${pdfFiles[index]}`;
+        setSelectedPdf(fullUrl);
     };
+
 
     return (
         <>

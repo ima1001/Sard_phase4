@@ -15,7 +15,7 @@ function Login() {
         return newErrors;
     };
 
-    /*const handleLogin = () => {
+    /* const handleLogin = () => {
         const newErrors = validate();
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
