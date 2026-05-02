@@ -53,7 +53,26 @@ router.get("/by-community/:name", async (req, res) => {
     }
 });
 
+// Update Project
+router.put("/:id", async (req, res) => {
+    try {
+        const updated = await Project.findByIdAndUpdate(
+            req.params.id,
+            {
+                name: req.body.name,
+                description: req.body.description,
+                numAuthors: req.body.numAuthors,
+                accessibility: req.body.accessibility,
+                communityNames: req.body.communityNames
+            },
+            { new: true } 
+        );
 
-
+        res.json(updated);
+    } catch (err) {
+        console.error("Project update error:", err);
+        res.status(500).json({ error: err.message });
+    }
+});
 
 module.exports = router;

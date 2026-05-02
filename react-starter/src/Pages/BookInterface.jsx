@@ -6,6 +6,21 @@ export default function BookInterface() {
     const { bookId } = useParams();
     const book = books.find(b => b.name === bookId) || books[0];
 
+    const handleSave = async (updatedFields) => {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${book._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            title: updatedFields.title,
+            category: updatedFields.category,
+            numAuthors: updatedFields.authors,
+            accessibility: updatedFields.accessibility,
+            communityNames: updatedFields.selectedCommunities
+        })
+        });
+    };
+
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', flex: 1, position: 'relative' }}>
 
