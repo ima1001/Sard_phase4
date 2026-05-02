@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CommunityCard from "../components/CommunityCard";
 import projects from "../../data/projectsData.json";
-import communities from "../../data/communityData.json";
+//import communities from "../../data/communityData.json";
 import { useParams } from "react-router-dom";
 import MessageCard from "../components/MessageCard";
 
@@ -10,7 +10,16 @@ import MessageCard from "../components/MessageCard";
 function CommunityInterface() {
     const [showToast, setShowToast] = useState(false);
     const { id } = useParams();
-    const community = communities.find((c) => c.id === Number(id));
+    //const community = communities.find((c) => c.id === Number(id));
+    const [community, setCommunity] = useState(null);
+
+    useEffect(() => {
+        console.log("Community id from URL:", id);
+        fetch(`http://localhost:5000/api/communities/${id}`)
+            .then(res => res.json())
+            .then(data => setCommunity(data))
+            .catch(err => console.error("Failed to load community:", err));
+    }, [id]);
 
     const handleJoin = () => {
         console.log("Join button clicked");
@@ -22,7 +31,7 @@ function CommunityInterface() {
         <div className="home"  id="community-interface">
             <div className="home-top" style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <h1 style={{ fontSize: "50px", paddingBottom: "40px", fontStyle: "bold" }}> 
-                    {community?.title || "Community"}
+                    {community?.name || "Community"}
                 </h1>
                 <p>{community?.description}</p>
             </div>

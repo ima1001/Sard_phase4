@@ -49,7 +49,7 @@ function Home({ role }) {
 
     const [newCommunity, setNewCommunity] =  useState([]);
     useEffect(() => {
-    fetch("http://localhost:5000/api/communities")
+    fetch("http://localhost:5000/api/communities/all")
         .then(res => res.json())
         .then(data => setCommunityList(data));
     }, []);
@@ -128,14 +128,14 @@ function Home({ role }) {
                 <div className="communities-container">
                     {communityList.map((community) => (
                         <CommunityCard
-                            key={community.id}
-                            title={community.title}
+                            key={community._id}
+                            title={community.name}
                             text={community.description}
                             primaryButtonText={role === "admin" ? "Edit" : "Join"}
                             primaryOnClick={() =>
                                 role === "admin"
                                     ? setShowAddForm(true)
-                                    : navigate(`/CommunityInterface/${community.id}`)
+                                    : navigate(`/CommunityInterface/${community._id}`)
                             }
                             secondaryButtonText={role === "admin" ? "Delete" : undefined}
                             secondaryOnClick={role === "admin" ? () => handleDelete(community) : undefined}

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import communities from "../../data/communityData.json";
+//import communities from "../../data/communityData.json";
 import { SuccessToast } from "../components/MessageCard";
+import { useEffect } from "react";
 
 function AddNew({ action }) {
     const [showToast, setShowToast] = useState(false);
@@ -13,6 +14,15 @@ function AddNew({ action }) {
         accessibility: "",
     });
 
+    const [communities, setCommunities] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:5000/api/communities/all")
+            .then(res => res.json())
+            .then(data => setCommunities(data))
+            .catch(err => console.error("Failed to load communities:", err));
+    }, []);
+
     const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
     const toggleCommunity = (title) => {
@@ -24,7 +34,7 @@ function AddNew({ action }) {
         }));
     };
 
-    const validateAndSubmit = () => {
+    const validateAndSubmit = async () => {
         const newErrors = {};
 
         if (action === "project") {
@@ -39,11 +49,23 @@ function AddNew({ action }) {
 
         setErrors(newErrors);
 
+        if (action === "community") {
+            const res = await fetch("http://localhost:5000/api/communities", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: form.name, description: form.description })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                setErrors({ name: data.error || "Failed to create community" });
+                return;
+            }
+        }
+
         if (Object.keys(newErrors).length === 0) {
             setShowToast(true);
             setTimeout(() => setShowToast(false), 3000);
         }
-
     };
 
     const label = action.charAt(0).toUpperCase() + action.slice(1);
@@ -91,12 +113,12 @@ function AddNew({ action }) {
 
                         <div className="input-group">
                             <span className="input-label">Accessibility *</span>
-                            {["Private", "Public"].map((opt) => (
-                                <div key={opt}>
-                                    <input type="radio" name="accessibility" value={opt}
-                                        checked={form.accessibility === opt}
+                            {["Private", "Public"].map((c) => (
+                                <div key={c._id}>
+                                    <input type="radio" name="accessibility" value={c}
+                                        checked={form.accessibility === c}
                                         onChange={set("accessibility")} />
-                                    <span style={{ marginLeft: "8px" }}>{opt}</span>
+                                    <span style={{ marginLeft: "8px" }}>{c}</span>
                                 </div>
                             ))}
                             {errors.accessibility && <p className="error-text">{errors.accessibility}</p>}

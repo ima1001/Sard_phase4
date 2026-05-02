@@ -27,9 +27,9 @@ router.get("/all", async (req, res) => {
 });
 
 //Get a specific community
-router.get("/:name", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        const community = await Community.findOne({ name: req.params.name });
+        const community = await Community.findById(req.params.id);
         if (!community) return res.status(404).json( {message: "Community not found"});
         res.json(community);
     } catch (error) {
@@ -38,7 +38,7 @@ router.get("/:name", async (req, res) => {
 });
 
 //Update a community
-router.put("api/communities/:id", async (req, res) => {
+router.put("/api/communities/:id", async (req, res) => {
     try {
         const { name="", description="" } = req.body||{};
         const updated = await Community.findByIdAndUpdate(
