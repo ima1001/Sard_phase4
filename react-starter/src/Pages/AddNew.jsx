@@ -101,11 +101,11 @@ function AddNew({ action }) {
                         <div className="input-group">
                             <span className="input-label">Related Communities *</span>
                             {communities.map((c) => (
-                                <div key={c.id}>
+                                <div key={c._id}>
                                     <input type="checkbox"
-                                        checked={form.selectedCommunities.includes(c.title)}
-                                        onChange={() => toggleCommunity(c.title)} />
-                                    <span style={{ marginLeft: "8px" }}>{c.title}</span>
+                                        checked={form.selectedCommunities.includes(c.name)}
+                                        onChange={() => toggleCommunity(c.name)} />
+                                    <span style={{ marginLeft: "8px" }}>{c.name}</span>
                                 </div>
                             ))}
                             {errors.selectedCommunities && <p className="error-text">{errors.selectedCommunities}</p>}
