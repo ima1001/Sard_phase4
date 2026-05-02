@@ -461,7 +461,7 @@ function NavTabs({ book }) {
                 ...prev,
                 ...updatedFields,
               }));
-            }}
+            }}  
             communities={communities}
           />
         )}

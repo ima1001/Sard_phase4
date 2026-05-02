@@ -5,7 +5,7 @@ const projectSchema = new mongoose.Schema({
     description: { type: String },
     numAuthors: { type: Number, required: true },
     accessibility: { type: String, required: true },
-    communityNames: [{ type: String, required: true }],
+    communityNames: [{ type: mongoose.Schema.Types.ObjectId, ref: "Community"}],
     createdAt: { type: Date, default: Date.now }
 });
 
