@@ -22,19 +22,6 @@ function Signup() {
         if (!role) newErrors.role = "Please select a role";
         return newErrors;
     };
-/*
-    const handlesignup = () => {
-        const newErrors = validate();
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
-
-        localStorage.setItem("role", role);
-        localStorage.setItem("name", name);
-        navigate("/Home");
-    };
-*/
 
     const handlesignup = async () => {
         const newErrors = validate();

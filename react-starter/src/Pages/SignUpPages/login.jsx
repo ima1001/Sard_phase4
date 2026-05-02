@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import users from "../../../data/users.json";
 
 function Login() {
     const navigate = useNavigate();
@@ -14,27 +13,6 @@ function Login() {
         if (!password) newErrors.password = "Password is required";
         return newErrors;
     };
-
-    /* const handleLogin = () => {
-        const newErrors = validate();
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
-
-        const user = users.find(
-            (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-        );
-
-        if (!user) {
-            setErrors({ email: "Invalid email or password" });
-            return;
-        }
-
-        localStorage.setItem("role", user.role);
-        localStorage.setItem("name", user.name);
-        navigate("/Home");
-    };*/
 
     const handleLogin = async () => {
     const newErrors = validate();
