@@ -1,4 +1,5 @@
 import { useState } from "react";
+//import communities from "../../data/communityData.json";
 import { SuccessToast } from "../components/MessageCard";
 import { useEffect } from "react";
 
@@ -61,7 +62,7 @@ function AddNew({ action }) {
             }
         }
         if (action === "project") {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`, {
+            const res = await fetch("http://localhost:5000/api/projects", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
