@@ -333,12 +333,12 @@ Sard_phase4/
 
 ## Team Members
 
-| Name | ID | Front-End | Back-End |
+| Name | ID | Front-End Roles | Back-End Roles |
 |------|------|------|------|
-| Fatemah AL Jawad |  202248340 | Log-in/Sign-up, Communities Interface, Adding new(projects or communities) and overall maintenance | Log-in/Sign-up and Communities | 
+| Fatemah Al Jawad |  202248340 | Log-in/Sign-up, Communities Interface, Adding new(projects or communities) and overall maintenance | Log-in/Sign-up and Communities | 
 | Layan Alasmari |  202223720 | SideBar, General Notifications and Account Settings | General and Project Notifications |
-| Naba AL Antaif |  202278160 | TodoList, Project Drafts, Notifications and overall maintenance |Project Todolist Tasks and Drafts |
-| Hawra AL Majed |  202333090 | Home Page, Book Interface, Project Settings and Chats | Chats and Poject Settings |
+| Naba Al Antaif |  202278160 | TodoList, Project Drafts, Notifications and overall maintenance |Project Todolist Tasks and Drafts |
+| Hawra Al Majed |  202333090 | Home Page, Book Interface, Project Settings and Chats | Chats and Poject Settings |
 
 
 ---
