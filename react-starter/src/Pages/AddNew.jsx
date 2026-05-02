@@ -17,7 +17,7 @@ function AddNew({ action }) {
     const [communities, setCommunities] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/communities/all")
+        fetch(`${import.meta.env.VITE_API_URL}/api/communities/all`)
             .then(res => res.json())
             .then(data => setCommunities(data))
             .catch(err => console.error("Failed to load communities:", err));
@@ -50,7 +50,7 @@ function AddNew({ action }) {
         setErrors(newErrors);
 
         if (action === "community") {
-            const res = await fetch("http://localhost:5000/api/communities", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/communities`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: form.name, description: form.description })
@@ -62,7 +62,7 @@ function AddNew({ action }) {
             }
         }
         if (action === "project") {
-            const res = await fetch("http://localhost:5000/api/projects", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

@@ -6,7 +6,7 @@ function DraftsSection({ projectId }) {
     const [selectedPdf, setSelectedPdf] = useState(null);
 
         useEffect(() => {
-        fetch("http://localhost:5000/api/drafts")
+        fetch(`${import.meta.env.VITE_API_URL}/api/drafts`)
             .then(res => res.json())
             .then(data => {
                 const arr = [null, null, null, null];
@@ -31,7 +31,7 @@ function DraftsSection({ projectId }) {
         const formData = new FormData();
         formData.append("pdf", file);
 
-        const res = await fetch(`http://localhost:5000/api/drafts/upload/${index}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/drafts/upload/${index}`, {
             method: "POST",
             body: formData
         });
@@ -50,7 +50,7 @@ function DraftsSection({ projectId }) {
         alert("No PDF uploaded yet");
         return;
         }
-        const fullUrl = `http://localhost:5000/${pdfFiles[index]}`;
+        const fullUrl = `${import.meta.env.VITE_API_URL}/${pdfFiles[index]}`;
         setSelectedPdf(fullUrl);
     };
 
