@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../assets/logoD.png";
 import books from "../../data/booksData.json";
 import {
@@ -25,6 +25,16 @@ function SideBar({
 }) {
   const [openProjects, setOpenProjects] = useState(false);
   const navigate = useNavigate();
+
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/projects`)
+      .then(res => res.json())
+      .then(data => setProjects(data))
+      .catch(err => console.error("Failed to load projects:", err));
+  }, []);
+
 
   return (
       <div className={`sidebar ${showActionCard ? "sidebar-with-action" : ""}`}>
@@ -75,15 +85,20 @@ function SideBar({
 
       {openProjects && (
         <div className="dropdown-menu-projects">
-          {projectLinks.length > 0 ? (
-            projectLinks.map((project, index) => (
-              <NavLink key={index} to={project.link} className="project-link">
-                {project.name}
-              </NavLink>
-            ))
-          ) : (
-            <div className="project-link">No projects yet</div>
-          )}
+          {projects.length > 0 ? (
+          projects.map((project) => (
+            <NavLink 
+              key={project._id} 
+              to={`/projects/${project._id}`} 
+              className="project-link"
+            >
+              {project.name}
+            </NavLink>
+          ))
+        ) : (
+          <div className="project-link">No projects yet</div>
+        )}
+
         </div>
       )}
     </>
