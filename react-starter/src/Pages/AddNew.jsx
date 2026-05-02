@@ -1,5 +1,4 @@
 import { useState } from "react";
-//import communities from "../../data/communityData.json";
 import { SuccessToast } from "../components/MessageCard";
 import { useEffect } from "react";
 

@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
 import CommunityCard from "../components/CommunityCard";
 import projects from "../../data/projectsData.json";
-//import communities from "../../data/communityData.json";
 import { useParams } from "react-router-dom";
 import MessageCard from "../components/MessageCard";
 
 function CommunityInterface() {
     const [showToast, setShowToast] = useState(false);
     const { id } = useParams();
-    //const community = communities.find((c) => c.id === Number(id));
     const [community, setCommunity] = useState(null);
 
     useEffect(() => {
         console.log("Community id from URL:", id);
-        fetch(`http://localhost:5000/api/communities/${id}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/communities/${id}`)
             .then(res => res.json())
             .then(data => setCommunity(data))
             .catch(err => console.error("Failed to load community:", err));
@@ -24,7 +22,7 @@ function CommunityInterface() {
     const name = localStorage.getItem("name") || "User";
     console.log("Sending request for project:", projectId);
 
-    await fetch("http://localhost:5000/api/notifications", {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -7,25 +7,35 @@ function SettingsPage() {
   const [password, setPassword] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [emailError, setEmailError] = useState("");
-
+  
   const isValidEmail = (value) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   };
 
-  const handleSave = () => {
-    if (!isValidEmail(email)) {
-      setEmailError("Please enter a valid email");
-      setShowSuccess(false);
-      return;
-    }
+  const handleSave = async () => {
+  const userId = localStorage.getItem("userId");
+  if (!userId) {
+    setEmailError("Session expired, please log in again");
+    return;
+  }
 
-    setEmailError("");
-    setShowSuccess(true);
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/update/${userId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, password })
+  });
 
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 2000);
-  };
+  const data = await res.json();
+  if (!res.ok) {
+    setEmailError(data.error || "Failed to save changes");
+    return;
+  }
+
+  if (name) localStorage.setItem("name", name);
+
+  setShowSuccess(true);
+  setTimeout(() => setShowSuccess(false), 2000);
+};
 
   return (
     <div className="settings-page">
@@ -51,23 +61,6 @@ function SettingsPage() {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-
-            <div className="settings-row">
-            <label>Email</label>
-            <div className="settings-input-wrapper">
-              <input
-              type="text"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                if (emailError) setEmailError("");
-                }}
-              className={emailError ? "settings-input-error" : ""}
-              />
-            {emailError && <p className="input-error">{emailError}</p>}
-          </div>
-        </div>
 
             <div className="settings-row">
               <label>Password</label>
