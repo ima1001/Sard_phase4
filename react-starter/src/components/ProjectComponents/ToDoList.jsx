@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 import "./toDoListStyle.css";
 import MessageCard from "../MessageCard";
 import tasks from "../../../data/toDoListTasks.json";
@@ -76,11 +77,15 @@ function ToDoList() {
 
     const [taskList, setTaskList] = useState([]);
 
+    const { projectId } = useParams();
+
+
     useEffect(() => {
-    fetch("http://localhost:3000/api/tasks")
-        .then(res => res.json())
-        .then(data => setTaskList(data));
-    }, []);
+        fetch(`http://localhost:3000/api/tasks?projectId=${projectId}`)
+            .then(res => res.json())
+            .then(data => setTaskList(data));
+        }, [projectId]);
+
 
     const [newTask, setNewTask] = useState({
     title: "",
@@ -100,6 +105,7 @@ function ToDoList() {
             status: newTask.status,
             deadline: newTask.deadline,
             author: newTask.author,
+            projectId: projectId,
             lastUpdate: new Date().toISOString().split("T")[0],
         };
 
