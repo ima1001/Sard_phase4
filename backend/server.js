@@ -12,6 +12,8 @@ const taskRoutes= require("./routes/taskRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const communityRoutes = require("./routes/communityRoutes.js");
 const draftRoutes = require("./routes/draftRoutes");
+const projectRoutes = require("./routes/projectRoutes");
+
 const app = express();
 
 // middleware
@@ -24,6 +26,7 @@ app.use("/api/communities", communityRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/drafts", draftRoutes);
+app.use("/api/projects", projectRoutes);
 // test route
 app.get("/", (req, res) => {
   res.send("Server is running");
