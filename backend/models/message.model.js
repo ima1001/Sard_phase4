@@ -9,7 +9,7 @@ const messageSchema = new mongoose.Schema({
   fileUrl:    { type: String, default: null },
   fileType:   { type: String, default: null },
   fileName:   { type: String, default: null },
-  projectId:  { type: mongoose.Schema.Types.ObjectId, ref: "Project", default: null, required: true },
+  projectId:  { type: mongoose.Schema.Types.ObjectId, ref: "Project", default: null },
 }, { timestamps: true });
 
 module.exports = mongoose.model("Message", messageSchema);

@@ -1,47 +1,61 @@
 const express = require("express");
 const router = express.Router();
-const Message = require("../models/message.model.js");
+const multer = require("multer");
+const Message = require("../models/Message");
 
-//Create a new message
-router.post("/", async (req, res) => {
-  try {
-    const { content="", sender="", senderName="", senderRole="", chatRoom="", fileUrl=null, fileType=null, fileName=null, projectId=null } = req.body||{};
-    const created = await Message.create({ 
-        content: content.trim(),
-        sender: sender.trim(),
-        senderName: senderName.trim(),
-        senderRole: senderRole.trim(),
-        chatRoom: chatRoom.trim(),
-        fileUrl: fileUrl,
-        fileType: fileType,
-        fileName: fileName,
-        projectId: projectId
-    });
-    res.status(201).json(created);
-  } catch (err) {
-    res.status(500).json({ message: err.message||"create failed" });
-  }
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
 });
+const upload = multer({ storage });
 
-//Get all messages
-router.get("/all", async (req, res) => {
+// GET messages for a chat room
+router.get("/:chatRoom", async (req, res) => {
   try {
-    const messages = await Message.find().sort({ createdAt: -1 });
+    const messages = await Message.find({ chatRoom: req.params.chatRoom })
+      .sort({ createdAt: 1 });
     res.json(messages);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-//Get a specific message
-router.get("/:id", async (req, res) => {
-    try {
-        const message = await Message.findById(req.params.id);
-        if (!message) return res.status(404).json( {message: "Message not found"});
-        res.json(message);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+// POST text message
+router.post("/", async (req, res) => {
+  try {
+    const { content, sender, senderName, senderRole, chatRoom } = req.body;
+    const message = await Message.create({ content, sender, senderName, senderRole, chatRoom });
+    res.status(201).json(message);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// POST file message
+router.post("/file", upload.single("file"), async (req, res) => {
+  try {
+    const { sender, senderName, senderRole, chatRoom } = req.body;
+    const fileUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+    const message = await Message.create({
+      sender, senderName, senderRole, chatRoom,
+      fileUrl,
+      fileType: req.file.mimetype,
+      fileName: req.file.originalname,
+    });
+    res.status(201).json(message);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// DELETE message
+router.delete("/:id", async (req, res) => {
+  try {
+    await Message.findByIdAndDelete(req.params.id);
+    res.status(204).end();
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 module.exports = router;
