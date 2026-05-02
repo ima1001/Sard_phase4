@@ -42,11 +42,19 @@ Key benefits:
 ---
 
 ## Tech Stack
-
+Front-End:
 - **Framework:** React.js
 - **Languages:** HTML, CSS, JavaScript
 - **Build Tool:** Vite
 - **Package Manager:** npm
+- **RoutingReact:** Router DOM
+
+Back-End: 
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **DataBase:** MongoDB Atlas
+- **Dependencies:** JSON Web Tokens (JWT), bcryptjs, Multer, dotenv, cors
+
 
 ---
 
@@ -103,7 +111,7 @@ Make sure the following is installed on your machine before getting started:
    ```
    npm install
    ```
-   This will install all required dependencies, including:
+   Then install each dependency in this table using the same command above following it by the name of the package:
 
    | Package | Purpose |
    |---|---|
