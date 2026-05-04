@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ConfirmCard, SuccessToast, ErrorToast } from "./MessageCard";
+import { useNavigate } from "react-router-dom";
 import ToDoList from "./ProjectComponents/ToDoList";
 import ChatList from "./ChatList";
 import ChatWindow from "./ChatWindow";
@@ -288,6 +289,9 @@ function BookSettings({ book, onSave }) {
   const [draftValue, setDraftValue] = useState("");
   const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/communities/all`)
@@ -396,9 +400,38 @@ function BookSettings({ book, onSave }) {
         </div>
       </div>
 
-      <div className="settings-footer">
+      <div className="settings-footer" style={{display: "flex", justifyContent: "center"}}>
         <button onClick={handleSaveChanges}>Save changes</button>
-      </div>
+        <button
+            onClick={() => setShowDeleteConfirm(true)}
+            style={{ background: "#c0392b", color: "white", marginLeft: "10px" }}
+        >
+            Delete Project
+        </button>
+    </div>
+
+      {showDeleteConfirm && (
+        <div className="modal-overlay">
+            <div className="modal-box">
+                <p>Are you sure you want to delete this project? This cannot be undone.</p>
+                <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+                    <button
+                        style={{ background: "#c0392b", color: "white" }}
+                        onClick={async () => {
+                            await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${book._id}`, {
+                                method: "DELETE"
+                            });
+                            window.dispatchEvent(new Event("project-updated"));
+                            navigate("/Home");
+                        }}
+                    >
+                        Yes, delete
+                    </button>
+                    <button onClick={() => setShowDeleteConfirm(false)}>Cancel</button>
+                </div>
+            </div>
+        </div>
+      )}
 
       {showToast && (
         <div className="alert_toast">
@@ -417,7 +450,7 @@ function NavTabs({ book, handleSave }) {
     setCurrentBook(book);
     setActiveTab("todo");
   }, [book?._id]);
-  
+
   if (!book) return <div>Loading...</div>;
 
   const projectId = book?._id; 
