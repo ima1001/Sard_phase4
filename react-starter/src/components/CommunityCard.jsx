@@ -6,6 +6,7 @@ function CommunityCard({
     text = "description",
     primaryButtonText = "Join",
     primaryOnClick,
+    primaryDisabled = false,
     secondaryButtonText,
     secondaryOnClick,
 }) {
@@ -15,7 +16,9 @@ function CommunityCard({
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>{text}</Card.Text>
                 <div className="community-card-buttons">
-                    <Button variant="primary" onClick={primaryOnClick}>
+                    <Button variant="primary"
+                     onClick={primaryOnClick}
+                     disabled={primaryDisabled}>
                         {primaryButtonText}
                     </Button>
                     {secondaryButtonText && (

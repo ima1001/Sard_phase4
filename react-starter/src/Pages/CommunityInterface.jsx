@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import CommunityCard from "../components/CommunityCard";
-import projects from "../../data/projectsData.json";
+//import projects from "../../data/projectsData.json";
 import { useParams } from "react-router-dom";
 import MessageCard from "../components/MessageCard";
 
@@ -8,18 +8,40 @@ function CommunityInterface() {
     const [showToast, setShowToast] = useState(false);
     const { id } = useParams();
     const [community, setCommunity] = useState(null);
+    const [projects, setProjects] = useState([]);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [joinStatus, setJoinStatus] = useState({});
+    const userId = localStorage.getItem("userId");
 
     useEffect(() => {
         console.log("Community id from URL:", id);
         fetch(`${import.meta.env.VITE_API_URL}/api/communities/${id}`)
             .then(res => res.json())
-            .then(data => setCommunity(data))
+            .then(data => {
+              setCommunity(data);
+              return fetch(`${import.meta.env.VITE_API_URL}/api/projects/by-community/${data.name}`);
+            })
+            .then(res => res.json())
+            .then(data => setProjects(data))
             .catch(err => console.error("Failed to load community:", err));
     }, [id]);
 
+    useEffect(() => {
+        if (!userId || projects.length === 0) return;
+        const statusMap = {};
+        projects.forEach(project => {
+            const member = project.members?.find(m => m.userId === userId);
+            if (member) statusMap[project._id] = "joined";
+        });
+        setJoinStatus(statusMap);
+    }, [projects]);
+
   const handleJoin = async (projectId) => {
+    if (joinStatus[projectId]) return;
+
     const role = localStorage.getItem("role");
     const name = localStorage.getItem("name") || "User";
+
     console.log("Sending request for project:", projectId);
 
     await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`, {
@@ -35,9 +57,16 @@ function CommunityInterface() {
       }),
     });
 
+    setJoinStatus(prev => ({ ...prev, [projectId]: "pending" }));
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
   };
+
+  const getButtonText = (projectId) => {
+        if (joinStatus[projectId] === "joined") return "Already Joined";
+        if (joinStatus[projectId] === "pending") return "Pending...";
+        return "Join";
+    };
 
   return (
     <div className="home" id="community-interface">
@@ -57,15 +86,31 @@ function CommunityInterface() {
         <div className="communities-container">
           {projects.map((project) => (
             <CommunityCard
-              key={project.id}
-              title={project.title}
-              text={project.text}
-              buttonText="Join"
-              primaryOnClick={() => handleJoin(project.id)}
+              key={project._id}
+              title={project.name}
+              text={`${project.numAuthors} author(s) · ${project.accessibility}`}
+              primaryButtonText={getButtonText(project._id)}
+              primaryOnClick={() => {
+                  if (!joinStatus[project._id]) handleJoin(project);
+              }}
+              secondaryButtonText="Description"
+              secondaryOnClick={() => setSelectedProject(project)}
+              primaryDisabled={!!joinStatus[project._id]}
             />
           ))}
         </div>
       </section>
+
+      {selectedProject && (
+        <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
+            <div className="modal-box" onClick={e => e.stopPropagation()}>
+                <button className="close-modal" onClick={() => setSelectedProject(null)}>×</button>
+                <h2>{selectedProject.name}</h2>
+                <p>{selectedProject.description || "No description provided."}</p>
+                <p><strong>Author:</strong> {selectedProject.createdBy}</p>
+            </div>
+        </div>
+      )}
 
       {showToast && (
         <div
