@@ -18,11 +18,12 @@ router.get("/", async (req, res) => {
 });
 
 // Upload draft
-router.post("/upload/:draftNumber", upload.single("pdf"), async (req, res) => {
+router.post("/upload/:projectId/:draftNumber", upload.single("pdf"), async (req, res) => {
     try {
         const draft = new Draft({
             fileUrl: req.file.path,
-            draftNumber: req.params.draftNumber
+            draftNumber: req.params.draftNumber,
+            projectId: req.params.projectId
         });
 
         const saved = await draft.save();
@@ -32,4 +33,9 @@ router.post("/upload/:draftNumber", upload.single("pdf"), async (req, res) => {
     }
 });
 
+// GET drafts by project
+router.get("/:projectId", async (req, res) => {
+    const drafts = await Draft.find({ projectId: req.params.projectId });
+    res.json(drafts);
+});
 module.exports = router;

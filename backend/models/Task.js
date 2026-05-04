@@ -5,7 +5,8 @@ const taskSchema = new mongoose.Schema({
     status: { type: String, default: "Proposed" },
     deadline: { type: String, required: true },
     author: { type: String, required: true },
-    lastUpdate: { type: String, default: new Date().toISOString().split("T")[0] }
+    projectId:  { type: mongoose.Schema.Types.ObjectId, ref: "Project", required: true },
+    lastUpdate: { type: String, default: new Date().toISOString().split("T")[0] },
 });
 
 module.exports = mongoose.model("Task", taskSchema);

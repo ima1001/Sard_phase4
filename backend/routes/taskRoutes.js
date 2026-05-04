@@ -19,4 +19,10 @@ router.post("/", async (req, res) => {
     }
 });
 
+// GET tasks by project
+router.get("/:projectId", async (req, res) => {
+    const tasks = await Task.find({ projectId: req.params.projectId });
+    res.json(tasks);
+});
+
 module.exports = router;
