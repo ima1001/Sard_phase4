@@ -36,6 +36,19 @@ function SideBar({
         .catch(err => console.error("Failed to load projects:", err));
   }, [showProjects]);
 
+  useEffect(() => {
+    const refetch = () => {
+        const userId = localStorage.getItem("userId");
+        fetch(`${import.meta.env.VITE_API_URL}/api/projects/by-user/${userId}`)
+            .then(res => res.json())
+            .then(data => setProjects(data));
+    };
+
+    refetch();
+    window.addEventListener("project-updated", refetch);
+    return () => window.removeEventListener("project-updated", refetch);
+}, [showProjects]);
+
   return (
       <div className={`sidebar ${showActionCard ? "sidebar-with-action" : ""}`}>
         <div className="logo-container">

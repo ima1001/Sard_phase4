@@ -261,31 +261,34 @@ function PublisherNavTabs({ book, projectId }) {
 
 function BookSettings({ book, onSave }) {
   const [fields, setFields] = useState({
-    name: book.name,
-    description: book.description || "",
-    numAuthors: Number(book.numAuthors) || 1,
-    selectedCommunities: book.communityNames || [],
-    accessibility: book.accessibility || "Private",
+      title: book?.name || "",
+      description: book?.description || "",
+      authors: String(book?.numAuthors || 1),
+      selectedCommunities: book?.communityNames || [],
+      accessibility: book?.accessibility || "Private",
   });
+
+  useEffect(() => {
+      if (book) {
+          setFields(prev => ({
+        ...prev,
+        title: book.name || "",
+        description: book.description || "",
+        authors: String(book.numAuthors || 1),
+        accessibility: book.accessibility || "Private",
+        selectedCommunities: prev.selectedCommunities.length > 0
+          ? prev.selectedCommunities
+          : book.communityNames || [],
+        }));
+      }
+  }, [book]);
+
   const [communities, setCommunities] = useState([]);
   const [editingField, setEditingField] = useState(null);
   const [draftValue, setDraftValue] = useState("");
   const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
 
-  useEffect(() => {
-    if (book) {
-      setFields({
-        title: book.name || "",
-        category: "Fiction",
-        authors: String(book.numAuthors || 1),
-        selectedCommunities: book.communityNames || [],
-        accessibility: book.accessibility || "Private",
-      });
-    }
-  }, [book]);
-
-  
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/communities/all`)
       .then(res => res.json())
@@ -313,7 +316,7 @@ function BookSettings({ book, onSave }) {
   
   const rows = [
     { key: "title", label: "Book title" },
-    { key: "category", label: "Project category" },
+    { key: "description", label: "Description" },
     { key: "authors", label: "Number of authors" },
   ];
 
@@ -332,7 +335,16 @@ function BookSettings({ book, onSave }) {
             <div className="editable-field">
               {editingField === row.key ? (
                 <>
-                  <input value={draftValue} onChange={(e) => setDraftValue(e.target.value)} />
+                  {row.key === "description" ? (
+                    <textarea
+                      value={draftValue}
+                      onChange={(e) => setDraftValue(e.target.value)}
+                      rows={3}
+                      style={{ width: "100%", resize: "vertical", fontSize: "14px" }}
+                    />
+                  ) : (
+                    <input value={draftValue} onChange={(e) => setDraftValue(e.target.value)} />
+                  )}
                   <div className="edit-actions">
                     <button className="edit-save" onClick={saveEdit}>✓</button>
                     <button className="edit-cancel" onClick={cancelEdit}>✕</button>
@@ -341,7 +353,13 @@ function BookSettings({ book, onSave }) {
                 </>
               ) : (
                 <>
-                  <span className="field-value">{fields[row.key]}</span>
+                  <span className="field-value" style={
+                    row.key === "description"
+                      ? { fontSize: "13px", color: "#666", fontStyle: "italic" }
+                      : {}
+                  }>
+                    {fields[row.key] || "—"}
+                  </span>
                   <button className="edit-trigger" onClick={() => beginEdit(row.key)}>✎</button>
                 </>
               )}
@@ -377,9 +395,11 @@ function BookSettings({ book, onSave }) {
           </div>
         </div>
       </div>
+
       <div className="settings-footer">
         <button onClick={handleSaveChanges}>Save changes</button>
       </div>
+
       {showToast && (
         <div className="alert_toast">
           <SuccessToast text="Changes saved successfully!" />
@@ -393,6 +413,11 @@ function NavTabs({ book, handleSave }) {
   const [activeTab, setActiveTab] = useState("todo");
   const [currentBook, setCurrentBook] = useState(book);
 
+  useEffect(() => {
+    setCurrentBook(book);
+    setActiveTab("todo");
+  }, [book?._id]);
+  
   if (!book) return <div>Loading...</div>;
 
   const projectId = book?._id; 

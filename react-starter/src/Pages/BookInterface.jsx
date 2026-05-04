@@ -21,12 +21,13 @@ export default function BookInterface() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 name: updatedFields.title,
+                description: updatedFields.description,  // ← add this
                 numAuthors: Number(updatedFields.authors),
                 accessibility: updatedFields.accessibility,
                 communityNames: updatedFields.selectedCommunities
             })
         });
-        
+
         const data = await res.json();
         if (!res.ok) {
             console.error("Failed to save:", data);
@@ -41,6 +42,8 @@ export default function BookInterface() {
             accessibility: updatedFields.accessibility,
             communityNames: updatedFields.selectedCommunities
         }));
+
+        window.dispatchEvent(new Event("project-updated"));
     };
     if (!project) return <div>Loading...</div>;
     return (
