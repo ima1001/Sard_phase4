@@ -65,7 +65,7 @@ const SHARE_OPTIONS = [
     { label: "PDF",   accept: ".pdf",     icon: "📄" },
 ];
 
-function ChatWindow({ chatRoom }) {
+function ChatWindow({ chatRoom, projectId }) {
     const [chatMessages, setChatMessages] = useState([]);
     const [text, setText] = useState("");
     const [showShare, setShowShare] = useState(false);

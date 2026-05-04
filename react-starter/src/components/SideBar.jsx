@@ -28,7 +28,7 @@ function SideBar({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!showProjects) return; // admin doesn't need this
+    if (!showProjects) return;
     const userId = localStorage.getItem("userId");
     fetch(`${import.meta.env.VITE_API_URL}/api/projects/by-user/${userId}`)
         .then(res => res.json())

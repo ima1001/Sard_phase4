@@ -5,7 +5,8 @@ import ChatList from "./ChatList";
 import ChatWindow from "./ChatWindow";
 import Notifications from "./ProjectComponents/ProjectNotification";
 import DraftsSection from "./ProjectComponents/DraftsSection";
-import communities from "../../data/communityData.json";
+//import communities from "../../data/communityData.json";
+
 
 function ChatEmptyState() {
   return (
@@ -17,7 +18,7 @@ function ChatEmptyState() {
   );
 }
 
-function Chats() {
+function Chats({ projectId }) {
   const [selectedChat, setSelectedChat] = useState(null);
   const [showError, setShowError] = useState(false);
 
@@ -29,7 +30,7 @@ function Chats() {
   return (
     <div style={{ display: "flex", flex: 1, position: "relative" }}>
       <ChatList onSelect={setSelectedChat} onLockedClick={handleLockedClick} />
-      {selectedChat ? <ChatWindow /> : <ChatEmptyState />}
+      {selectedChat ? <ChatWindow projectId={projectId} /> : <ChatEmptyState />}
       {showError && (
         <div style={{ position: "absolute", bottom: "24px", left: "24px", zIndex: 10 }}>
           <ErrorToast onClose={() => setShowError(false)} />
@@ -54,12 +55,12 @@ async function sendJoinRequest(book) {
       title: "Join Request",
       message: `${name} wants to join as ${role}`,
       type: "project",
-      projectId: book.id,
+      projectId: book._id,
     }),
   });
 }
 
-function ReviewerNavTabs({ book }) {
+function ReviewerNavTabs({ book, projectId }) {
   const [reviewed, setReviewed] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -119,15 +120,15 @@ function ReviewerNavTabs({ book }) {
       )}
 
       <div className="project-content-box">
-        {activeTab === "todo" && <ToDoList />}
-        {activeTab === "chats" && <Chats />}
-        {activeTab === "drafts" && <DraftsSection />}
+        {activeTab === "todo" && <ToDoList projectId={projectId} />}
+        {activeTab === "chats" && <Chats projectId={projectId} />}
+        {activeTab === "drafts" && <DraftsSection projectId={projectId} />}
       </div>
     </>
   );
 }
 
-function EditorNavTabs({ book }) {
+function EditorNavTabs({ book, projectId }) {
   const [edited, setEdited] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -187,174 +188,16 @@ function EditorNavTabs({ book }) {
       )}
 
       <div className="project-content-box">
-        {activeTab === "todo" && <ToDoList />}
-        {activeTab === "chats" && <Chats />}
-        {activeTab === "drafts" && <DraftsSection />}
+        {activeTab === "todo" && <ToDoList projectId={projectId} />}
+        {activeTab === "chats" && <Chats projectId={projectId} />}
+        {activeTab === "drafts" && <DraftsSection projectId={projectId} />}
       </div>
     </>
   );
 }
 
-function BookSettings({ book, onSave }) {
-  const [fields, setFields] = useState({
-    title: book.name,
-    category: "Fiction",
-    authors: "1",
-    selectedCommunities: book.selectedCommunities || [],
-    accessibility: book.accessibility || "Private",
-  });
 
-  const [editingField, setEditingField] = useState(null);
-  const [draftValue, setDraftValue] = useState(fields.title);
-  const [error, setError] = useState("");
-  const [showToast, setShowToast] = useState(false);
-
-  useEffect(() => {
-    setFields({
-      title: book.name,
-      category: "Fiction",
-      authors: "1",
-      selectedCommunities: book.selectedCommunities || [],
-      accessibility: book.accessibility || "Private",
-    });
-  }, [book.id]);
-
-  const beginEdit = (field) => {
-    setEditingField(field);
-    setDraftValue(fields[field]);
-    setError("");
-  };
-
-  const saveEdit = () => {
-    if (!draftValue.trim()) {
-      setError("Field cannot be empty");
-      return;
-    }
-
-    setFields((prev) => ({ ...prev, [editingField]: draftValue }));
-    setEditingField(null);
-    setError("");
-  };
-
-  const cancelEdit = () => {
-    setDraftValue(fields[editingField]);
-    setEditingField(null);
-    setError("");
-  };
-
-  const handleSaveChanges = () => {
-    if (onSave) onSave(fields);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2000);
-  };
-
-  const toggleCommunity = (title) => {
-    setFields((prev) => {
-      const exists = prev.selectedCommunities.includes(title);
-      return {
-        ...prev,
-        selectedCommunities: exists
-          ? prev.selectedCommunities.filter((c) => c !== title)
-          : [...prev.selectedCommunities, title],
-      };
-    });
-  };
-
-  const setAccessibility = (value) => {
-    setFields((prev) => ({ ...prev, accessibility: value }));
-  };
-
-  const rows = [
-    { key: "title", label: "Book title" },
-    { key: "category", label: "Project category" },
-    { key: "authors", label: "Number of authors" },
-  ];
-
-  return (
-    <div className="book-settings-card">
-      <div className="settings-header">
-        <div>
-          <p className="settings-label">settings</p>
-          <h2>{fields.title}</h2>
-        </div>
-      </div>
-
-      <div className="settings-grid">
-        {rows.map((row) => (
-          <div key={row.key} className="settings-row settings-row-editable">
-            <label>{row.label}</label>
-
-            <div className="editable-field">
-              {editingField === row.key ? (
-                <>
-                  <input value={draftValue} onChange={(event) => setDraftValue(event.target.value)} />
-                  <div className="edit-actions">
-                    <button className="edit-save" onClick={saveEdit}>✓</button>
-                    <button className="edit-cancel" onClick={cancelEdit}>✕</button>
-                  </div>
-                  {error && <p className="error-text">{error}</p>}
-                </>
-              ) : (
-                <>
-                  <span className="field-value">{fields[row.key]}</span>
-                  <button className="edit-trigger" onClick={() => beginEdit(row.key)} aria-label={`Edit ${row.label}`}>
-                    ✎
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-        ))}
-
-        <div className="settings-row">
-          <label>Related Communities</label>
-          <div className="settings-options">
-            {communities.map((c) => (
-              <div key={c.id} className="option-item">
-                <input
-                  type="checkbox"
-                  checked={fields.selectedCommunities.includes(c.title)}
-                  onChange={() => toggleCommunity(c.title)}
-                />
-                <span style={{ marginLeft: "8px" }}>{c.title}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="settings-row">
-          <label>Accessibility</label>
-          <div className="settings-options">
-            {["Private", "Public"].map((opt) => (
-              <div key={opt} className="option-item">
-                <input
-                  type="radio"
-                  name="accessibility"
-                  value={opt}
-                  checked={fields.accessibility === opt}
-                  onChange={() => setAccessibility(opt)}
-                />
-                <span style={{ marginLeft: "8px" }}>{opt}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="settings-footer">
-        <button onClick={handleSaveChanges}>Save changes</button>
-      </div>
-
-      {showToast && (
-        <div className="alert_toast">
-          <SuccessToast text="Changes saved successfully!" />
-        </div>
-      )}
-    </div>
-  );
-}
-
-function PublisherNavTabs({ book }) {
+function PublisherNavTabs({ book, projectId }) {
   const [activeTab, setActiveTab] = useState("drafts");
   const [requestSent, setRequestSent] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -409,17 +252,150 @@ function PublisherNavTabs({ book }) {
       )}
 
       <div className="project-content-box">
-        {activeTab === "drafts" && <DraftsSection />}
-        {activeTab === "chats" && <Chats />}
+        {activeTab === "drafts" && <DraftsSection projectId={projectId} />}
+        {activeTab === "chats" && <Chats projectId={projectId} />}
       </div>
     </>
   );
 }
 
-function NavTabs({ book }) {
+function BookSettings({ book, onSave }) {
+  const [fields, setFields] = useState({
+    name: book.name,
+    description: book.description || "",
+    numAuthors: Number(book.numAuthors) || 1,
+    selectedCommunities: book.communityNames || [],
+    accessibility: book.accessibility || "Private",
+  });
+  const [communities, setCommunities] = useState([]);
+  const [editingField, setEditingField] = useState(null);
+  const [draftValue, setDraftValue] = useState("");
+  const [error, setError] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
+  useEffect(() => {
+    if (book) {
+      setFields({
+        title: book.name || "",
+        category: "Fiction",
+        authors: String(book.numAuthors || 1),
+        selectedCommunities: book.communityNames || [],
+        accessibility: book.accessibility || "Private",
+      });
+    }
+  }, [book]);
+
+  
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/communities/all`)
+      .then(res => res.json())
+      .then(data => setCommunities(data))
+      .catch(err => console.error(err));
+  }, []);
+
+  const beginEdit = (field) => { setEditingField(field); setDraftValue(fields[field]); setError(""); };
+  const saveEdit = () => {
+    if (!draftValue.trim()) { setError("Field cannot be empty"); return; }
+    setFields((prev) => ({ ...prev, [editingField]: draftValue }));
+    setEditingField(null); setError("");
+  };
+  const cancelEdit = () => { setDraftValue(fields[editingField]); setEditingField(null); setError(""); };
+  const handleSaveChanges = () => { if (onSave) onSave(fields); setShowToast(true); setTimeout(() => setShowToast(false), 2000); };
+  const toggleCommunity = (name) => {
+    setFields((prev) => ({
+      ...prev,
+      selectedCommunities: prev.selectedCommunities.includes(name)
+        ? prev.selectedCommunities.filter((c) => c !== name)
+        : [...prev.selectedCommunities, name],
+    }));
+  };
+  const setAccessibility = (value) => setFields((prev) => ({ ...prev, accessibility: value }));
+  
+  const rows = [
+    { key: "title", label: "Book title" },
+    { key: "category", label: "Project category" },
+    { key: "authors", label: "Number of authors" },
+  ];
+
+  return (
+    <div className="book-settings-card">
+      <div className="settings-header">
+        <div>
+          <p className="settings-label">settings</p>
+          <h2>{fields.title}</h2>
+        </div>
+      </div>
+      <div className="settings-grid">
+        {rows.map((row) => (
+          <div key={row.key} className="settings-row settings-row-editable">
+            <label>{row.label}</label>
+            <div className="editable-field">
+              {editingField === row.key ? (
+                <>
+                  <input value={draftValue} onChange={(e) => setDraftValue(e.target.value)} />
+                  <div className="edit-actions">
+                    <button className="edit-save" onClick={saveEdit}>✓</button>
+                    <button className="edit-cancel" onClick={cancelEdit}>✕</button>
+                  </div>
+                  {error && <p className="error-text">{error}</p>}
+                </>
+              ) : (
+                <>
+                  <span className="field-value">{fields[row.key]}</span>
+                  <button className="edit-trigger" onClick={() => beginEdit(row.key)}>✎</button>
+                </>
+              )}
+            </div>
+          </div>
+        ))}
+
+        <div className="settings-row">
+          <label>Related Communities</label>
+          <div className="settings-options">
+            {communities.map((c) => (
+              <div key={c._id} className="option-item">
+                <input type="checkbox"
+                  checked={fields.selectedCommunities.includes(c.name)}
+                  onChange={() => toggleCommunity(c.name)} />
+                <span style={{ marginLeft: "8px" }}>{c.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="settings-row">
+          <label>Accessibility</label>
+          <div className="settings-options">
+            {["Private", "Public"].map((opt) => (
+              <div key={opt} className="option-item">
+                <input type="radio" name="accessibility" value={opt}
+                  checked={fields.accessibility === opt}
+                  onChange={() => setAccessibility(opt)} />
+                <span style={{ marginLeft: "8px" }}>{opt}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="settings-footer">
+        <button onClick={handleSaveChanges}>Save changes</button>
+      </div>
+      {showToast && (
+        <div className="alert_toast">
+          <SuccessToast text="Changes saved successfully!" />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function NavTabs({ book, handleSave }) {
   const [activeTab, setActiveTab] = useState("todo");
   const [currentBook, setCurrentBook] = useState(book);
 
+  if (!book) return <div>Loading...</div>;
+
+  const projectId = book?._id; 
   const role = localStorage.getItem("role");
   const tabs = [
     { key: "todo", label: "todo list" },
@@ -434,9 +410,9 @@ function NavTabs({ book }) {
     );
   }
 
-  if (role === "reviewer") return <ReviewerNavTabs book={book} />;
-  if (role === "editor") return <EditorNavTabs book={book} />;
-  if (role === "publisher") return <PublisherNavTabs book={book} />;
+  if (role === "reviewer") return <ReviewerNavTabs book={book} projectId={projectId} />;
+  if (role === "editor") return <EditorNavTabs book={book} projectId={projectId} />;
+  if (role === "publisher") return <PublisherNavTabs book={book} projectId={projectId} />;
 
   return (
     <>
@@ -449,21 +425,18 @@ function NavTabs({ book }) {
       </nav>
 
       <div className="project-content-box">
-        {activeTab === "todo" && <ToDoList />}
-        {activeTab === "chats" && <Chats />}
-        {activeTab === "notifications" && role === "author" && <Notifications projectId={book.id} />}
-        {activeTab === "drafts" && <DraftsSection />}
+        {activeTab === "todo"          && <ToDoList projectId={projectId} />}
+        {activeTab === "chats"         && <Chats projectId={projectId} />}
+        {activeTab === "notifications" && <Notifications projectId={projectId} />}
+        {activeTab === "drafts"        && <DraftsSection projectId={projectId} />}
         {activeTab === "settings" && role === "author" && (
           <BookSettings
             book={currentBook}
             onSave={(updatedFields) => {
-              setCurrentBook((prev) => ({
-                ...prev,
-                ...updatedFields,
-              }));
-            }}  
-            communities={communities}
-          />
+              setCurrentBook((prev) => ({ ...prev, ...updatedFields }));
+              handleSave(updatedFields);
+            }}
+        />
         )}
       </div>
     </>

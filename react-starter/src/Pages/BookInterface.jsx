@@ -16,18 +16,33 @@ export default function BookInterface() {
     }, [bookId]);
 
     const handleSave = async (updatedFields) => {
-        await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${project._id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${project._id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 name: updatedFields.title,
-                numAuthors: updatedFields.authors,
+                numAuthors: Number(updatedFields.authors),
                 accessibility: updatedFields.accessibility,
                 communityNames: updatedFields.selectedCommunities
             })
         });
-    };
+        
+        const data = await res.json();
+        if (!res.ok) {
+            console.error("Failed to save:", data);
+            return;
+        }
 
+        console.log("Saved successfully:", data);
+            setProject(prev => ({
+            ...prev,
+            name: updatedFields.title,
+            numAuthors: Number(updatedFields.authors),
+            accessibility: updatedFields.accessibility,
+            communityNames: updatedFields.selectedCommunities
+        }));
+    };
+    if (!project) return <div>Loading...</div>;
     return (
         <div style={{ display: 'flex', flexDirection: 'column', flex: 1, position: 'relative' }}>
 
