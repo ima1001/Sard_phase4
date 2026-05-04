@@ -11,57 +11,17 @@ import NavTabs from "./components/NavTabs";
 import BookInterface from "./Pages/BookInterface";
 import SettingsPage from "./Pages/SettingsPage";
 import AddNew from "./Pages/AddNew";
-import books from "../data/booksData.json";
+//import books from "../data/booksData.json";
 
 
 import "./App.css";
 
 const ROLES = {
-    editor: {
-        label: "EDITOR",
-        notificationLink: "/Notifications",
-        projectLinks: books,
-        showProjects: true,
-        showActionCard: false,
-        actionText: "",
-        actionLink: "",
-    },
-    publisher: {
-        label: "PUBLISHER",
-        notificationLink: "/Notifications",
-        projectLinks: books,
-        showProjects: true,
-        showActionCard: false,
-        actionText: "",
-        actionLink: "",
-    },
-    reviewer: {
-        label: "REVIEWER",
-        notificationLink: "/Notifications",
-        projectLinks: books,
-        showProjects: true,
-        showActionCard: false,
-        actionText: "",
-        actionLink: "",
-    },
-    author: {
-        label: "AUTHOR",
-        notificationLink: "/Notifications",
-        projectLinks: books,
-        showProjects: true,
-        showActionCard: true,
-        actionText: "Add New Project",
-        actionLink: "/CreateProject",
-    },
-    admin: {
-        label: "ADMIN",
-        notificationLink: "/Notifications",
-        projectLinks: [],
-        showProjects: false,
-        showActionCard: true,
-        actionText: "Add New Community",
-        actionLink: "/CreateCommunity",
-    },
+    editor:    { label: "EDITOR",     notificationLink: "/Notifications", showProjects: true,  showActionCard: false, actionText: "", actionLink: "" },
+    publisher: { label: "PUBLISHER",  notificationLink: "/Notifications", showProjects: true,  showActionCard: false, actionText: "", actionLink: "" },
+    reviewer:  { label: "REVIEWER",   notificationLink: "/Notifications", showProjects: true,  showActionCard: false, actionText: "", actionLink: "" },
+    author:    { label: "AUTHOR",     notificationLink: "/Notifications", showProjects: true,  showActionCard: true,  actionText: "Add New Project",   actionLink: "/CreateProject" },
+    admin:     { label: "ADMIN",      notificationLink: "/Notifications", showProjects: false, showActionCard: true,  actionText: "Add New Community", actionLink: "/CreateCommunity" },
 };
 
 const AUTH_PATHS = ["/", "/login", "/signup"];
@@ -87,7 +47,6 @@ function AppLayout() {
                 name={name}
                 homeLink="/Home"
                 notificationLink={config.notificationLink}
-                projectLinks={config.projectLinks}
                 showProjects={config.showProjects}
                 showActionCard={config.showActionCard}
                 actionText={config.actionText}

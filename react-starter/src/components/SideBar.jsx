@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../assets/logoD.png";
-import books from "../../data/booksData.json";
+//import books from "../../data/booksData.json";
 import {
   House,
   Pencil,
@@ -24,7 +24,17 @@ function SideBar({
   onActionClick,
 }) {
   const [openProjects, setOpenProjects] = useState(false);
+  const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!showProjects) return; // admin doesn't need this
+    const userId = localStorage.getItem("userId");
+    fetch(`${import.meta.env.VITE_API_URL}/api/projects/by-user/${userId}`)
+        .then(res => res.json())
+        .then(data => setProjects(data))
+        .catch(err => console.error("Failed to load projects:", err));
+  }, [showProjects]);
 
   return (
       <div className={`sidebar ${showActionCard ? "sidebar-with-action" : ""}`}>
@@ -60,7 +70,7 @@ function SideBar({
       <div
         className="nav-item project-toggle"
         role="button"
-        onClick={() => { setOpenProjects(!openProjects); navigate(books[0].link); }}
+        onClick={() => setOpenProjects(!openProjects)}
       >
         <div className="nav-left">
           <Pencil className="nav-icon" />
@@ -75,15 +85,19 @@ function SideBar({
 
       {openProjects && (
         <div className="dropdown-menu-projects">
-          {projectLinks.length > 0 ? (
-            projectLinks.map((project, index) => (
-              <NavLink key={index} to={project.link} className="project-link">
-                {project.name}
-              </NavLink>
-            ))
-          ) : (
-            <div className="project-link">No projects yet</div>
-          )}
+            {projects.length > 0 ? (
+                projects.map((project) => (
+                    <NavLink
+                        key={project._id}
+                        to={`/BookInterface/${project._id}`}
+                        className="project-link"
+                    >
+                        {project.name}
+                    </NavLink>
+                ))
+            ) : (
+                <div className="project-link">No projects yet</div>
+            )}
         </div>
       )}
     </>
