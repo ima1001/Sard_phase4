@@ -12,6 +12,7 @@ function AddNew({ action }) {
         numAuthors: "",
         selectedCommunities: [],
         accessibility: "",
+        createdBy: ""
     });
 
     const [communities, setCommunities] = useState([]);
@@ -63,7 +64,7 @@ function AddNew({ action }) {
             }
         }
         if (action === "project") {
-            const res = await fetch("http://localhost:5000/api/projects", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
