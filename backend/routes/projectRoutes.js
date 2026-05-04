@@ -108,4 +108,13 @@ router.get("/by-user/:userId", async (req, res) => {
     }
 });
 
+// Get single project
+router.get("/:id", async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id);
+        res.json(project);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 module.exports = router;

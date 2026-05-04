@@ -13,13 +13,15 @@ const userRoutes = require("./routes/userRoutes.js");
 const communityRoutes = require("./routes/communityRoutes.js");
 const draftRoutes = require("./routes/draftRoutes");
 const projectRoutes = require("./routes/projectRoutes");
+const messageRoutes = require("./routes/chatRoutes");
+
 
 const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json());
-  
+
 // routes
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/communities", communityRoutes);
@@ -27,7 +29,7 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/api/drafts", draftRoutes);
 app.use("/api/projects", projectRoutes);
-
+app.use("/api/messages", messageRoutes);
 // test route
 app.get("/", (req, res) => {
   res.send("Server is running");
