@@ -108,6 +108,16 @@ router.get("/by-user/:userId", async (req, res) => {
     }
 });
 
+//Delete project
+router.delete("/:id", async (req, res) => {
+    try {
+        await Project.findByIdAndDelete(req.params.id);
+        res.status(204).end();
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // Get single project
 router.get("/:id", async (req, res) => {
     try {
