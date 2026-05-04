@@ -19,7 +19,7 @@ const app = express();
 // middleware
 app.use(cors());
 app.use(express.json());
-
+  
 // routes
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/communities", communityRoutes);

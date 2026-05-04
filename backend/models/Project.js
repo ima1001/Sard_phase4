@@ -6,6 +6,11 @@ const projectSchema = new mongoose.Schema({
     numAuthors: { type: Number, required: true },
     accessibility: { type: String, required: true },
     communityNames: [{ type: String}],
+    members: [{
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        role:   { type: String }
+    }],
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     createdAt: { type: Date, default: Date.now }
 });
 
