@@ -51,6 +51,8 @@ function AddNew({ action }) {
 
         setErrors(newErrors);
 
+        if (Object.keys(newErrors).length > 0) return;
+
         if (action === "community") {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/communities`, {
             method: "POST",
@@ -63,6 +65,7 @@ function AddNew({ action }) {
                 return;
             }
         }
+
         if (action === "project") {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`, {
                 method: "POST",
@@ -70,17 +73,23 @@ function AddNew({ action }) {
                 body: JSON.stringify({
                     name: form.name,
                     description: form.description,
-                    numAuthors: form.numAuthors,
+                    numAuthors: Number(form.numAuthors),
                     accessibility: form.accessibility,
-                    communityNames: form.selectedCommunities
+                    communityNames: form.selectedCommunities,
+                    createdBy: localStorage.getItem("userId")
                 })
             });
+            console.log(localStorage.getItem("userId"))
+            const data = await res.json();
+            if (!res.ok) {
+                setErrors({ name: data.error || "Failed to create project" });
+                console.error("Error response:", data);
+                return;
+            }
         }   
-
-        if (Object.keys(newErrors).length === 0) {
-            setShowToast(true);
-            setTimeout(() => setShowToast(false), 3000);
-        }
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+        console.log("Form submitted successfully:", form);
     };
 
     const label = action.charAt(0).toUpperCase() + action.slice(1);
@@ -129,7 +138,7 @@ function AddNew({ action }) {
                         <div className="input-group">
                             <span className="input-label">Accessibility *</span>
                             {["Private", "Public"].map((c) => (
-                                <div key={c._id}>
+                                <div key={c}>
                                     <input type="radio" name="accessibility" value={c}
                                         checked={form.accessibility === c}
                                         onChange={set("accessibility")} />
