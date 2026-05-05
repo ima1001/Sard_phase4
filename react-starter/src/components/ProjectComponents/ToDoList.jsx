@@ -142,6 +142,21 @@ function ToDoList({ projectId }) {
         setMessage(<MessageCard type="success" text="Published for Publishing Houses successfully" />);
     }
 
+    function handleDeleteTask(taskId) {
+        fetch(`${import.meta.env.VITE_API_URL}/api/tasks/${taskId}`, {
+            method: "DELETE",
+        })
+        .then(res => res.json())
+        .then(() => {
+            setTaskList(taskList.filter(task => task._id !== taskId));
+            setMessage(<MessageCard type="success" text="Task deleted successfully" />);
+        })
+        .catch(() => {
+            setMessage(<MessageCard type="error" text="Failed to delete task" />);
+        });
+    }
+
+
     return (
         <>
         <div className="container">
@@ -191,6 +206,14 @@ function ToDoList({ projectId }) {
                             <td>{task.lastUpdate}</td>
                             <td>{task.deadline}</td>
                             <td>{task.author}</td>
+                            <td>
+                                <button 
+                                    className="delete-btn"
+                                    onClick={() => handleDeleteTask(task._id)}
+                                >
+                                    ×
+                                </button>
+                            </td> 
                         </tr>
                     ))}
                 </tbody>
