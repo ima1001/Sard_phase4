@@ -20,18 +20,20 @@ router.get("/", async (req, res) => {
 // Upload draft
 router.post("/upload/:projectId/:draftNumber", upload.single("pdf"), async (req, res) => {
     try {
-        const draft = new Draft({
-            fileUrl: req.file.path,
-            draftNumber: req.params.draftNumber,
-            projectId: req.params.projectId
-        });
+        const { projectId, draftNumber } = req.params;
+        const draft = await Draft.findOneAndUpdate(
+            { projectId, draftNumber },
+            { fileUrl: req.file.path },
+            { new: true, upsert: true }
+        );
 
-        const saved = await draft.save();
-        res.json(saved);
+        res.json(draft);
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: "Failed to upload draft" });
     }
 });
+
 
 // GET drafts by project
 router.get("/:projectId", async (req, res) => {
