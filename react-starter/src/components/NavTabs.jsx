@@ -44,21 +44,30 @@ function Chats({ projectId }) {
 async function sendJoinRequest(book) {
   const role = localStorage.getItem("role");
   const name = localStorage.getItem("name") || "User";
+  const projectId = String(book._id);
 
-  console.log("Sending request for project:", book.id);
+  console.log("Sending request for project:", projectId);
 
-  await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: "Join Request",
-      message: `${name} wants to join as ${role}`,
-      type: "project",
-      projectId: book._id,
-    }),
-  });
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "Join Request",
+        message: `${name} wants to join as ${role}`,
+        type: "project",
+        projectId: projectId,
+      }),
+    });
+
+    const data = await res.json();
+
+    console.log("Notification saved:", data);
+  } catch (error) {
+    console.error("Failed to send join request:", error);
+  }
 }
 
 function ReviewerNavTabs({ book, projectId }) {

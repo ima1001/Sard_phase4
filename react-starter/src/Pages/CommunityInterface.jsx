@@ -36,31 +36,33 @@ function CommunityInterface() {
         setJoinStatus(statusMap);
     }, [projects]);
 
-  const handleJoin = async (projectId) => {
-    if (joinStatus[projectId]) return;
+  const handleJoin = async (project) => {
+  const projectId = project._id;
 
-    const role = localStorage.getItem("role");
-    const name = localStorage.getItem("name") || "User";
+  if (joinStatus[projectId]) return;
 
-    console.log("Sending request for project:", projectId);
+  const role = localStorage.getItem("role");
+  const name = localStorage.getItem("name") || "User";
 
-    await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: "Join Request",
-        message: `${name} wants to join as ${role}`,
-        type: "project",
-        projectId: String(projectId),
-      }),
-    });
+  console.log("Sending request for project:", projectId);
 
-    setJoinStatus(prev => ({ ...prev, [projectId]: "pending" }));
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
-  };
+  await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: "Join Request",
+      message: `${name} wants to join as ${role}`,
+      type: "project",
+      projectId: String(projectId),
+    }),
+  });
+
+  setJoinStatus((prev) => ({ ...prev, [projectId]: "pending" }));
+  setShowToast(true);
+  setTimeout(() => setShowToast(false), 3000);
+};
 
   const getButtonText = (projectId) => {
         if (joinStatus[projectId] === "joined") return "Already Joined";
