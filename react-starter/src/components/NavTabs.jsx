@@ -29,7 +29,7 @@ function Chats({ projectId }) {
   };
 
   return (
-    <div style={{ display: "flex", flex: 1, position: "relative" }}>
+      <div style={{ display: "flex", flex: 1, overflow: "hidden", minHeight: 0, height: "100%" }}>
       <ChatList onSelect={setSelectedChat} onLockedClick={handleLockedClick} />
       {selectedChat ? <ChatWindow projectId={projectId} chatRoom={selectedChat} /> : <ChatEmptyState />}
       {showError && (

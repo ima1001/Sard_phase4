@@ -7,6 +7,12 @@ const CHAT_ACCESS = {
     publisher: [3],
 };
 
+const CHAT_ROOM_KEYS = {
+    1: "authors",
+    2: "editors-reviewers",
+    3: "publishing-house"
+};
+
 function ChatList({ onSelect, onLockedClick }) {
     const role = localStorage.getItem("role") || "editor";
     const accessibleIds = CHAT_ACCESS[role] || [];
@@ -18,14 +24,14 @@ function ChatList({ onSelect, onLockedClick }) {
                 return (
                     <div
                         key={chat.id}
-                        onClick={() => isLocked ? onLockedClick() : onSelect(chat)}
+                        onClick={() => isLocked ? onLockedClick() : onSelect(CHAT_ROOM_KEYS[chat.id])}
                         style={{
                             padding: "16px",
                             cursor: isLocked ? "not-allowed" : "pointer",
                             opacity: isLocked ? 0.5 : 1,
                         }}
                     >
-                        {chat.name} {isLocked ? "🔒" : ""}
+                        {chat.name} {isLocked ? "🔒" : ""}  
                     </div>
                 );
             })}
