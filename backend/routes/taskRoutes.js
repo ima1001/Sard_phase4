@@ -21,8 +21,13 @@ router.post("/", async (req, res) => {
 
 // GET tasks by project
 router.get("/:projectId", async (req, res) => {
+    try {
     const tasks = await Task.find({ projectId: req.params.projectId });
     res.json(tasks);
+    } catch (err) {
+        res.status(500).json({ error: "Failed to fetch tasks" });
+    }
+
 });
 
 module.exports = router;

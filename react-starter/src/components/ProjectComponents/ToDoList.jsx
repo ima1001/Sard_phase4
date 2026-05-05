@@ -77,13 +77,12 @@ function ToDoList({ projectId }) {
 
     const [taskList, setTaskList] = useState([]);
 
-
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/api/tasks`)
+        if (!projectId) return;
+        fetch(`${import.meta.env.VITE_API_URL}/api/tasks/${projectId}`)
             .then(res => res.json())
             .then(data => setTaskList(data));
-        }, []);
-
+    }, [projectId]);
 
     const [newTask, setNewTask] = useState({
     title: "",
@@ -98,11 +97,11 @@ function ToDoList({ projectId }) {
 
     function handleAddTask() {
         const taskToAdd = {
-            id: taskList.length + 1,
             title: newTask.title,
             status: newTask.status,
             deadline: newTask.deadline,
             author: newTask.author,
+            projectId: projectId,
             lastUpdate: new Date().toISOString().split("T")[0],
         };
 
@@ -182,11 +181,11 @@ function ToDoList({ projectId }) {
 
                 <tbody>
                     {taskList.map((task) => (
-                        <tr key={task.id}>
+                        <tr key={task._id}>
                             <td>{task.title}</td>
                             <td>
                                 <span className={task.status.toLowerCase().replace(" ", "_")}>
-                                    {task.status}
+                                    {task.status || "Unknown"}
                                 </span>
                             </td>
                             <td>{task.lastUpdate}</td>
