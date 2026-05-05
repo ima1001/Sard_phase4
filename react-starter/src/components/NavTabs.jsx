@@ -59,6 +59,8 @@ async function sendJoinRequest(book) {
         message: `${name} wants to join as ${role}`,
         type: "project",
         projectId: projectId,
+        senderId: localStorage.getItem("userId"),
+        senderRole: role,   
       }),
     });
 

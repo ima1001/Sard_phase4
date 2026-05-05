@@ -1,18 +1,21 @@
 const express = require("express");
 const Notification = require("../models/Notification");
+const Project = require("../models/Project");
 
 const router = express.Router();
 
 // Create notification
 router.post("/", async (req, res) => {
   try {
-    const { title, message, type, projectId } = req.body;
+    const { title, message, type, projectId, senderId, senderRole } = req.body;
 
     const notification = await Notification.create({
       title,
       message,
       type,
       projectId: type === "project" ? projectId : null,
+      senderId: senderId || null,
+      senderRole: senderRole || null
     });
 
     res.status(201).json(notification);
@@ -73,12 +76,23 @@ router.patch("/:id/respond", async (req, res) => {
 
     const notification = await Notification.findByIdAndUpdate(
       req.params.id,
-      {
-        status: action,
-        isRead: true,
-      },
+      { status: action, isRead: true },
       { new: true }
     );
+
+    if (action === "accept" && notification.projectId && notification.senderId) {
+      await Project.findByIdAndUpdate(
+        notification.projectId,
+        {
+          $addToSet: {  // prevents duplicate members
+            members: {
+              userId: notification.senderId,
+              role: notification.senderRole
+            }
+          }
+        }
+      );
+    }
 
     res.json(notification);
   } catch (error) {

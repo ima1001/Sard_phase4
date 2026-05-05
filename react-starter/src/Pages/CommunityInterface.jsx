@@ -68,6 +68,8 @@ function CommunityInterface() {
       message: `${name} wants to join as ${role}`,
       type: "project",
       projectId: String(projectId),
+      senderId: String(userId),
+      senderRole: role,
     }),
   });
 
