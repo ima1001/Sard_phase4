@@ -16,9 +16,15 @@ function CommunityCard({
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>{text}</Card.Text>
                 <div className="community-card-buttons">
-                    <Button variant="primary"
-                     onClick={primaryOnClick}
-                     disabled={primaryDisabled}>
+                    <Button
+                        variant="primary"
+                        onClick={primaryDisabled ? undefined : primaryOnClick}
+                        disabled={primaryDisabled}
+                        style={{
+                            opacity: primaryDisabled ? 0.6 : 1,
+                            cursor: primaryDisabled ? "not-allowed" : "pointer",
+                        }}
+                    >
                         {primaryButtonText}
                     </Button>
                     {secondaryButtonText && (

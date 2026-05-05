@@ -27,14 +27,26 @@ function CommunityInterface() {
     }, [id]);
 
     useEffect(() => {
-        if (!userId || projects.length === 0) return;
-        const statusMap = {};
-        projects.forEach(project => {
-            const member = project.members?.find(m => m.userId === userId);
-            if (member) statusMap[project._id] = "joined";
-        });
-        setJoinStatus(statusMap);
-    }, [projects]);
+  if (!userId || projects.length === 0) return;
+
+  const statusMap = {};
+
+  projects.forEach((project) => {
+    const isMember = project.members?.some(
+      (m) => String(m.userId) === String(userId)
+    );
+
+    const isCreator =
+      String(project.createdBy) === String(userId) ||
+      String(project.createdBy?._id) === String(userId);
+
+    if (isMember || isCreator) {
+      statusMap[project._id] = "joined";
+    }
+  });
+
+  setJoinStatus(statusMap);
+}, [projects, userId]);
 
   const handleJoin = async (project) => {
   const projectId = project._id;
@@ -65,7 +77,7 @@ function CommunityInterface() {
 };
 
   const getButtonText = (projectId) => {
-        if (joinStatus[projectId] === "joined") return "Already Joined";
+        if (joinStatus[projectId] === "joined") return "Joined";
         if (joinStatus[projectId] === "pending") return "Pending...";
         return "Join";
     };
