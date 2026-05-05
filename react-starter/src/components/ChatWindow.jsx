@@ -9,7 +9,10 @@ function SentMessage({ msg }) {
 
     if (fileUrl) {
         return (
-            <div style={{ alignSelf: "flex-end" }}>
+            <div style={{ alignSelf: "flex-end", maxWidth: "70%" }}>
+                <div style={{ fontSize: "12px", color: "#666", textAlign: "right", marginBottom: "4px" }}>
+                    {msg.senderName}
+                </div>
                 <div style={{ background: "#2d3a4a", color: "white", borderRadius: "16px", padding: "10px 14px" }}>
                     {fileType?.startsWith("image/") ? (
                         <img src={fileUrl} alt={msg.fileName}
@@ -32,7 +35,10 @@ function SentMessage({ msg }) {
     }
 
     return (
-        <div style={{ alignSelf: "flex-end" }}>
+        <div style={{ alignSelf: "flex-end", maxWidth: "70%" }}>
+            <div style={{ fontSize: "12px", color: "#666", textAlign: "right", marginBottom: "4px" }}>
+                {msg.senderName}
+            </div>
             <div style={{ background: "#2d3a4a", color: "white", borderRadius: "16px", padding: "10px 14px" }}>
                 {msg.content || msg.text}
             </div>
@@ -47,11 +53,13 @@ function ReceivedMessage({ msg }) {
         : msg.time;
 
     return (
-        <div style={{ alignSelf: "flex-start", display: "flex", gap: "8px", alignItems: "flex-start" }}>
+        <div style={{ alignSelf: "flex-start", display: "flex", gap: "8px", alignItems: "flex-start", maxWidth: "70%" }}>
             <div style={{ width: "36px", height: "36px", borderRadius: "50%", border: "1px solid #ccc", flexShrink: 0 }} />
             <div>
                 <div style={{ fontSize: "12px", color: "#666", marginBottom: "4px" }}>{msg.senderName || msg.name}</div>
-                <div style={{ background: "#e8e8e8", borderRadius: "16px", padding: "10px 14px" }}>{msg.content || msg.text}</div>
+                <div style={{ background: "#e8e8e8", borderRadius: "16px", padding: "10px 14px" }}>
+                    {msg.content || msg.text}
+                </div>
                 {time && <div style={{ fontSize: "11px", color: "#aaa", marginTop: "4px" }}>{time}</div>}
             </div>
         </div>
@@ -67,7 +75,7 @@ const SHARE_OPTIONS = [
 
 function ChatWindow({ chatRoom, projectId }) {
     const [chatMessages, setChatMessages] = useState([]);
-    const [text, setText] = useState("");
+    const [text, setText] = useState([]);
     const [showShare, setShowShare] = useState(false);
     const [activeAccept, setActiveAccept] = useState("");
     const fileInputRef = useRef(null);
@@ -78,15 +86,14 @@ function ChatWindow({ chatRoom, projectId }) {
     const senderRole = localStorage.getItem("role");
     const API = import.meta.env.VITE_API_URL;
 
-    // Fetch messages on mount
     useEffect(() => {
-        fetch(`${API}/api/messages/${chatRoom}`)
+        if (!projectId || !chatRoom) return;
+        fetch(`${API}/api/messages/${projectId}/${chatRoom}`)
             .then(res => res.json())
-            .then(data => setChatMessages(data))
+            .then(data => setChatMessages(Array.isArray(data) ? data : []))
             .catch(err => console.error("Failed to load messages:", err));
-    }, [chatRoom]);
+    }, [chatRoom, projectId]);
 
-    // Auto-scroll to bottom
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [chatMessages]);
@@ -101,7 +108,8 @@ function ChatWindow({ chatRoom, projectId }) {
                 sender: userId,
                 senderName,
                 senderRole,
-                chatRoom
+                chatRoom,
+                projectId 
             })
         });
         const newMsg = await res.json();
@@ -119,6 +127,7 @@ function ChatWindow({ chatRoom, projectId }) {
         formData.append("senderName", senderName);
         formData.append("senderRole", senderRole);
         formData.append("chatRoom", chatRoom);
+        formData.append("projectId", projectId); 
 
         const res = await fetch(`${API}/api/messages/file`, {
             method: "POST",
@@ -136,20 +145,30 @@ function ChatWindow({ chatRoom, projectId }) {
     };
 
     return (
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", height: "100%" }}>
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px", overflowY: "auto", gap: "12px" }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
+
+            <div style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                padding: "24px",
+                overflowY: "scroll", 
+                gap: "12px",
+                minHeight: 0 
+            }}>
                 <div style={{ textAlign: "center", marginBottom: "4px" }}>
                     <span style={{ background: "#ccc", borderRadius: "12px", padding: "4px 12px", fontSize: "12px" }}>Today</span>
                 </div>
+
                 {chatMessages.map(msg =>
-                    msg.sender === userId || msg.from === "me"
+                    String(msg.sender) === String(userId) || msg.from === "me"
                         ? <SentMessage key={msg._id || msg.id} msg={msg} />
                         : <ReceivedMessage key={msg._id || msg.id} msg={msg} />
                 )}
                 <div ref={bottomRef} />
             </div>
 
-            <div style={{ position: "relative", padding: "12px 16px", borderTop: "1px solid #eee", background: "#fff" }}>
+            <div style={{ position: "relative", padding: "12px 16px", borderTop: "1px solid #eee", background: "#fff", flexShrink: 0 }}>
                 {showShare && (
                     <div style={{
                         position: "absolute", bottom: "64px", left: "16px",
