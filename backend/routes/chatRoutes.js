@@ -9,11 +9,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// GET messages for a chat room
-router.get("/:chatRoom", async (req, res) => {
+// GET messages for a specific project + chatRoom
+router.get("/:projectId/:chatRoom", async (req, res) => {
   try {
-    const messages = await Message.find({ chatRoom: req.params.chatRoom })
-      .sort({ createdAt: 1 });
+    const messages = await Message.find({
+      projectId: req.params.projectId,
+      chatRoom: req.params.chatRoom
+    }).sort({ createdAt: 1 });
     res.json(messages);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -23,8 +25,10 @@ router.get("/:chatRoom", async (req, res) => {
 // POST text message
 router.post("/", async (req, res) => {
   try {
-    const { content, sender, senderName, senderRole, chatRoom } = req.body;
-    const message = await Message.create({ content, sender, senderName, senderRole, chatRoom });
+    const { content, sender, senderName, senderRole, chatRoom, projectId } = req.body;
+    const message = await Message.create({
+      content, sender, senderName, senderRole, chatRoom, projectId
+    });
     res.status(201).json(message);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -34,10 +38,10 @@ router.post("/", async (req, res) => {
 // POST file message
 router.post("/file", upload.single("file"), async (req, res) => {
   try {
-    const { sender, senderName, senderRole, chatRoom } = req.body;
+    const { sender, senderName, senderRole, chatRoom, projectId } = req.body;
     const fileUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
     const message = await Message.create({
-      sender, senderName, senderRole, chatRoom,
+      sender, senderName, senderRole, chatRoom, projectId,
       fileUrl,
       fileType: req.file.mimetype,
       fileName: req.file.originalname,
