@@ -18,41 +18,41 @@ function DraftsSection({ projectId }) {
     }, []);
 
 
-    const handleUpload = async (index, event) => {
+const handleUpload = async (index, event) => {
     const file = event.target.files[0];
-        if (!file) return;
+    if (!file) return;
 
-        // Prevent uploading Draft 2 before Draft 1, etc.
-        if (index > 0 && !pdfFiles[index - 1]) {
-            alert(`You must upload Draft ${index} before uploading Draft ${index + 1}`);
-            return;
-        }
+    if (index > 0 && !pdfFiles[index - 1]) {
+        alert(`You must upload Draft ${index} before uploading Draft ${index + 1}`);
+        return;
+    }
 
-        const formData = new FormData();
-        formData.append("pdf", file);
+    const formData = new FormData();
+    formData.append("pdf", file);
 
-        const res = fetch(`${import.meta.env.VITE_API_URL}/api/drafts/upload/${projectId}/${index}`, {
-            method: "POST",
-            body: formData
-        });
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/drafts/upload/${projectId}/${index}`, {
+        method: "POST",
+        body: formData
+    });
 
-        const data = await res.json();
+    const data = await res.json();
 
-        if (data.fileUrl) {
-            const updated = [...pdfFiles];
-            updated[index] = data.fileUrl;
-            setPdfFiles(updated);
-        }
-    };
+    if (data.fileUrl) {
+        const updated = [...pdfFiles];
+        updated[index] = data.fileUrl;
+        setPdfFiles(updated);
+    }
+};
 
-    const handleView = (index) => {
-            if (!pdfFiles[index]) {
+const handleView = (index) => {
+    if (!pdfFiles[index]) {
         alert("No PDF uploaded yet");
         return;
-        }
-        const fullUrl = `${import.meta.env.VITE_API_URL}/${pdfFiles[index]}`;
-        setSelectedPdf(fullUrl);
-    };
+    }
+
+    const fullUrl = `${import.meta.env.VITE_API_URL}/${pdfFiles[index]}`.replace(/([^:]\/)\/+/g, "$1");
+    setSelectedPdf(fullUrl);
+};
 
 
     return (
@@ -91,9 +91,10 @@ function DraftsSection({ projectId }) {
                         </button>
                     </div>
                 ))}
-            </div>
 
-            {selectedPdf && <PDF_Viewer pdfUrl={selectedPdf} />}
+                {selectedPdf && <PDF_Viewer pdfUrl={selectedPdf} />}
+
+            </div>
         </>
     );
 }
