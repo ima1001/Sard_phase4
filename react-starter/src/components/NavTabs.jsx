@@ -103,7 +103,7 @@ function ReviewerNavTabs({ book, projectId }) {
           onClick={handleButtonClick}
           style={{ backgroundColor: reviewed ? "#4caf50" : "#30364F", color: "white" }}
         >
-          {reviewed ? "Request Sent" : "Request to Join"}
+          {reviewed ? "Reviewed" : "Mark as Reviewed"}
         </button>
 
         <div style={{ flex: 1, display: "flex", justifyContent: "center", gap: "10px" }}>
@@ -171,7 +171,7 @@ function EditorNavTabs({ book, projectId }) {
           onClick={handleButtonClick}
           style={{ backgroundColor: edited ? "#4caf50" : "#30364F", color: "white" }}
         >
-          {edited ? "Request Sent" : "Request to Join"}
+          {edited ? "Edited" : "Mark as Edited"}
         </button>
 
         <div style={{ flex: 1, display: "flex", justifyContent: "center", gap: "10px" }}>
